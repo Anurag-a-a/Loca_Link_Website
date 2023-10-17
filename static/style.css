@@ -1,0 +1,10 @@
+body{
+    background-color: lightcyan;
+}
+div{
+    margin: 0 auto;
+    width: 500px;
+    height: 300px;
+    border: 1px solid skyblue;
+    text-align: center;
+}
