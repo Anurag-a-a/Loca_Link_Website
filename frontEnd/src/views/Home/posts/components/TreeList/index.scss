@@ -1,0 +1,25 @@
+.left-tree {
+  width: 350px;
+  height: 100%;
+  margin-right: 20px;
+  .MuiButtonBase-root {
+    &:hover {
+      background-color: #eaedef;
+    }
+  }
+  .MuiCollapse-wrapper {
+    .MuiAccordionDetails-root {
+      display: flex;
+      align-items: center;
+      .MuiSvgIcon-root {
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .left-tree {
+    display: none;
+  }
+}

@@ -1,0 +1,77 @@
+.navbar {
+  height: 50px;
+  border-bottom: 1px solid #ccc;
+  width: auto;
+  padding: 5px 3%;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  .left-logo {
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .search {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    border-radius: 15px;
+    padding: 3px;
+    background: #eaedef;
+    &:hover {
+      //   background: #ccc;
+      opacity: 0.8;
+    }
+    .input {
+      flex: 1;
+      height: 30px;
+      background: #eaedef;
+    }
+    .MuiSvgIcon-root {
+      cursor: pointer;
+    }
+  }
+  .right {
+    display: flex;
+    align-items: center;
+    .more-icon {
+      padding: 5px;
+      border-radius: 50%;
+      cursor: pointer;
+      &:hover {
+        background: #e2e7e9;
+      }
+    }
+  }
+}
+
+// sign-form
+.sign-form {
+  .form-main {
+    padding: 20px;
+    text-align: center;
+    .form-item + .form-item {
+      margin-top: 20px;
+    }
+  }
+  .form-footer {
+    text-align: center;
+    .MuiButtonBase-root {
+      width: 80%;
+      margin: 10px;
+    }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .search {
+    flex: 0 0 500px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .search {
+    flex: 1;
+    margin: 0 20px !important;
+  }
+}
