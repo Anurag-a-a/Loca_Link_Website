@@ -1,0 +1,171 @@
+body {
+  font-family: sans-serif;
+}
+
+header {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+}
+
+header h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.5em;
+}
+
+header button {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+section {
+  padding: 20px 0;
+}
+
+section h2 {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.communities {
+  display: flex;
+  justify-content: space-around;
+}
+
+.community {
+  width: 200px;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.community h3 {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+.community p {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.community button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.events {
+  display: flex;
+  justify-content: space-around;
+}
+
+.event {
+  width: 200px;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.event h3 {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+.event p {
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+.event button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.testimonials {
+  display: flex;
+  justify-content: space-around;
+}
+
+.testimonial {
+  width: 200px;
+  text-align: center;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.testimonial p {
+  font-size: 1em;
+  margin-bottom: 5px;
+}
+
+.benefits {
+  text-align: center;
+}
+
+.benefits ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.benefits li {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.benefits button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.social-proof {
+  text-align: center;
+}
+
+.social-proof ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.social-proof li {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.social-proof button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+footer {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+
