@@ -1,6 +1,6 @@
 import pymysql
 
-conn = pymysql.connect(host='localhost', user='root', password='root', db='team20')
+conn = pymysql.connect(host='localhost', user='root', password='rootroot', db='team20')
 cur = conn.cursor()
 
 
@@ -19,7 +19,7 @@ def close(conn, cur):
 
 
 def is_existed(username, password):
-    sql = "SELECT * FROM students WHERE name ='" + username + "' and password ='" + password + "'"
+    sql = "SELECT * FROM user WHERE username ='" + username + "' and password ='" + password + "'"
     conn.ping(reconnect=True)
     cur.execute(sql)
     result = cur.fetchall()
@@ -31,7 +31,7 @@ def is_existed(username, password):
 
 
 def exist_user(username):
-    sql = "SELECT * FROM students WHERE name ='" + username + "'"
+    sql = "SELECT * FROM user WHERE username ='" + username + "'"
     conn.ping(reconnect=True)
     cur.execute(sql)
     result = cur.fetchall()

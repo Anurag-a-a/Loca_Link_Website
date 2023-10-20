@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return redirect(url_for('user_login'))
+    return redirect(url_for('home'))
 
 
 @app.route('/user_login', methods=['GET', 'POST'])
@@ -48,6 +48,11 @@ def signup():
             add_user(request.form['username'], request.form['password'])
             return render_template('index.html', username=username)
     return render_template('signup.html')
+
+
+@app.route("/homepage",methods= ["GET"])
+def home():
+    return render_template('home.html')
 
 
 if __name__ == "__main__":
