@@ -36,7 +36,7 @@ def exist_user(username):
 
 
 def add_user(username, password):
-    sql = "INSERT INTO user(username, password,email,isAdm) VALUES ('" + username + "','" + password + "')"
+    sql = "INSERT INTO user(username, password) VALUES ('" + username + "','" + password + "')"
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()

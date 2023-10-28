@@ -14,7 +14,7 @@ def add_community(name, userId):
 
 
 def exist_community(name):
-    sql = "SELECT * FROM user WHERE name ='" + name + "'"
+    sql = "SELECT * FROM community WHERE name ='" + name + "'"
     conn.ping(reconnect=True)
     cur.execute(sql)
     result = cur.fetchall()
@@ -23,3 +23,15 @@ def exist_community(name):
         return False
     else:
         return True
+
+
+def get_community_id_by_communityName(name):
+    sql = "SELECT id FROM community WHERE name = '" + name + "'"
+    conn.ping(reconnect=True)
+    cur.execute(sql, (name,))
+    result = cur.fetchone()
+    conn.commit()
+    if result:
+        return result[0]
+    else:
+        return None
