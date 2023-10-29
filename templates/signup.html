@@ -14,11 +14,13 @@
         <br/>
         <input type="password" name="password" placeholder="Your password" />
         <br/>
+        <input type="text" name="email" placeholder="Your email" />
+        <br/>
         {% if message %} {{message}} {% endif %}
         <br/>
         <input type="submit" value="submit" />
         <input type="reset" value="reset" />
-        <a href="{{ url_for('user_login') }}">login</a>
+        <a href="{{ url_for('user.user_login') }}">login</a>
     </form>
     </div>
 </body>

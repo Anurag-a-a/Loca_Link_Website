@@ -35,11 +35,15 @@ def signup():
         session.clear()
         username = request.form.get('username')
         password = request.form.get('password')
+        email = request.form.get('email')
+        if is_null(username, password, email):
+            login_message = "Wrong username or password or email. "
+            return render_template('signup.html', message=login_message)
         if exist_user(username):
             login_message = "Username has been used. "
             return render_template('signup.html', message=login_message)
         else:
-            add_user(request.form['username'], request.form['password'])
+            add_user(request.form['username'], request.form['password'], request.form['email'])
             return render_template('home.html', username=username)
     return render_template('signup.html')
 

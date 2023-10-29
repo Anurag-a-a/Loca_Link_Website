@@ -9,6 +9,12 @@ def is_null(username, password):
         return True
     else:
         return False
+    
+def is_null(username, password, email):
+    if (username == '' or password == '' or email == ''):
+        return True
+    else:
+        return False
 
 
 def is_existed(username, password):
@@ -35,8 +41,8 @@ def exist_user(username):
         return True
 
 
-def add_user(username, password):
-    sql = "INSERT INTO user(username, password) VALUES ('" + username + "','" + password + "')"
+def add_user(username, password, email):
+    sql = "INSERT INTO user(username, password, email) VALUES ('" + username + "','" + password + "','" + email + "')"
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()
