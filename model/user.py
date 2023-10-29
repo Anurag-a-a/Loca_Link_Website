@@ -4,8 +4,15 @@ conn = pymysql.connect(host='localhost', user='root', password='rootroot', db='t
 cur = conn.cursor()
 
 
-def is_null(username, password):
+def is_null_login(username, password):
     if (username == '' or password == ''):
+        return True
+    else:
+        return False
+
+
+def is_null_signup(username, password, email):
+    if (username == '' or password == '' or email == ''):
         return True
     else:
         return False

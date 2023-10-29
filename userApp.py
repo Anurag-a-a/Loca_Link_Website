@@ -13,8 +13,8 @@ def user_login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        if is_null(username, password):
-            login_message = "Wrong username or password. "
+        if is_null_login(username, password):
+            login_message = "Please input username and password. "
             return render_template('login.html', message=login_message)
         elif is_existed(username, password):
 
@@ -36,6 +36,9 @@ def signup():
         username = request.form.get('username')
         password = request.form.get('password')
         email = request.form.get('email')
+        if is_null_signup(username, password, email):
+            login_message = "Please input username, password and email. "
+            return render_template('signup.html', message=login_message)
         if exist_user(username):
             login_message = "Username has been used. "
             return render_template('signup.html', message=login_message)
