@@ -45,7 +45,7 @@ def add_user(username, password):
 def get_user_id_by_username(username):
     sql = "SELECT id FROM user WHERE username = '" + username + "'"
     conn.ping(reconnect=True)
-    cur.execute(sql, (username,))
+    cur.execute(sql)
     result = cur.fetchone()
     conn.commit()
     if result:
