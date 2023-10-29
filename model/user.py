@@ -10,12 +10,6 @@ def is_null(username, password):
     else:
         return False
     
-def is_null(username, password, email):
-    if (username == '' or password == '' or email == ''):
-        return True
-    else:
-        return False
-
 
 def is_existed(username, password):
     sql = "SELECT * FROM user WHERE username ='" + username + "' and password ='" + password + "'"
