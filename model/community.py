@@ -5,7 +5,7 @@ cur = conn.cursor()
 
 
 def add_community(name, userId):
-    sql = "INSERT INTO community(name,userId) VALUES ('" + name + "','" + userId + "')"
+    sql = "INSERT INTO community(name,userId) VALUES ('" + name + "','" + str(userId) + "')"
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()
