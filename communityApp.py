@@ -19,7 +19,7 @@ def createCommunity():
         print(type(communityName), type(username), type(user_id))
         if exist_community(communityName):
             createCommunity_message = "Community name has been used. "
-            return render_template('home.html', message=createCommunity_message)
+            return render_template('createCommunity.html', message=createCommunity_message)
         else:
             add_community(communityName, user_id)
             return render_template('home.html', username=username)
