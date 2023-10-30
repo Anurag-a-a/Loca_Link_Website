@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Display Posts</title>
+</head>
+<body>
+    <div id="post-container">
+        <!-- Posts will be displayed here -->
+    </div>
+
+    <script>
+        // Function to fetch and display posts
+        function fetchPostsByCommunity(communityId) {
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        const posts = JSON.parse(xhr.responseText);
+                        displayPosts(posts);
+                    } else {
+                        console.error('Error fetching posts');
+                    }
+                }
+            };
+
+            xhr.open('GET', `/posts/community/${communityId}/posts`, true);
+            xhr.send();
+        }
+
+        function displayPosts(posts) {
+            const postContainer = document.getElementById('post-container');
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.classList.add('post'); // Add a class for styling
+
+                postElement.innerHTML = `
+                    <p><strong>Post ID:</strong> ${post.id}</p>
+                    <p><strong>Content:</strong> ${post.content}</p>
+                    <button onclick="likePost(${post.id})">Like</button>
+                    <button onclick="commentOnPost(${post.id})">Comment</button>
+                `;
+                postContainer.appendChild(postElement);
+            });
+        }
+
+        function likePost(postId) {
+            // Logic to handle liking a post via another AJAX request to the backend
+            // Add your implementation here
+        }
+
+        function commentOnPost(postId) {
+            // Logic to handle commenting on a post via another AJAX request to the backend
+            // Add your implementation here
+        }
+
+        // Usage: Replace 123 with the actual community ID
+        const communityId = 123;
+        fetchPostsByCommunity(communityId);
+    </script>
+</body>
+</html>
