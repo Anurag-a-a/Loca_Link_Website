@@ -8,7 +8,7 @@
   <header>
     <h1>Find your community</h1>
     <p>Join thousands of people who are passionate about the same things you are.</p>
-    <button>Join now</button>
+    <button><a href="{{ url_for('user.user_login') }}">Log in</a></button>
   </header>
   {{username}}
   <a href="{{ url_for('user.logout') }}">logout</a>

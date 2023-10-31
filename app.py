@@ -1,4 +1,4 @@
-from flask import Flask, session
+from flask import Flask, session, render_template
 from flask import redirect
 from flask import url_for
 from userApp import user_blueprint
@@ -12,7 +12,7 @@ app.secret_key = 'team20'
 
 @app.route('/')
 def index():
-    return redirect(url_for('user.user_login'))
+    return render_template('home.html')
 
 
 if __name__ == "__main__":
