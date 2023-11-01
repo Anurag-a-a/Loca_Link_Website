@@ -2,10 +2,14 @@ from flask import Flask, render_template, Blueprint, session
 from flask import redirect
 from flask import url_for
 from flask import request
+
+from model.comment import *
+from model.post import *
 from model.user import *
 from flask import jsonify
 
 app = Flask(__name__)
+app.secret_key = 'team20'
 user_blueprint = Blueprint('user', __name__)
 
 @user_blueprint.route('/user_login', methods=['GET', 'POST'])
@@ -48,13 +52,43 @@ def signup():
     return render_template('signup.html')
 
 
-
 @user_blueprint.route('/logout')
 def logout():
     session.pop('user_id', None)
     session.clear()
     return redirect(url_for('user.user_login'))
 
+
+@user_blueprint.route('/like/<int:postId>')
+def like(postId):
+    username = session.get("username")
+    if not username:
+        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+    user_id = get_user_id_by_username(username)
+    try:
+        add_like(user_id, postId)
+        add_likeNum(postId)
+        return jsonify({'status': 'success', 'message': 'Post liked successfully'}), 200
+    except:
+        return jsonify({'status': 'failed', 'message': 'An error occurred while liking the post'}), 500
+
+
+
+@user_blueprint.route('/createComment/<int:postId>', methods=["GET", 'POST'])
+def createComment(postId):
+    if request.method == "POST":
+        username = session.get("username")
+        if not username:
+            return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+        user_id = get_user_id_by_username(username)
+        content = request.form.get('content')
+        try:
+            add_comment(content, user_id, postId)
+            return jsonify({'status': 'success', 'message': 'Comment successfully'}), 200
+        except:
+            return jsonify({'status': 'failed', 'message': 'An error occurred while commenting'}), 500
 
 
 # @user_blueprint.route('/')
