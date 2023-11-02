@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Community Engagement Website</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Find your community</h1>
+    <p>Join thousands of people who are passionate about the same things you are.</p>
+    <div class="auth-buttons">
+      <button><a href="{{ url_for('user.user_login') }}">Log in</a></button>
+      <button><a href="{{ url_for('user.user_signup') }}">Sign up</a></button>
+    </div>
+    <div class="social-auth">
+      <p>Or join with</p>
+      <button class="social-btn"><img src="path/to/gmail-icon.png" alt="Gmail"> Gmail</button>
+      <button class="social-btn"><img src="path/to/facebook-icon.png" alt="Facebook"> Facebook</button>
+    </div>
+  </header>
+  {{username}}
+  <a href="{{ url_for('user.logout') }}">logout</a>
+
+  <section class="communities">
+    <h2>Featured communities</h2>
+    <div class="community">
+      <h3>Art community</h3>
+      <p>A community for artists, art enthusiasts, and anyone who loves art.</p>
+      <button class="join-btn">Join and learn more!</button>
+    </div>
+    <div class="community">
+      <h3>Technology community</h3>
+      <p>A community for tech enthusiasts, developers, and anyone who loves technology.</p>
+      <button class="join-btn">Join and learn more!</button>
+    </div>
+    <div class="community">
+      <h3>Sports and health community</h3>
+      <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p>
+      <button class="join-btn">Join and learn more!</button>
+    </div>
+  </section>
+
+  <!-- Additional sections can be uncommented and used as needed -->
+
+  <footer>
+    <ul>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Terms of service</a></li>
+    </ul>
+  </footer>
+</body>
+</html>
