@@ -87,6 +87,10 @@ def logout():
     session.clear()
     return redirect(url_for('user.user_login'))
 
+# @user_blueprint.route('/about-us')
+# def about_us_page():
+#     return render_template('about_page.html')
+
 
 @user_blueprint.route('/like/<int:postId>')
 def like(postId):

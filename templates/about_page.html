@@ -2,8 +2,8 @@
 <html>
 
 <head>
-    <title>Community Engagement Website</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <title>About Us</title>
+    <link rel="stylesheet" href="/static/about_page.css">
 </head>
 
 <body>
@@ -13,29 +13,52 @@
         </div>
 
         <header>
-            <h1>Find your community</h1>
-            <p>Join thousands of people who are passionate about the same things you are.</p>
-            <button type="button"><a href="{{ url_for('user.user_login') }}">Log in</a></button>
+            <h1>About Us</h1>
+            <p class="about-us">We are a dynamic team of Full Stack Developers. 
+                We are a group of seven versatile professionals who are not bound by traditional roles but instead thrive on adaptability, change, and collaboration. 
+                Our mission is to deliver exceptional solutions and innovate across the full spectrum of web development, 
+                and our story is one of constant evolution.</p>
+            <!-- <button type="button"><a href="{{ url_for('user.user_login') }}">Log in</a></button> -->
         </header>
 
         <section class="communities">
             <div class="community" data-view="view1">
-                <h3>Art community</h3>
-                <p>A community for artists, art enthusiasts, and anyone who loves art.</p>
+                <h3>Anurag Athwale</h3>
+                <!-- <p>A community for artists, art enthusiasts, and anyone who loves art.</p> -->
                 <button>View</button>
             </div>
             <div class="community" data-view="view2">
-                <h3>Technology community</h3>
-                <p>A community for tech enthusiasts, developers, and anyone who loves technology.</p>
+                <h3>Dhanesh Akolu</h3>
+                <!-- <p>A community for tech enthusiasts, developers, and anyone who loves technology.</p> -->
                 <button>View</button>
             </div>
             <div class="community" data-view="view3">
-                <h3>Sports and health community</h3>
-                <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p>
+                <h3>Jessica Patwal</h3>
+                <!-- <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p> -->
+                <button>View</button>
+            </div>
+            <div class="community" data-view="view3">
+                <h3>Pavan</h3>
+                <!-- <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p> -->
+                <button>View</button>
+            </div>
+            <div class="community" data-view="view3">
+                <h3>Qui Li</h3>
+                <!-- <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p> -->
+                <button>View</button>
+            </div>
+            <div class="community" data-view="view3">
+                <h3>Lijuan LIU</h3>
+                <!-- <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p> -->
+                <button>View</button>
+            </div>
+            <div class="community" data-view="view3">
+                <h3>Shantanu T K</h3>
+                <!-- <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p> -->
                 <button>View</button>
             </div>
         </section>
-    
+
         <section class="events">
             <div class="event" data-view="view1">
                 <h2>Upcoming events for Art Community</h2>
@@ -62,9 +85,8 @@
                 <p>Location: City park</p>
             </div>
         </section>
-        
     </div>
-    <!-- <p class="about-us">About Us</p> -->
+
     <script>
         const communities = document.querySelectorAll('.community');
         const events = document.querySelectorAll('.event');
@@ -88,7 +110,7 @@
             });
         });
     </script>
-    
+
 </body>
 
 </html>
