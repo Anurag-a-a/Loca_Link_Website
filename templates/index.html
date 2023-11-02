@@ -1,13 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cultural Community</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/static/main.js"></script>
-  </body>
+<html>
+
+<head>
+    <title>Community Engagement Website</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <div class="page-container">
+        <div class="page-title">
+            <h1>LocaLink</h1>
+        </div>
+
+        <header>
+            <h1>Find your community</h1>
+            <p>Join thousands of people who are passionate about the same things you are.</p>
+            <button type="button"><a href="{{ url_for('user.user_login') }}">Log in</a></button>
+        </header>
+
+        <section class="communities">
+            <div class="community" data-view="view1">
+                <h3>Art community</h3>
+                <p>A community for artists, art enthusiasts, and anyone who loves art.</p>
+                <button>View</button>
+            </div>
+            <div class="community" data-view="view2">
+                <h3>Technology community</h3>
+                <p>A community for tech enthusiasts, developers, and anyone who loves technology.</p>
+                <button>View</button>
+            </div>
+            <div class="community" data-view="view3">
+                <h3>Sports and health community</h3>
+                <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p>
+                <button>View</button>
+            </div>
+        </section>
+
+        <section class="events">
+            <div class="event" data-view="view1">
+                <h2>Upcoming events for Art Community</h2>
+                <h3>Community meetup</h3>
+                <p>A meetup for members of the art community to get together and socialize.</p>
+                <p>Date: 2023-10-26</p>
+                <p>Time: 7:00 PM</p>
+                <p>Location: Community center</p>
+            </div>
+            <div class="event" data-view="view2">
+                <h2>Upcoming events for Technology Community</h2>
+                <h3>Hackathon</h3>
+                <p>A 24-hour event where teams of developers come together to build software.</p>
+                <p>Date: 2023-11-03</p>
+                <p>Time: 9:00 AM</p>
+                <p>Location: Tech conference</p>
+            </div>
+            <div class="event" data-view="view3">
+                <h2>Upcoming events for Sports and Health Community</h2>
+                <h3>Charity run</h3>
+                <p>A 5K run to raise money for a local charity.</p>
+                <p>Date: 2023-11-10</p>
+                <p>Time: 8:00 AM</p>
+                <p>Location: City park</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const communities = document.querySelectorAll('.community');
+        const events = document.querySelectorAll('.event');
+
+        communities.forEach(community => {
+            community.addEventListener('click', () => {
+                const view = community.getAttribute('data-view');
+                const targetEvent = document.querySelector(`.event[data-view="${view}"]`);
+
+                events.forEach(event => {
+                    if (event !== targetEvent) {
+                        event.style.display = 'none';
+                    }
+                });
+
+                if (targetEvent.style.display === 'block') {
+                    targetEvent.style.display = 'none';
+                } else {
+                    targetEvent.style.display = 'block';
+                }
+            });
+        });
+    </script>
+
+</body>
+
 </html>
