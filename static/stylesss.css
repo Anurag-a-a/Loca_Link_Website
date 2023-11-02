@@ -1,0 +1,121 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2757
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 /* General Styling */\
+body \{\
+  font-family: Arial, sans-serif;\
+  margin: 0;\
+  padding: 0;\
+  background-color: #f0f0f0;\
+\}\
+\
+header \{\
+  background-color: #4CAF50;\
+  color: #fff;\
+  padding: 20px;\
+  text-align: center;\
+\}\
+\
+header h1 \{\
+  margin-bottom: 10px;\
+\}\
+\
+/* Authentication Buttons */\
+.auth-buttons button \{\
+  background-color: #fff;\
+  color: #4CAF50;\
+  padding: 10px 20px;\
+  margin: 10px;\
+  border: none;\
+  border-radius: 5px;\
+  cursor: pointer;\
+  transition: background-color 0.3s;\
+\}\
+\
+.auth-buttons button:hover \{\
+  background-color: #ddd;\
+\}\
+\
+/* Social Authentication Buttons */\
+.social-auth p \{\
+  margin: 10px 0;\
+\}\
+\
+.social-btn \{\
+  background-color: #fff;\
+  color: #333;\
+  padding: 10px;\
+  margin: 5px;\
+  border: 1px solid #ccc;\
+  border-radius: 5px;\
+  cursor: pointer;\
+  transition: background-color 0.3s;\
+\}\
+\
+.social-btn:hover \{\
+  background-color: #ddd;\
+\}\
+\
+/* Community Section */\
+.communities \{\
+  padding: 50px;\
+  text-align: center;\
+\}\
+\
+.community \{\
+  background-color: #f9f9f9;\
+  border-radius: 10px;\
+  padding: 20px;\
+  margin: 15px 0;\
+  transition: transform 0.3s;\
+\}\
+\
+.community:hover \{\
+  transform: scale(1.05);\
+\}\
+\
+.join-btn \{\
+  background-color: #50b3a2;\
+  color: #fff;\
+  padding: 10px 20px;\
+  border: none;\
+  border-radius: 5px;\
+  cursor: pointer;\
+  transition: background-color 0.3s;\
+\}\
+\
+.join-btn:hover \{\
+  background-color: #3f927a;\
+\}\
+\
+/* Footer */\
+footer \{\
+  background-color: #4CAF50;\
+  color: #fff;\
+  text-align: center;\
+  padding: 10px 0;\
+  position: fixed;\
+  left: 0;\
+  bottom: 0;\
+  width: 100%;\
+\}\
+\
+footer ul \{\
+  list-style: none;\
+  padding: 0;\
+\}\
+\
+footer li \{\
+  display: inline;\
+  margin-right: 10px;\
+\}\
+\
+footer a \{\
+  color: #fff;\
+  text-decoration: none;\
+\}\
+}
