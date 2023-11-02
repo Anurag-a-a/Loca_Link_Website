@@ -1,129 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Community Engagement Website</title>
-  <link rel="stylesheet" href="/static/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  type="text/css" href="/static/style.css">
+    <title>Virtual Community</title>
 </head>
 <body>
-  <header>
-    <h1>Find your community</h1>
-    <p>Join thousands of people who are passionate about the same things you are.</p>
-    <button><a href="{{ url_for('user.user_login') }}">Log in</a></button>
-  </header>
-  {{username}}
-  <a href="{{ url_for('user.logout') }}">logout</a>
-
-  <section class="communities">
-    <h2>Featured communities</h2>
-    <div class="community">
-      <h3>Art community</h3>
-      <p>A community for artists, art enthusiasts, and anyone who loves art.</p>
-      <button>Join</button>
+    <div>
+    <h1>Welcome to Virtual Community</h1>
+        <a href="{{ url_for('user.user_login') }}">Exit</a>
+        <br/>
     </div>
-    <div class="community">
-      <h3>Technology community</h3>
-      <p>A community for tech enthusiasts, developers, and anyone who loves technology.</p>
-      <button>Join</button>
-    </div>
-    <div class="community">
-      <h3>Sports and health community</h3>
-      <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p>
-      <button>Join</button>
-    </div>
-  </section>
-<!-- 
-  <section class="events">
-    <h2>Upcoming events</h2>
-    <div class="event" id="community-meetup" style="display: none;">
-      <h3>Community meetup</h3>
-      <p>A meetup for members of the community to get together and socialize.</p>
-      <p>Date: 2023-10-26</p>
-      <p>Time: 7:00 PM</p>
-      <p>Location: Community center</p>
-      <button>Attend</button>
-    </div>
-    <div class="event" id="hackathon" style="display: none;">
-      <h3>Hackathon</h3>
-      <p>A 24-hour event where teams of developers come together to build software.</p>
-      <p>Date: 2023-11-03</p>
-      <p>Time: 9:00 AM</p>
-      <p>Location: Tech conference</p>
-      <button>Attend</button>
-    </div>
-    <div class="event" id="charity-run" style="display: none;">
-      <h3>Charity run</h3>
-      <p>A 5K run to raise money for a local charity.</p>
-      <p>Date: 2023-11-10</p>
-      <p>Time: 8:00 AM</p>
-      <p>Location: City park</p>
-      <button>Attend</button>
-    </div>
-  </section>
-
-  <section class="testimonials">
-    <h2>Testimonials</h2>
-    <div class="testimonial">
-      <p>"I've met so many amazing people through this community. It's been a great way to connect with others who share my interests."</p>
-      <p>- John Doe</p>
-    </div>
-    <div class="testimonial">
-      <p>"I've learned so much from the members of this community. They're always willing to share their knowledge and expertise."</p>
-      <p>- Jane Doe</p>
-    </div>
-    <div class="testimonial">
-      <p>"This community has given me a sense of belonging. I'm glad to be a part of it."</p>
-      <p>- Mary Doe</p>
-    </div>
-  </section>
-
-  <section class="benefits">
-    <h2>Benefits of using our platform</h2>
-    <ul>
-      <li>Find people who share your interests</li>
-      <li>Learn new things</li>
-      <li>Connect with others</li>
-      <li>Make a difference</li>
-    </ul>
-    <button>Learn more</button>
-  </section>
-
-  <section class="social-proof">
-    <h2>Social proof</h2>
-    <ul>
-      <li>100,000 registered users</li>
-      <li>1,000 active communities</li>
-      <li>10,000 posts created per day</li>
-    </ul>
-    <button>Join the community</button>
-  </section> -->
-
-  <footer>
-    <ul>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Terms of service</a></li>
-    </ul>
-  </footer>
-<script>
-    const communityMeetup = document.getElementById('community-meetup');
-    const hackathon = document.getElementById('hackathon');
-    const charityRun = document.getElementById('charity-run');
-
-    const artCommunityButton = document.querySelector('.community:nth-child(1) button');
-    const techCommunityButton = document.querySelector('.community:nth-child(2) button');
-    const sportsCommunityButton = document.querySelector('.community:nth-child(3) button');
-
-    artCommunityButton.addEventListener('click', () => {
-      communityMeetup.style.display = 'block';
-    });
-
-    techCommunityButton.addEventListener('click', () => {
-      hackathon.style.display = 'block';
-    });
-
-    sportsCommunityButton.addEventListener('click', () => {
-      charityRun.style.display = 'block';
-    });
-  </script>
 </body>
 </html>

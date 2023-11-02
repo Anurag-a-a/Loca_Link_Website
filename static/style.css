@@ -1,10 +1,101 @@
-body{
-    background-color: lightcyan;
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f3f3f3;
+    width: 100%;
 }
-div{
-    margin: 0 auto;
-    width: 500px;
-    height: 300px;
-    border: 1px solid skyblue;
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 50px;
+    width: 100%;
+    margin: 0;
+}
+
+.page-title {
+    background-color: #2626a1;
     text-align: center;
+    padding: 50px;
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding is included in the width */
+}
+
+.page-title h1 {
+    color: #fff;
+    font-size: 80px;
+    margin: 0;
+}
+
+.login-container,.signup-container {
+    background-color: #fff;
+    padding: 50px;
+    padding-top: 0%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    border: 2px solid #ddd;
+    width: 80%;
+    max-width: 700px;
+    margin-top: 5%;
+}
+
+.login-container h2,.signup-container h2 {
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 50px;
+    color: #333;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="submit"],
+input[type="reset"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.button-container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+button[type="submit"],
+button[type="reset"] {
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 20px;
+    width: 50%;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    
+}
+
+button[type="submit"]:hover,
+button[type="reset"]:hover {
+    background-color: #45a049;
+}
+
+.signup-link a,.login-link a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #0000EE;
+}
+
+.message {
+    text-align: center;
+    color: red;
 }

@@ -7,21 +7,39 @@
     <title>Signup</title>
 </head>
 <body>
-    <div>
-    <h1>Signup</h1>
-    <form method="POST">
-        <input type="text" name="username" placeholder="Your username" />
-        <br/>
-        <input type="password" name="password" placeholder="Your password" />
-        <br/>
-        <input type="text" name="email" placeholder="Your email" />
-        <br/>
-        {% if message %} {{message}} {% endif %}
-        <br/>
-        <input type="submit" value="submit" />
-        <input type="reset" value="reset" />
-        <a href="{{ url_for('user.user_login') }}">login</a>
-    </form>
+    <div class="page-container">
+        <div class="page-title">
+            <h1>LocaLink</h1>
+        </div>
+        <div class="signup-container">
+            <h2>Signup</h2>
+            <form method="POST">
+                User Name:
+                <input type="text" name="username" placeholder="Your username" required />
+                <br/>
+                Password:
+                <input type="password" name="password" placeholder="Your password" required />
+                <br/>
+                Confirm Password:
+                <input type="password" name="confirm_password" placeholder="Confirm password" required />
+                <br/>
+                Email ID:
+                <input type="email" name="email" placeholder="Your email" required />
+                <br/>
+                {% if message %}
+                    <p>{{ message }}</p>
+                {% endif %}
+                <br/>
+
+                <div class="button-container">
+                    <button type="submit" value="submit"> Submit </button>
+                    <button type="reset" value="reset"> Reset </button>
+                </div>
+                <div class="login-link a">
+                    <a href="{{ url_for('user.user_login') }}">login</a>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>

@@ -7,6 +7,7 @@ from model.comment import *
 from model.post import *
 from model.user import *
 from flask import jsonify
+import re  # Import regular expression module
 
 app = Flask(__name__)
 app.secret_key = 'team20'
@@ -32,23 +33,51 @@ def user_login():
     return render_template('login.html')
 
 
-@user_blueprint.route("/signup", methods=["GET", 'POST'])
+
+
+@user_blueprint.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == 'POST':
         session.pop('user_id', None)
         session.clear()
         username = request.form.get('username')
         password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
         email = request.form.get('email')
-        if is_null_signup(username, password, email):
-            login_message = "Please input username, password and email. "
+
+        if not all([username, password, confirm_password, email]):
+            login_message = "Please fill in all fields."
             return render_template('signup.html', message=login_message)
+
+        # Username validation
+        if not re.match("^[a-zA-Z0-9]+$", username) or username.isdigit() or not username[0].isalpha():
+            login_message = "Invalid username. Username should only contain letters and numbers, and should start with a letter."
+            return render_template('signup.html', message=login_message)
+
+        # Email validation
+        if not re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email):
+            login_message = "Invalid email format."
+            return render_template('signup.html', message=login_message)
+
+        # Password validation
+        if len(password) < 8 or not re.match(r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", password):
+            login_message = "Invalid password. Password should be at least 8 characters long and include numbers, alphabets, and special characters."
+            return render_template('signup.html', message=login_message)
+
+        if password != confirm_password:
+            login_message = "Passwords do not match."
+            return render_template('signup.html', message=login_message)
+
         if exist_user(username):
-            login_message = "Username has been used. "
+            login_message = "Username has been used."
             return render_template('signup.html', message=login_message)
         else:
-            add_user(request.form['username'], request.form['password'], request.form['email'])
+            # Implement secure password storage (hashing) before storing in the database
+            # Add the user to the database with hashed password
+            add_user(username, password, email)  # Replace this with your secure database storage function
+
             return render_template('home.html', username=username)
+    
     return render_template('signup.html')
 
 

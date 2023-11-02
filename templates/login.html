@@ -3,24 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  type="text/css" href="/static/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
     <title>Login</title>
 </head>
 <body>
-    <div>
-    <h1>Login</h1>
-    <form method="POST">
-        <input type="text" name="username" placeholder="Your username" />
-        <br/>
-        <input type="password" name="password" placeholder="Your password" />
-        <br/>
-        {% if message %} {{message}} {% endif %}
-        <br/>
-        <input type="submit" value="login" />
-        <input type="reset" value="reset" />
-        <a href="{{ url_for('user.signup') }}">signup</a>
-        <!-- <a href="{{ url_for('index') }}">home</a> -->
-    </form>
+    <div class="page-container">
+        <div class="page-title">
+            <h1>LocaLink</h1>
+        </div>
+        <div class="login-container">
+            <h2>Login</h2>
+            <form id="login-form" method="POST">
+            <div class="input-container">
+                User Name
+                <input type="text" name="username" id="username" placeholder="Your username" />
+            </div>
+            <div class="input-container">
+                Password
+                <input type="password" name="password" id="password" placeholder="Your password" />
+            </div>
+            <div class="message">
+                <p id="message">{% if message %} {{message}} {% endif %}</p>
+            </div>
+            <div class="button-container">
+                <button type="submit" value="Login" >Submit</button>
+                <button type="reset" value="Reset" >Reset</button>
+            </div>
+            <div class="signup-link">
+                <a href="{{ url_for('user.signup') }}">Signup</a>
+            </div>
+        </form>
+        </div>
     </div>
 </body>
 </html>

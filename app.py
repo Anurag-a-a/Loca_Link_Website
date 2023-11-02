@@ -12,7 +12,7 @@ app.secret_key = 'team20'
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    return render_template('index.html')
 
 
 if __name__ == "__main__":
