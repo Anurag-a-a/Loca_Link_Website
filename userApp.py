@@ -124,7 +124,13 @@ def createComment(postId):
         except:
             return jsonify({'status': 'failed', 'message': 'An error occurred while commenting'}), 500
 
+@user_blueprint.route("/profile")
+def profile():
+    username = session.get("username")
+    if not username:
+        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
 
+    return render_template('EditProfile.html',username=username)
 
 # @user_blueprint.route('/')
 # def index():
