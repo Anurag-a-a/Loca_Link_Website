@@ -10,7 +10,7 @@
       <a href="/post/create/{{ communityId }}">   <button>Create Post</button></a>
   </header>
   {{username}}
-  <a href="{{ url_for('user.logout') }}">logout</a>
+  <a href="{{ url_for('user.user_login') }}">logout</a>
 
   <section class="posts">
     <h2>All Posts</h2>
@@ -25,71 +25,6 @@
     {% endfor %}
 
   </section>
-<!-- 
-  <section class="events">
-    <h2>Upcoming events</h2>
-    <div class="event" id="community-meetup" style="display: none;">
-      <h3>Community meetup</h3>
-      <p>A meetup for members of the community to get together and socialize.</p>
-      <p>Date: 2023-10-26</p>
-      <p>Time: 7:00 PM</p>
-      <p>Location: Community center</p>
-      <button>Attend</button>
-    </div>
-    <div class="event" id="hackathon" style="display: none;">
-      <h3>Hackathon</h3>
-      <p>A 24-hour event where teams of developers come together to build software.</p>
-      <p>Date: 2023-11-03</p>
-      <p>Time: 9:00 AM</p>
-      <p>Location: Tech conference</p>
-      <button>Attend</button>
-    </div>
-    <div class="event" id="charity-run" style="display: none;">
-      <h3>Charity run</h3>
-      <p>A 5K run to raise money for a local charity.</p>
-      <p>Date: 2023-11-10</p>
-      <p>Time: 8:00 AM</p>
-      <p>Location: City park</p>
-      <button>Attend</button>
-    </div>
-  </section>
-
-  <section class="testimonials">
-    <h2>Testimonials</h2>
-    <div class="testimonial">
-      <p>"I've met so many amazing people through this community. It's been a great way to connect with others who share my interests."</p>
-      <p>- John Doe</p>
-    </div>
-    <div class="testimonial">
-      <p>"I've learned so much from the members of this community. They're always willing to share their knowledge and expertise."</p>
-      <p>- Jane Doe</p>
-    </div>
-    <div class="testimonial">
-      <p>"This community has given me a sense of belonging. I'm glad to be a part of it."</p>
-      <p>- Mary Doe</p>
-    </div>
-  </section>
-
-  <section class="benefits">
-    <h2>Benefits of using our platform</h2>
-    <ul>
-      <li>Find people who share your interests</li>
-      <li>Learn new things</li>
-      <li>Connect with others</li>
-      <li>Make a difference</li>
-    </ul>
-    <button>Learn more</button>
-  </section>
-
-  <section class="social-proof">
-    <h2>Social proof</h2>
-    <ul>
-      <li>100,000 registered users</li>
-      <li>1,000 active communities</li>
-      <li>10,000 posts created per day</li>
-    </ul>
-    <button>Join the community</button>
-  </section> -->
 
   <footer>
     <ul>
@@ -98,27 +33,6 @@
       <li><a href="#">Terms of service</a></li>
     </ul>
   </footer>
-<script>
-    const communityMeetup = document.getElementById('community-meetup');
-    const hackathon = document.getElementById('hackathon');
-    const charityRun = document.getElementById('charity-run');
-
-    const artCommunityButton = document.querySelector('.community:nth-child(1) button');
-    const techCommunityButton = document.querySelector('.community:nth-child(2) button');
-    const sportsCommunityButton = document.querySelector('.community:nth-child(3) button');
-
-    artCommunityButton.addEventListener('click', () => {
-      communityMeetup.style.display = 'block';
-    });
-
-    techCommunityButton.addEventListener('click', () => {
-      hackathon.style.display = 'block';
-    });
-
-    sportsCommunityButton.addEventListener('click', () => {
-      charityRun.style.display = 'block';
-    });
-  </script>
 
 
 </body>

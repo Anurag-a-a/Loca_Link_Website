@@ -2,9 +2,10 @@
 <html>
 <head>
     <title>ART Community</title>
-    <link rel="stylesheet" type="text/css" href="profilepage.css">
+    <link rel="stylesheet" type="text/css" href="/static/profilepage.css">
 </head>
 <body>
+    
     <!-- Navigation bar -->
     <div class="navbar">
         <a href="#">My Profile</a>
@@ -12,15 +13,22 @@
         <div class="dropdown">
             <a href="#">All Communities</a>
             <div class="dropdown-content">
-                <a href="#">Music</a>
-                <a href="#">Dance</a>
-                <a href="#">Sports</a>
+                <a href="{{ url_for('community.arts') }}">Arts</a>
+                <a href="{{ url_for('community.music') }}">Music</a>
+                <a href="{{ url_for('community.dance') }}">Dance</a>
+                <a href="{{ url_for('community.sports') }}">Sports</a>
             </div>
         </div>
     </div>
 
     <!-- Profile page content -->
     <div class="profile">
+        <h1>Welcome to your Virtual Community {{username}}</h1>
+
+    
+        <a href="{{ url_for('user.logout') }}">Exit</a>
+        <br/>
+
         <div class="profile-icon">
             <img src="https://assets.online.berklee.edu/catalog-site-heroes/careers-illustration-v2.png" alt="Profile Icon" width="900" height="300"/>
         </div>

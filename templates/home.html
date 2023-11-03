@@ -7,9 +7,15 @@
     <title>Virtual Community</title>
 </head>
 <body>
-    <div>
-    <h1>Welcome to Virtual Community</h1>
-        <a href="{{ url_for('user.user_login') }}">Exit</a>
+    <header>
+        <h1>Post List</h1>
+          <a href="/post/create/{{ communityId }}">   <button>Create Post</button></a>
+      </header>
+
+      <div>
+        <h1>Welcome to Virtual Community</h1>
+        {{username}}     
+        <a href="{{ url_for('user.logout') }}">Exit</a>
         <br/>
     </div>
 </body>

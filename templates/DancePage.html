@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dance Community</title>
+    <link rel="stylesheet" type="text/css" href="/static/profilepage.css">
+</head>
+<body>
+    
+    <!-- Navigation bar -->
+    <div class="navbar">
+        <a href="#">My Profile</a>
+        <a href="#">Scavenger Hunt</a>
+        <div class="dropdown">
+            <a href="#">All Communities</a>
+            <div class="dropdown-content">
+                <a href="{{ url_for('community.arts') }}">Arts</a>
+                <a href="{{ url_for('community.music') }}">Music</a>
+                <a href="{{ url_for('community.dance') }}">Dance</a>
+                <a href="{{ url_for('community.sports') }}">Sports</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile page content -->
+    <div class="profile">
+        <h1>Welcome to your Virtual Community {{username}}</h1>
+
+        <a href="{{ url_for('user.logout') }}">Exit</a>
+        <br/>
+
+        <div class="profile-icon">
+            <img src="https://dancedentampa.com/wp-content/uploads/2023/02/industry-hip-hop-transformed.jpg" alt="Profile Icon" width="900" height="300"/>
+        </div>
+        <div class="content-block">
+            <h1>Welcome to the DANCE Community</h1>
+            <p>Here you can find posts related to dance</p>
+        </div>
+        <div class="content-container">
+            <div class="content-block">
+                <h2>Contemporary Dance: Expressive Movements</h2>
+                <p>Let's talk about contemporary dance forms. I find the expressive movements captivating. Share your thoughts!</p>
+            </div>
+            <div class="content-block">
+                <h2>Traditional Dance Styles Around the World</h2>
+                <p>Exploring traditional dance styles has been a fascinating journey. Which traditional dance forms do you admire?</p>
+            </div>
+            <div class="content-block">
+                <h2>Hip-Hop Culture: The Beat and Dance</h2>
+                <p>Hip-hop culture is more than just dance; it's a lifestyle. What aspects of hip-hop dance intrigue you the most?</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -25,8 +25,9 @@ def user_login():
 
             user_id = get_user_id_by_username(username)
             session['user_id'] = user_id
+            session['username'] = username
 
-            return render_template('home.html', username=username)
+            return render_template('Artspage.html', username=username)
         else:
             login_message = "Please input correctly. "
             return render_template('login.html', message=login_message)
@@ -122,6 +123,7 @@ def createComment(postId):
             return jsonify({'status': 'success', 'message': 'Comment successfully'}), 200
         except:
             return jsonify({'status': 'failed', 'message': 'An error occurred while commenting'}), 500
+
 
 
 # @user_blueprint.route('/')

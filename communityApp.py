@@ -24,3 +24,37 @@ def createCommunity():
             add_community(communityName, user_id)
             return render_template('home.html', username=username)
     return render_template('createCommunity.html')
+
+
+@community_blueprint.route("/music")
+def music():
+    username = session.get("username")
+    if not username:
+        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+    return render_template('MusicPage.html',username=username)
+
+
+
+@community_blueprint.route("/dance")
+def dance():
+    username = session.get("username")
+    if not username:
+        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+    return render_template('DancePage.html',username=username)
+
+@community_blueprint.route("/sports")
+def sports():
+    username = session.get("username")
+    if not username:
+        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+    return render_template('Sports.html',username=username)
+@community_blueprint.route("/arts")
+def arts():
+    username = session.get("username")
+    if not username:
+        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+    return render_template('ArtsPage.html',username=username)
