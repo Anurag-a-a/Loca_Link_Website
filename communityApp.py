@@ -58,3 +58,11 @@ def arts():
         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
 
     return render_template('ArtsPage.html',username=username)
+
+@community_blueprint.route("/topPosts")
+def topPosts():
+    username = session.get("username")
+    if not username:
+        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+    return render_template('topPosts.html',username=username)

@@ -27,7 +27,7 @@ def user_login():
             session['user_id'] = user_id
             session['username'] = username
 
-            return render_template('Artspage.html', username=username)
+            return render_template('topPosts.html', username=username)
         else:
             login_message = "Please input correctly. "
             return render_template('login.html', message=login_message)

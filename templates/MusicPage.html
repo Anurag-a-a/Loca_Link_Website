@@ -1,55 +1,70 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Music Community</title>
-    <link rel="stylesheet" type="text/css" href="/static/profilepage.css">
-</head>
-<body>
-    
+    <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
+  </head>
+  <body>
     <!-- Navigation bar -->
     <div class="navbar">
-        <a href="{{ url_for('community.arts') }}">My Profile</a>
-        <a href="#">Scavenger Hunt</a>
-        <div class="dropdown">
-            <a href="#">All Communities</a>
-            <div class="dropdown-content">
-                <a href="{{ url_for('community.arts') }}">Arts</a>
-                <a href="{{ url_for('community.music') }}">Music</a>
-                <a href="{{ url_for('community.dance') }}">Dance</a>
-                <a href="{{ url_for('community.sports') }}">Sports</a>
-            </div>
+      <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
+      <a href="{{ url_for('community.arts') }}">My Profile</a>
+      <a href="#">Scavenger Hunt</a>
+      <div class="dropdown">
+        <a href="#">All Communities</a>
+        <div class="dropdown-content">
+          <a href="{{ url_for('community.arts') }}">Arts</a>
+          <a href="{{ url_for('community.music') }}">Music</a>
+          <a href="{{ url_for('community.dance') }}">Dance</a>
+          <a href="{{ url_for('community.sports') }}">Sports</a>
         </div>
-        <a href="{{ url_for('user.profile') }}">User Profile</a>
+      </div>
+      <a href="{{ url_for('user.profile') }}">User Profile</a>
     </div>
 
     <!-- Profile page content -->
     <div class="profile">
-        <h1>Welcome to your Virtual Community {{username}}</h1>
+      <h1>Welcome to your Virtual Community {{username}}</h1>
 
-        <a href="{{ url_for('user.logout') }}">Exit</a>
-        <br/>
+      <a href="{{ url_for('user.logout') }}">Exit</a>
+      <br />
 
-        <div class="profile-icon">
-            <img src="https://c8.alamy.com/comp/2JWN0J8/hands-up-group-of-people-of-diverse-culture-or-friends-holding-musical-notes-community-of-fans-musicians-collaborators-who-share-or-exchange-music-2JWN0J8.jpg" alt="Profile Icon" width="900" height="300"/>
+      <div class="profile-icon">
+        <img
+          src="https://c8.alamy.com/comp/2JWN0J8/hands-up-group-of-people-of-diverse-culture-or-friends-holding-musical-notes-community-of-fans-musicians-collaborators-who-share-or-exchange-music-2JWN0J8.jpg"
+          alt="Profile Icon"
+          width="900"
+          height="300"
+        />
+      </div>
+      <div class="content-block">
+        <h1>Welcome to the MUSIC Community</h1>
+        <p>Here you can find posts related to music</p>
+      </div>
+      <div class="content-container">
+        <div class="content-block">
+          <h2>Exploring Jazz: The Soulful Rhythms</h2>
+          <p>
+            Hey music lovers! Let's delve into the world of Jazz. I've been
+            captivated by its soulful rhythms. What are your favorite Jazz
+            tunes?
+          </p>
         </div>
         <div class="content-block">
-            <h1>Welcome to the MUSIC Community</h1>
-            <p>Here you can find posts related to music</p>
+          <h2>Rock Legends: A Nostalgic Journey</h2>
+          <p>
+            Rock music has a special place in my heart. Join me in celebrating
+            the rock legends. Who's your ultimate rock icon?
+          </p>
         </div>
-        <div class="content-container">
-            <div class="content-block">
-                <h2>Exploring Jazz: The Soulful Rhythms</h2>
-                <p>Hey music lovers! Let's delve into the world of Jazz. I've been captivated by its soulful rhythms. What are your favorite Jazz tunes?</p>
-            </div>
-            <div class="content-block">
-                <h2>Rock Legends: A Nostalgic Journey</h2>
-                <p>Rock music has a special place in my heart. Join me in celebrating the rock legends. Who's your ultimate rock icon?</p>
-            </div>
-            <div class="content-block">
-                <h2>Classical Melodies: Timeless Beauty</h2>
-                <p>Let's discuss the mesmerizing world of classical music. Do you have any favorite classical compositions?</p>
-            </div>
+        <div class="content-block">
+          <h2>Classical Melodies: Timeless Beauty</h2>
+          <p>
+            Let's discuss the mesmerizing world of classical music. Do you have
+            any favorite classical compositions?
+          </p>
         </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

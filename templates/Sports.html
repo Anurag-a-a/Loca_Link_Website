@@ -1,56 +1,69 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Sports Community</title>
-    <link rel="stylesheet" type="text/css" href="/static/profilepage.css">
-</head>
-<body>
-    
+    <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
+  </head>
+  <body>
     <!-- Navigation bar -->
     <div class="navbar">
-        <a href="{{ url_for('community.arts') }}">My Profile</a>
-        <a href="#">Scavenger Hunt</a>
-        <div class="dropdown">
-            <a href="#">All Communities</a>
-            <div class="dropdown-content">
-                <a href="{{ url_for('community.arts') }}">Arts</a>
-                <a href="{{ url_for('community.music') }}">Music</a>
-                <a href="{{ url_for('community.dance') }}">Dance</a>
-                <a href="{{ url_for('community.sports') }}">Sports</a>
-            </div>
+      <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
+      <a href="{{ url_for('community.arts') }}">My Profile</a>
+      <a href="#">Scavenger Hunt</a>
+      <div class="dropdown">
+        <a href="#">All Communities</a>
+        <div class="dropdown-content">
+          <a href="{{ url_for('community.arts') }}">Arts</a>
+          <a href="{{ url_for('community.music') }}">Music</a>
+          <a href="{{ url_for('community.dance') }}">Dance</a>
+          <a href="{{ url_for('community.sports') }}">Sports</a>
         </div>
-        <a href="{{ url_for('user.profile') }}">User Profile</a>
-            
+      </div>
+      <a href="{{ url_for('user.profile') }}">User Profile</a>
     </div>
 
     <!-- Profile page content -->
     <div class="profile">
-        <h1>Welcome to your Virtual Community {{username}}</h1>
+      <h1>Welcome to your Virtual Community {{username}}</h1>
 
-        <a href="{{ url_for('user.logout') }}">Exit</a>
-        <br/>
+      <a href="{{ url_for('user.logout') }}">Exit</a>
+      <br />
 
-        <div class="profile-icon">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqOJQE2AsHIEAqZOGdH_Q_yr41jy9SSrK54Q&usqp=CAU" alt="Profile Icon" width="900" height="300"/>
+      <div class="profile-icon">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqOJQE2AsHIEAqZOGdH_Q_yr41jy9SSrK54Q&usqp=CAU"
+          alt="Profile Icon"
+          width="900"
+          height="300"
+        />
+      </div>
+      <div class="content-block">
+        <h1>Welcome to the SPORTS Community</h1>
+        <p>Here you can find posts related to sports</p>
+      </div>
+      <div class="content-container">
+        <div class="content-block">
+          <h2>Basketball Fever: The Game & Strategies</h2>
+          <p>
+            Let's discuss the latest in basketball. What strategies do you find
+            most effective on the court?
+          </p>
         </div>
         <div class="content-block">
-            <h1>Welcome to the SPORTS Community</h1>
-            <p>Here you can find posts related to sports</p>
+          <h2>Football Frenzy: Legendary Matches</h2>
+          <p>
+            Football has seen some epic matches. Which one do you think is the
+            most legendary, and why?
+          </p>
         </div>
-        <div class="content-container">
-            <div class="content-block">
-                <h2>Basketball Fever: The Game & Strategies</h2>
-                <p>Let's discuss the latest in basketball. What strategies do you find most effective on the court?</p>
-            </div>
-            <div class="content-block">
-                <h2>Football Frenzy: Legendary Matches</h2>
-                <p>Football has seen some epic matches. Which one do you think is the most legendary, and why?</p>
-            </div>
-            <div class="content-block">
-                <h2>Thrilling Sports Moments: Your Favorites</h2>
-                <p>Share some of the most thrilling sports moments that have left a lasting impact on you.</p>
-            </div>
+        <div class="content-block">
+          <h2>Thrilling Sports Moments: Your Favorites</h2>
+          <p>
+            Share some of the most thrilling sports moments that have left a
+            lasting impact on you.
+          </p>
         </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

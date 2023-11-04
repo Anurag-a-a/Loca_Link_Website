@@ -1,6 +1,9 @@
 import pymysql
+from config import Config
 
-conn = pymysql.connect(host='localhost', user='root', password='rootroot', db='team20')
+config = Config()
+
+conn = pymysql.connect(host=config.DB_HOST, user=config.DB_USER, password=config.DB_PASSWORD, db=config.DB_NAME)
 cur = conn.cursor()
 
 
