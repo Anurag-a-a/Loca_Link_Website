@@ -37,8 +37,7 @@ def get_posts_by_community(community_id):
 #     # Get the post by its ID
 #     post = next((p for p in posts if p['id'] == post_id), None)
 #     if post:
-#         # Delete the post if the user_id matches (you may need to add authentication)
-#         if post['user_id'] == 1:  # Replace 1 with the user's ID who can delete posts
+#         if post['user_id'] == 1:
 #             posts.remove(post)
 #
-#     return 'Post deleted successfully'  # You might redirect to another page after deletion
+#     return 'Post deleted successfully'

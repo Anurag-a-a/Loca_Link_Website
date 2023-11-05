@@ -3,6 +3,7 @@ from flask import redirect
 from flask import url_for
 from flask import request
 from model.community import *
+from model.post import *
 from model.user import *
 from flask import jsonify
 
@@ -26,38 +27,51 @@ def createCommunity():
     return render_template('createCommunity.html')
 
 
-@community_blueprint.route("/music")
-def music():
+@community_blueprint.route("/<int:id>")
+def community(id):
     username = session.get("username")
     if not username:
         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
 
-    return render_template('MusicPage.html',username=username)
+    communityList = get_communityList()[:4]
+    community = get_community_by_id(id)
+    posts = get_postList_in_community(id)[:3]
 
+    return render_template('CommunityPage.html',communityList=communityList,
+                           username=username,community=community,posts=posts)
 
-
-@community_blueprint.route("/dance")
-def dance():
-    username = session.get("username")
-    if not username:
-        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-
-    return render_template('DancePage.html',username=username)
-
-@community_blueprint.route("/sports")
-def sports():
-    username = session.get("username")
-    if not username:
-        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-
-    return render_template('Sports.html',username=username)
-@community_blueprint.route("/arts")
-def arts():
-    username = session.get("username")
-    if not username:
-        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-
-    return render_template('ArtsPage.html',username=username)
+# @community_blueprint.route("/music")
+# def music():
+#     username = session.get("username")
+#     if not username:
+#         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+#
+#     return render_template('MusicPage.html',username=username)
+#
+#
+#
+# @community_blueprint.route("/dance")
+# def dance():
+#     username = session.get("username")
+#     if not username:
+#         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+#
+#     return render_template('DancePage.html',username=username)
+#
+# @community_blueprint.route("/sports")
+# def sports():
+#     username = session.get("username")
+#     if not username:
+#         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+#
+#     return render_template('Sports.html',username=username)
+# @community_blueprint.route("/arts")
+# def arts():
+#     username = session.get("username")
+#     if not username:
+#         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+#
+#     return render_template('ArtsPage.html',username=username)
 
 @community_blueprint.route("/topPosts")
 def topPosts():

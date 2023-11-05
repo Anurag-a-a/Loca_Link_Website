@@ -3,7 +3,8 @@ from config import Config
 
 config = Config()
 
-conn = pymysql.connect(host=config.DB_HOST, user=config.DB_USER, password=config.DB_PASSWORD, db=config.DB_NAME)
+conn = pymysql.connect(host=config.DB_HOST, user=config.DB_USER, password=config.DB_PASSWORD, db=config.DB_NAME,
+                       cursorclass=pymysql.cursors.DictCursor)
 
 cur = conn.cursor()
 
@@ -29,19 +30,55 @@ def exist_community(name):
         return True
 
 
+def get_community_by_id(id):
+    sql = "SELECT * FROM community WHERE id = %s"
+    conn.ping(reconnect=True)
+    cur.execute(sql, (id,))
+    result = cur.fetchone()
+    conn.commit()
+    if result:
+        return result
+    else:
+        return None
+
+
+def get_communityName_by_id(id):
+    sql = "SELECT name FROM community WHERE id = %s"
+    conn.ping(reconnect=True)
+    cur.execute(sql, (id,))
+    result = cur.fetchone()
+    conn.commit()
+    if result:
+        return result
+    else:
+        return None
+
+
+def get_communityDescription_by_id(id):
+    sql = "SELECT description FROM community WHERE id = %s"
+    conn.ping(reconnect=True)
+    cur.execute(sql, (id,))
+    result = cur.fetchone()
+    conn.commit()
+    if result:
+        return result
+    else:
+        return None
+
+
 def get_community_id_by_communityName(name):
-    sql = "SELECT id FROM community WHERE name = '" + name + "'"
+    sql = "SELECT id FROM community WHERE name = %s"
     conn.ping(reconnect=True)
     cur.execute(sql, (name,))
     result = cur.fetchone()
     conn.commit()
     if result:
-        return result[0]
+        return result
     else:
         return None
 
 def get_communityList():
-    sql = "SELECT id,name,description,avatar FROM community"
+    sql = "SELECT * FROM community"
     conn.ping(reconnect=True)
     cur.execute(sql)
     result = cur.fetchall()
@@ -68,6 +105,6 @@ def existSubscription(userid,commityId):
     result = cur.fetchone()
     conn.commit()
     if result:
-        return result[0]
+        return result
     else:
         return None

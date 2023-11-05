@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ART Community</title>
+    <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <div class="navbar">
+      <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
+      <a href="{{ url_for('user.profile') }}">My Profile</a>
+      <a href="#">Scavenger Hunt</a>
+      <div class="dropdown">
+        <a href="#">All Communities</a>
+        <div class="dropdown-content">
+          {% for communities in communityList %}
+            <a href="{{ url_for('community.community',id=communities['id']) }}">{{ communities['name'] }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      <a href="{{ url_for('user.profile') }}">User Profile</a>
+    </div>
+
+    <!-- Profile page content -->
+    <div class="profile">
+      <h1>Welcome to your Virtual Community {{username}}</h1>
+
+      <a href="{{ url_for('user.logout') }}">Exit</a>
+      <br />
+
+      <div class="profile-icon">
+        <img
+          src="https://assets.online.berklee.edu/catalog-site-heroes/careers-illustration-v2.png"
+          alt="Profile Icon"
+          width="900"
+          height="300"
+        />
+      </div>
+      <div class="content-block">
+        <h1>Welcome to the {{community['name']}} Community</h1>
+        <p>{{community['description']}}</p>
+      </div>
+      <div class="content-container">
+        {% for post in posts %}
+          <div class="content-block">
+              <h2>{{ post['title'] }}</h2>
+              <p>{{ post['content'] }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>

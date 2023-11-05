@@ -3,7 +3,8 @@ from config import Config
 
 config = Config()
 
-conn = pymysql.connect(host=config.DB_HOST, user=config.DB_USER, password=config.DB_PASSWORD, db=config.DB_NAME)
+conn = pymysql.connect(host=config.DB_HOST, user=config.DB_USER, password=config.DB_PASSWORD, db=config.DB_NAME,
+                       cursorclass=pymysql.cursors.DictCursor)
 
 cur = conn.cursor()
 
