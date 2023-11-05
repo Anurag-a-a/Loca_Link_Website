@@ -206,5 +206,5 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('0000000001', '123456', '123456', '123456@mail.com', '0', null, null);
-INSERT INTO `user` VALUES ('0000000005', '111111', '111111', '111111@111.com', '0', null, null);
+INSERT INTO `user` VALUES ('0000000001', 'UserName', 'Password123@', 'mail@mail.com', '0', null, null);
+INSERT INTO `user` VALUES ('0000000005', 'UserName1', 'Password123', 'mail1@mail1.com', '0', null, null);
