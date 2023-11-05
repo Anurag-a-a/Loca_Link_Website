@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80034
 File Encoding         : 65001
 
-Date: 2023-11-05 16:30:16
+Date: 2023-11-05 17:06:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -72,10 +72,10 @@ CREATE TABLE `community` (
 -- ----------------------------
 -- Records of community
 -- ----------------------------
-INSERT INTO `community` VALUES ('0000000001', 'Arts', '1', 'Here you can find posts related to arts', null);
-INSERT INTO `community` VALUES ('0000000002', 'Music', '1', 'Here you can find posts related to music', null);
-INSERT INTO `community` VALUES ('0000000003', 'Dance', '1', 'Here you can find posts related to dance', null);
-INSERT INTO `community` VALUES ('0000000004', 'Sports', '1', 'Here you can find posts related to sports', null);
+INSERT INTO `community` VALUES ('0000000001', 'Arts', '1', 'Here you can find posts related to arts', 'https://assets.online.berklee.edu/catalog-site-heroes/careers-illustration-v2.png');
+INSERT INTO `community` VALUES ('0000000002', 'Music', '1', 'Here you can find posts related to music', 'https://c8.alamy.com/comp/2JWN0J8/hands-up-group-of-people-of-diverse-culture-or-friends-holding-musical-notes-community-of-fans-musicians-collaborators-who-share-or-exchange-music-2JWN0J8.jpg');
+INSERT INTO `community` VALUES ('0000000003', 'Dance', '1', 'Here you can find posts related to dance', 'https://dancedentampa.com/wp-content/uploads/2023/02/industry-hip-hop-transformed.jpg');
+INSERT INTO `community` VALUES ('0000000004', 'Sports', '1', 'Here you can find posts related to sports', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqOJQE2AsHIEAqZOGdH_Q_yr41jy9SSrK54Q&usqp=CAU');
 
 -- ----------------------------
 -- Table structure for follow
