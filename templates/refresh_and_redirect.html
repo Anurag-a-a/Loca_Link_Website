@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Refresh and Redirect</title>
+    <script type="text/javascript">
+        // Refresh the page
+        window.location.reload();
+
+        // Wait for a short time before redirecting
+        setTimeout(function() {
+            // Redirect to the desired route after refreshing
+            window.location.href = "{{ url_for('community.topPosts') }}";
+        }, 10); // Adjust the time as needed
+    </script>
+</head>
+<body>
+    <p>Refreshing page...</p>
+</body>
+</html>

@@ -2,7 +2,6 @@ from flask import Flask, render_template, Blueprint, session
 from flask import redirect
 from flask import url_for
 from flask import request
-
 from model.comment import *
 from model.post import *
 from model.user import *
@@ -27,7 +26,7 @@ def user_login():
             session['user_id'] = user_id
             session['username'] = username
 
-            return render_template('topPosts.html', username=username)
+            return render_template('refresh_and_redirect.html')
         else:
             login_message = "Please input correctly. "
             return render_template('login.html', message=login_message)
