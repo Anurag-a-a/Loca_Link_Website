@@ -68,6 +68,19 @@
     border: 1px solid #ddd;
 }
 
+.posts-container {
+    display: block;
+    justify-content: space-between;
+}
+
+.posts-block {
+    flex: 1;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+}
+
 .profile-icon img {
     max-width: 100%;
     height: auto;

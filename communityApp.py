@@ -6,7 +6,7 @@ from model.community import *
 from model.post import *
 from model.user import *
 from flask import jsonify
-
+from collections import defaultdict
 app = Flask(__name__)
 community_blueprint = Blueprint('community', __name__)
 
@@ -33,9 +33,9 @@ def community(id):
     if not username:
         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
 
-    communityList = get_communityList()[:4]
+    communityList = get_communityList()[:]
     community = get_community_by_id(id)
-    posts = get_postList_in_community(id)[:3]
+    posts = get_postList_in_community(id)[:]
 
     return render_template('CommunityPage.html',communityList=communityList,
                            username=username,community=community,posts=posts)
@@ -79,4 +79,17 @@ def topPosts():
     if not username:
         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
 
-    return render_template('topPosts.html',username=username)
+    communityList = get_communityList()[:]
+    all_posts = []
+    print(communityList)
+    # Fetch posts from all communities
+    for community in communityList:
+        print(community)
+        posts = get_postList_in_community(community['id'])[:]
+        all_posts.extend(posts)
+
+    # Sort the combined posts based on a specific criterion (for example, by the number of likes)
+    #all_posts.sort(key=lambda post: post['likes'], reverse=True)
+
+    return render_template('topPosts.html', communityList=communityList,
+                           username=username, posts=all_posts)
