@@ -1,5 +1,4 @@
 body {
-  
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
@@ -10,16 +9,16 @@ body {
   margin: 0 auto;
 }
 
-
 .page-title {
   background-color: #2626a1;
   text-align: center;
   padding: 50px;
   width: 100%;
-  box-sizing: border-box; /* Ensures padding is included in the width */
+  box-sizing: border-box;
+ /* Ensures padding is included in the width */
 }
 
-.page-title h1{
+.page-title h1 {
   color: #fff;
   font-size: 80px;
   margin: 0;
