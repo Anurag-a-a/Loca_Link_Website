@@ -50,7 +50,15 @@ def add_like(user_id, post_id):
     conn.cursor()
     conn.close()
 
+def get_post_by_id(post_id):
+    sql = ""
+    conn.ping(reconnect=True)
+    cur.execute(sql)
+    conn.commit()
+    conn.cursor()
+    conn.close()
 
+    
 def add_likeNum(post_id):
     sql = "UPDATE post SET likeNum=likeNum+1 WHERE id = '" + str(post_id) + "'"
     conn.ping(reconnect=True)

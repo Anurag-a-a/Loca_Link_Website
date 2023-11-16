@@ -93,3 +93,15 @@ def topPosts():
 
     return render_template('topPosts.html', communityList=communityList,
                            username=username, posts=all_posts)
+
+@community_blueprint.route("/post/<int:id>", methods=["GET"])
+def show_post(id):
+    if request.method == 'GET':
+        username = session.get("username")
+        if not username:
+            return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+        
+        post = get_post_by_id(id)
+
+        return render_template('post_template.html', post=post)
+
