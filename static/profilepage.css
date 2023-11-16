@@ -21,6 +21,7 @@
 }
 
 /* Styling for the dropdown menu */
+
 .dropdown {
     position: relative;
     display: inline-block;
@@ -32,7 +33,8 @@
     background-color: #333;
     min-width: 160px;
     z-index: 1;
-    left: 20px; /* Adjust the value to shift the menu to the right */
+    left: 20px;
+   /* Adjust the value to shift the menu to the right */
 }
 
 .dropdown-content a {
@@ -47,6 +49,7 @@
 }
 
 /* Styling for the profile page content */
+
 .profile {
     margin-left: 220px;
     padding: 20px;

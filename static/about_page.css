@@ -21,6 +21,7 @@ body {
   padding: 50px;
   width: 100%;
   box-sizing: border-box;
+
   /* Ensures padding is included in the width */
 }
 
