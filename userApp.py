@@ -3,6 +3,7 @@ from flask import redirect
 from flask import url_for
 from flask import request
 from model.comment import *
+from model.community import *
 from model.post import *
 from model.user import *
 from flask import jsonify
@@ -123,13 +124,44 @@ def createComment(postId):
         except:
             return jsonify({'status': 'failed', 'message': 'An error occurred while commenting'}), 500
 
+
 @user_blueprint.route("/profile")
 def profile():
     username = session.get("username")
     if not username:
         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
 
-    return render_template('EditProfile.html',username=username)
+    communityList = get_communityList()[:]
+    email = get_email_by_username(username)
+    password = get_password_by_username(username)
+    private_password = '*' * len(password)
+
+    return render_template('Profile.html', username=username, communityList=communityList,
+                           email=email, private_password=private_password)
+
+
+@user_blueprint.route("/editProfile", methods=["GET","POST"])
+def editProfile():
+    username = session.get("username")
+    if not username:
+        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+    communityList = get_communityList()[:]
+
+    if request.method == 'POST':
+        edit_password = request.form.get('edit-password')
+        edit_email = request.form.get('edit-email')
+        change_user_password(username,edit_password)
+        change_email(username,edit_email)
+
+        email = get_email_by_username(username)
+        password = get_password_by_username(username)
+        private_password = '*' * len(password)
+
+        return render_template('Profile.html',username=username,communityList=communityList,
+                           email=email,private_password=private_password)
+
+    return render_template('EditProfile.html',username=username,communityList=communityList)
 
 # @user_blueprint.route('/')
 # def index():

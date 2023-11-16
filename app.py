@@ -1,6 +1,4 @@
-from flask import Flask, session, render_template
-from flask import redirect
-from flask import url_for
+from flask import Flask, render_template
 from userApp import user_blueprint
 from communityApp import community_blueprint
 
@@ -14,7 +12,5 @@ app.secret_key = 'team20'
 def index():
     return render_template('index.html')
 
-
-
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)

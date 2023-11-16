@@ -115,163 +115,49 @@
       <a href="#">Scavenger Hunt</a>
       <div class="dropdown">
         <a href="#">All Communities</a>
-        <a href="{{ url_for('user.profile') }}">User Profile</a>
+        <div class="dropdown-content">
+          {% for communities in communityList %}
+            <a href="{{ url_for('community.community',id=communities['id']) }}">{{ communities['name'] }}</a>
+          {% endfor %}
+        </div>
       </div>
+      <a href="{{ url_for('user.profile') }}">User Profile</a>
     </div>
 
-    <form>
+    <form id="edit-form" method="POST" action="{{ url_for('user.editProfile') }}">
       <div class="profile-container" id="edit-form-hidden">
-        <h1>User Profile</h1>
-        <div class="profile-info">
-          <p><strong>Name:</strong> <span id="profile-name">Pavan</span></p>
-          <p>
-            <strong>Password:</strong> <span id="profile-password">*****</span>
-          </p>
-          <p>
-            <strong>Bio Data:</strong>
-            <span id="profile-description">Web Developer</span>
-          </p>
-          <p>
-            <strong>Address:</strong>
-            <span id="profile-address">123 Street, 70053</span>
-          </p>
-          <p>
-            <strong>Phone Number:</strong>
-            <span id="profile-phone">1234567890</span>
-          </p>
-          <p>
-            <strong>Email Address:</strong>
-            <span id="profile-email">pavan@example.com</span>
-          </p>
+        <h1>Edit User Profile</h1>
+            <p>
+              <label for="edit-password">Update Password:
+                <input type="password" name="edit-password" id="edit-password" required/>
+              </label>
+            </p>
+<!--          <p>-->
+<!--            <label for="edit-description">Bio Data: </label-->
+<!--            ><textarea id="edit-description" required>Web Developer</textarea>-->
+<!--          </p>-->
+<!--          <small id="character-counter" class="character-limit"-->
+<!--            >0 / 250 characters</small-->
+<!--          >-->
+<!--          <p>-->
+<!--            <label for="edit-address">Address: </label-->
+<!--            ><textarea id="edit-address" required>123 Street, 70053</textarea>-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            <label for="edit-phone"-->
+<!--              >Phone Number:-->
+<!--              <input type="text" id="edit-phone" value="1234567890" required-->
+<!--            /></label>-->
+<!--          </p>-->
+        <p>
+            <label for="edit-email">Email Address:
+              <input type="text" name="edit-email" id="edit-email" required/>
+            </label>
+        </p>
+        <p>
+            <button type="submit" value="Save">Save</button>
+        </p>
         </div>
-        <button id="edit-button" class="edit-button" onclick="enableEdit()">
-          Edit Profile
-        </button>
-        <div class="edit-mode">
-          <p>
-            <label for="edit-password"
-              >Update Password:
-              <input type="password" id="edit-password" value="" required
-            /></label>
-          </p>
-          <p>
-            <label for="edit-description">Bio Data: </label
-            ><textarea id="edit-description" required>Web Developer</textarea>
-          </p>
-          <small id="character-counter" class="character-limit"
-            >0 / 250 characters</small
-          >
-          <p>
-            <label for="edit-address">Address: </label
-            ><textarea id="edit-address" required>123 Street, 70053</textarea>
-          </p>
-          <p>
-            <label for="edit-phone"
-              >Phone Number:
-              <input type="text" id="edit-phone" value="1234567890" required
-            /></label>
-          </p>
-          <label for="edit-email"
-            >Email Address:
-            <input
-              type="text"
-              id="edit-email"
-              value="pavan@example.com"
-              required
-          /></label>
-          <button onclick="saveProfile()">Save</button>
-          <div
-            class="error-message"
-            id="error-message"
-            style="display: none"
-          ></div>
-        </div>
-      </div>
     </form>
-    <script>
-      function enableEdit() {
-        const editMode = document.querySelector(".edit-mode");
-        const profileInfo = document.querySelector(".profile-info");
-        const editButton = document.getElementById("edit-button");
-        editMode.style.display = "block";
-        profileInfo.style.display = "none";
-        editButton.style.display = "none";
-      }
-
-      const descriptionInput = document.getElementById("edit-description");
-      const addressInput = document.getElementById("edit-address");
-      descriptionInput.addEventListener("input", countCharacters);
-
-      function countCharacters() {
-        const maxLength = 250;
-        const characterCounter = document.getElementById("character-counter");
-        const currentLength = descriptionInput.value.length;
-        characterCounter.textContent = `${currentLength} / ${maxLength} characters`;
-
-        if (currentLength > maxLength) {
-          descriptionInput.value = descriptionInput.value.substring(
-            0,
-            maxLength
-          );
-          characterCounter.textContent = `${maxLength} / ${maxLength} characters`;
-        }
-      }
-
-      function saveProfile() {
-        const passwordInput = document.getElementById("edit-password");
-        const descriptionInput = document.getElementById("edit-description");
-        const phoneInput = document.getElementById("edit-phone");
-        const emailInput = document.getElementById("edit-email");
-        const profileName = document.getElementById("profile-name");
-        const profilePassword = document.getElementById("profile-password");
-        const profileDescription = document.getElementById(
-          "profile-description"
-        );
-        const profileAddress = document.getElementById("profile-address");
-        const profilePhone = document.getElementById("profile-phone");
-        const profileEmail = document.getElementById("profile-email");
-        const editMode = document.querySelector(".edit-mode");
-        const profileInfo = document.querySelector(".profile-info");
-        const editButton = document.getElementById("edit-button");
-        const errorMessage = document.getElementById("error-message");
-        if (
-          !passwordInput.value ||
-          !addressInput.value ||
-          !descriptionInput.value ||
-          !phoneInput.value ||
-          !emailInput.value
-        ) {
-          errorMessage.style.display = "block";
-          errorMessage.textContent = "All fields are required";
-          return;
-        }
-        if (descriptionInput.value.length > 250) {
-          errorMessage.style.display = "block";
-          errorMessage.textContent =
-            "Description should be at most 250 characters";
-          return;
-        }
-        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zAZ0-9.-]+\.[a-zA-Z]{2,4}$/;
-        if (!emailPattern.test(emailInput.value)) {
-          errorMessage.style.display = "block";
-          errorMessage.textContent = "Invalid email address format";
-          return;
-        }
-        const phonePattern = /^\d{10}$/;
-        if (!phonePattern.test(phoneInput.value)) {
-          errorMessage.style.display = "block";
-          errorMessage.textContent = "Phone number should be 10 digits";
-          return;
-        }
-        profileDescription.textContent = descriptionInput.value;
-        profileAddress.textContent = addressInput.value;
-        profilePhone.textContent = phoneInput.value;
-        profileEmail.textContent = emailInput.value;
-        editMode.style.display = "none";
-        profileInfo.style.display = "block";
-        editButton.style.display = "block";
-        errorMessage.style.display = "none";
-      }
-    </script>
   </body>
 </html>
