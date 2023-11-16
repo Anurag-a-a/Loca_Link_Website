@@ -51,12 +51,15 @@ def add_like(user_id, post_id):
     conn.close()
 
 def get_post_by_id(post_id):
-    sql = ""
+    sql = "SELECT * from post where id = '" + str(post_id) + "'"
     conn.ping(reconnect=True)
     cur.execute(sql)
+    result = cur.fetchone()
     conn.commit()
-    conn.cursor()
-    conn.close()
+    if result:
+        return result
+    else:
+        return None
 
     
 def add_likeNum(post_id):

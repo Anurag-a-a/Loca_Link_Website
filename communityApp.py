@@ -102,6 +102,6 @@ def show_post(id):
             return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
         
         post = get_post_by_id(id)
+        print(post)
 
         return render_template('post_template.html', post=post)
-

@@ -30,8 +30,6 @@ def get_posts_by_community(community_id):
     posts = get_postList_in_community(community_id)
     return render_template('PostList.html',posts=posts,community_id=community_id)
 
-
-
 # @post_blueprint.route('/delete_post/<int:post_id>', methods=['POST'])
 # def delete_post(post_id):
 #     # Get the post by its ID
