@@ -4,38 +4,44 @@ body {
   background-color: #f4f4f4;
   color: #333;
 }
+
 .page-container {
   margin: 0 auto;
 }
+
 .about-us {
   text-align: justify;
   margin-left: 5em;
   margin-right: 5em;
 }
+
 .page-title {
   background-color: #2626a1;
   text-align: center;
   padding: 50px;
   width: 100%;
   box-sizing: border-box;
- /* Ensures padding is included in the width */
+  /* Ensures padding is included in the width */
 }
-.page-title h1{
+
+.page-title h1 {
   color: #fff;
   font-size: 80px;
   margin: 0;
 }
+
 header {
   text-align: center;
   padding: 20px 0;
 }
+
 .communities {
   display: flex;
   justify-content: space-around;
   margin: 20px 0;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
 }
+
 .community {
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -46,6 +52,7 @@ header {
   margin: 10px;
   width: 20em;
 }
+
 .event {
   border: 1px solid #ccc;
   border-radius: 5px;
