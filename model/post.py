@@ -10,7 +10,8 @@ cur = conn.cursor()
 
 
 def add_post(userId, communityId, title, content):
-    sql = "INSERT INTO post(userId,communityId,title,content) VALUES ('" + str(userId) + "','" + str(communityId) + "','" + title + "','" + content + "')"
+    sql = ("INSERT INTO post(userId,communityId,title,content) VALUES ('" + str(userId) + "','" + str(communityId)
+           + "','" + title + "','" + content + "')")
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()

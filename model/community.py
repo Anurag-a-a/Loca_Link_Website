@@ -67,9 +67,9 @@ def get_communityDescription_by_id(id):
 
 
 def get_community_id_by_communityName(name):
-    sql = "SELECT id FROM community WHERE name = %s"
+    sql = "SELECT id FROM community WHERE name='{}'".format(name)
     conn.ping(reconnect=True)
-    cur.execute(sql, (name,))
+    cur.execute(sql)
     result = cur.fetchone()
     conn.commit()
     if result:

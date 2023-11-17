@@ -7,11 +7,13 @@ app = Flask(__name__)
 post_blueprint = Blueprint('post', __name__)
 
 
-@post_blueprint.route("/create/<int:communityId>", methods=["GET", 'POST'])
-def createPost(communityId):
+@post_blueprint.route("/createPost", methods=["GET", 'POST'])
+def createPost():
     if request.method == 'POST':
         username = session.get("username")
-        user_id = get_user_id_by_username(username)
+        user_id = get_user_id_by_username(username)['id']
+        communityName = request.form.get("communityName")
+        communityId = get_community_id_by_communityName(communityName)['id']
         title=request.form.get("title")
         content=request.form.get("content")
 
@@ -20,8 +22,8 @@ def createPost(communityId):
             return render_template('createPost.html', message=createPost_message)
         else:
             add_post(user_id, communityId, title, content)
-            return redirect("/community/{}/posts".format(communityId))
-    return render_template('createPost.html',communityId=communityId)
+            return redirect("/community/{}".format(communityId))
+    return render_template('createPost.html')
 
 
 # post list of community
