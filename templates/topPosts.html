@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>ART Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
   </head>
   <body>
@@ -34,11 +35,61 @@
             <div class="posts-block">
               <h2>{{ singlePost['title'] }}</h2>
               <p>{{ singlePost['content'] }}</p>
+              
+              <p>Likes: {{ singlePost['likeNum'] }}</p>
+            
+              <button onclick="likePost(singlePost['id'] )">
+                <i class="fas fa-heart"></i> Like
+              </button>
+              <button onclick="showComments(singlePost['id'] )">Show Comments</button>
+              
+              <form id="commentForm{{ singlePost['id'] }}" style="display: none;">
+                <input type="text" name="content" placeholder="Enter your comment">
+                <button onclick="addComment(singlePost['id'] )">Add Comment</button>
+              </form>
             </div>
+            
           </a>
           <br>
         {% endfor %}
       </div>
     </div>
+    <script>
+      // JavaScript functions for AJAX requests
+      function likePost(postId) {
+        // Make an AJAX request to the like endpoint
+        fetch(`/like/${postId}`)
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response, e.g., show a message
+            alert(data.message);
+          })
+          .catch(error => console.error('Error:', error));
+      }
+    
+      function showComments(postId) {
+        // Show or hide the comment input form based on its current state
+        const commentForm = document.getElementById(`commentForm${postId}`);
+        commentForm.style.display = commentForm.style.display === 'none' ? 'block' : 'none';
+      }
+    
+      function addComment(postId) {
+        // Make an AJAX request to the createComment endpoint
+        const content = document.querySelector(`#commentForm${postId} input[name="content"]`).value;
+        fetch(`/createComment/${postId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `content=${content}`,
+        })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response, e.g., show a message
+            alert(data.message);
+          })
+          .catch(error => console.error('Error:', error));
+      }
+    </script>
   </body>
 </html>

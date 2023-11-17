@@ -12,7 +12,7 @@ import re  # Import regular expression module
 app = Flask(__name__)
 app.secret_key = 'team20'
 user_blueprint = Blueprint('user', __name__)
-
+print(app.url_map)
 @user_blueprint.route('/user_login', methods=['GET', 'POST'])
 def user_login():
     if request.method == 'POST':
@@ -108,6 +108,11 @@ def like(postId):
         return jsonify({'status': 'failed', 'message': 'An error occurred while liking the post'}), 500
 
 
+# @user_blueprint.route('/comment')
+# def your_route():
+#     # Your code to fetch posts and other data
+#     posts = get_posts()
+#     return render_template('your_template.html', posts=posts, get_comment_count=get_comment_count)
 
 @user_blueprint.route('/createComment/<int:postId>', methods=["GET", 'POST'])
 def createComment(postId):

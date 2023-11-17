@@ -37,17 +37,63 @@
         />
       </div>
       <div class="content-block">
-        <h1>Welcome to the {{community['name']}} Community</h1>
-        <p>{{community['description']}}</p>
+        <h1>Welcome to the {{ community['name'] }} Community</h1>
+        <p>{{ community['description'] }}</p>
       </div>
       <div class="content-container">
         {% for post in posts %}
           <div class="content-block">
-              <h2>{{ post['title'] }}</h2>
-              <p>{{ post['content'] }}</p>
+            <h2>{{ post['title'] }}</h2>
+            <p>{{ post['content'] }}</p>
+
+            <!-- Display Like and Comment information -->
+            <p>Likes: {{ post['likeNum'] }}</p>
+
+            <!-- Like and Comment buttons with AJAX functionality -->
+            <button onclick="likePost( post['id'] )">
+              <i class="fas fa-heart"></i> Like
+            </button>
+            <button onclick="showComments(post['id'] )">Show Comments</button>
+
+            <!-- Comment input form -->
+            <form id="commentForm{{ post['id'] }}" style="display: none;">
+              <input type="text" name="content" placeholder="Enter your comment">
+              <button onclick="addComment(post['id'])">Add Comment</button>
+            </form>
           </div>
         {% endfor %}
       </div>
     </div>
+    <script>
+      function likePost(postId) {
+        fetch(`/like/${postId}`)
+          .then(response => response.json())
+          .then(data => {
+            alert(data.message);
+          })
+          .catch(error => console.error('Error:', error));
+      }
+
+      function showComments(postId) {
+        const commentForm = document.getElementById(`commentForm${postId}`);
+        commentForm.style.display = commentForm.style.display === 'none' ? 'block' : 'none';
+      }
+
+      function addComment(postId) {
+        const content = document.querySelector(`#commentForm${postId} input[name="content"]`).value;
+        fetch(`/createComment/${postId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: `content=${content}`,
+        })
+          .then(response => response.json())
+          .then(data => {
+            alert(data.message);
+          })
+          .catch(error => console.error('Error:', error));
+      }
+    </script>
   </body>
 </html>
