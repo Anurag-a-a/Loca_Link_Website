@@ -53,6 +53,7 @@
     <h2>Create a post</h2>
 
     <form method="post" action="{{ url_for('post.createPost') }}">
+        <!-- Existing form fields for community selection, title, and content -->
         <label for="communityName">Choose a community:</label>
         <select id="communityName" name="communityName">
             <option value="Arts">Arts</option>
@@ -67,6 +68,14 @@
         <label for="content">Post Content:</label>
         <textarea id="content" name="content" rows="6" required placeholder="Text (optional)"></textarea>
 
+        <!-- New fields for photo and video URLs -->
+        <label for="photoUrl">Photo URL (optional):</label>
+        <input type="url" id="photoUrl" name="photoUrl" placeholder="Enter photo URL">
+
+        <label for="videoUrl">Video URL (optional):</label>
+        <input type="url" id="videoUrl" name="videoUrl" placeholder="Enter video URL">
+
+        <!-- Submit button -->
         <input type="submit" value="Post">
     </form>
 
