@@ -88,10 +88,6 @@ def logout():
     session.clear()
     return redirect(url_for('user.user_login'))
 
-# @user_blueprint.route('/about-us')
-# def about_us_page():
-#     return render_template('about_page.html')
-
 
 @user_blueprint.route('/like/<int:postId>')
 def like(postId):
@@ -107,12 +103,6 @@ def like(postId):
     except:
         return jsonify({'status': 'failed', 'message': 'An error occurred while liking the post'}), 500
 
-
-# @user_blueprint.route('/comment')
-# def your_route():
-#     # Your code to fetch posts and other data
-#     posts = get_posts()
-#     return render_template('your_template.html', posts=posts, get_comment_count=get_comment_count)
 
 @user_blueprint.route('/createComment/<int:postId>', methods=["GET", 'POST'])
 def createComment(postId):
@@ -168,17 +158,3 @@ def editProfile():
 
     return render_template('EditProfile.html',username=username,communityList=communityList)
 
-# @user_blueprint.route('/')
-# def index():
-#     return render_template('login0.html')
-#
-# @user_blueprint.route('/login', methods=['POST'])
-# def login():
-#     if request.method == 'POST':
-#         username = request.form['username']
-#         password = request.form['password']
-#         user = {
-#             'username': username,
-#             'password': password
-#         }
-#         return jsonify(user), 200

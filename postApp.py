@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, Flask, request, render_template, session, 
 from model.community import *
 from model.post import *
 from model.user import *
+from model.comment import *
 
 app = Flask(__name__)
 post_blueprint = Blueprint('post', __name__)
@@ -14,8 +15,8 @@ def createPost():
         user_id = get_user_id_by_username(username)['id']
         communityName = request.form.get("communityName")
         communityId = get_community_id_by_communityName(communityName)['id']
-        title=request.form.get("title")
-        content=request.form.get("content")
+        title = request.form.get("title")
+        content = request.form.get("content")
 
         if exist_post(title):
             createPost_message = "Title has been used. "
@@ -32,12 +33,17 @@ def get_posts_by_community(community_id):
     posts = get_postList_in_community(community_id)
     return render_template('PostList.html',posts=posts,community_id=community_id)
 
-# @post_blueprint.route('/delete_post/<int:post_id>', methods=['POST'])
-# def delete_post(post_id):
-#     # Get the post by its ID
-#     post = next((p for p in posts if p['id'] == post_id), None)
-#     if post:
-#         if post['user_id'] == 1:
-#             posts.remove(post)
-#
-#     return 'Post deleted successfully'
+
+@post_blueprint.route("/<int:id>", methods=["GET"])
+def show_post(id):
+    if request.method == 'GET':
+        username = session.get("username")
+        if not username:
+            return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+        post = get_post_by_id(id)
+        communityList = get_communityList()[:]
+        comments = get_comments_by_postId(id)
+
+        return render_template('singlePost.html', post=post, communityList=communityList,
+                               comments=comments)

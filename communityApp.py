@@ -17,7 +17,7 @@ def createCommunity():
         communityName = request.form.get('name')
         username = request.form.get('username')
         user_id = get_user_id_by_username(username)
-        print(type(communityName), type(username), type(user_id))
+        # print(type(communityName), type(username), type(user_id))
         if exist_community(communityName):
             createCommunity_message = "Community name has been used. "
             return render_template('createCommunity.html', message=createCommunity_message)
@@ -40,38 +40,7 @@ def community(id):
     return render_template('CommunityPage.html',communityList=communityList,
                            username=username,community=community,posts=posts)
 
-# @community_blueprint.route("/music")
-# def music():
-#     username = session.get("username")
-#     if not username:
-#         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-#
-#     return render_template('MusicPage.html',username=username)
-#
-#
-#
-# @community_blueprint.route("/dance")
-# def dance():
-#     username = session.get("username")
-#     if not username:
-#         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-#
-#     return render_template('DancePage.html',username=username)
-#
-# @community_blueprint.route("/sports")
-# def sports():
-#     username = session.get("username")
-#     if not username:
-#         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-#
-#     return render_template('Sports.html',username=username)
-# @community_blueprint.route("/arts")
-# def arts():
-#     username = session.get("username")
-#     if not username:
-#         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-#
-#     return render_template('ArtsPage.html',username=username)
+
 
 @community_blueprint.route("/topPosts")
 def topPosts():
@@ -81,10 +50,10 @@ def topPosts():
 
     communityList = get_communityList()[:]
     all_posts = []
-    print(communityList)
+    # print(communityList)
     # Fetch posts from all communities
     for community in communityList:
-        print(community)
+        # print(community)
         posts = get_postList_in_community(community['id'])[:]
         all_posts.extend(posts)
 
@@ -94,14 +63,14 @@ def topPosts():
     return render_template('topPosts.html', communityList=communityList,
                            username=username, posts=all_posts)
 
-@community_blueprint.route("/post/<int:id>", methods=["GET"])
-def show_post(id):
-    if request.method == 'GET':
-        username = session.get("username")
-        if not username:
-            return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-        
-        post = get_post_by_id(id)
-        print(post)
-
-        return render_template('post_template.html', post=post)
+# @community_blueprint.route("/post/<int:id>", methods=["GET"])
+# def show_post(id):
+#     if request.method == 'GET':
+#         username = session.get("username")
+#         if not username:
+#             return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+#
+#         post = get_post_by_id(id)
+#         # print(post)
+#
+#         return render_template('post_template.html', post=post)

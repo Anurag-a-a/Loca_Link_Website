@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : root
+Source Server         : localhost_3306
 Source Server Version : 80034
 Source Host           : localhost:3306
 Source Database       : team20
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80034
 File Encoding         : 65001
 
-Date: 2023-11-05 17:06:37
+Date: 2023-11-20 19:09:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,18 +23,20 @@ CREATE TABLE `comment` (
   `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `content` varchar(255) DEFAULT NULL,
   `postId` int(10) unsigned zerofill NOT NULL,
-  `userId` int(10) unsigned zerofill NOT NULL,
+  `auther` varchar(255) NOT NULL,
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `postOfCom` (`postId`),
-  KEY `userWhoCom` (`userId`),
+  KEY `userWhoCom` (`auther`),
   CONSTRAINT `postOfCom` FOREIGN KEY (`postId`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `userWhoCom` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `userWhoCom` FOREIGN KEY (`auther`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
+INSERT INTO `comment` VALUES ('0000000001', 'This is the content of this example of comment. ', '0000000002', 'UserName', '2023-11-20 19:02:52');
+INSERT INTO `comment` VALUES ('0000000002', 'This is the second example of comment. ', '0000000002', 'UserName1', '2023-11-20 19:07:12');
 
 -- ----------------------------
 -- Table structure for commentimg
@@ -67,15 +69,17 @@ CREATE TABLE `community` (
   PRIMARY KEY (`id`),
   KEY `communityCreater` (`userId`),
   CONSTRAINT `communityCreater` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of community
 -- ----------------------------
-INSERT INTO `community` VALUES ('0000000001', 'Arts', '1', 'Here you can find posts related to arts', 'https://assets.online.berklee.edu/catalog-site-heroes/careers-illustration-v2.png');
-INSERT INTO `community` VALUES ('0000000002', 'Music', '1', 'Here you can find posts related to music', 'https://c8.alamy.com/comp/2JWN0J8/hands-up-group-of-people-of-diverse-culture-or-friends-holding-musical-notes-community-of-fans-musicians-collaborators-who-share-or-exchange-music-2JWN0J8.jpg');
-INSERT INTO `community` VALUES ('0000000003', 'Dance', '1', 'Here you can find posts related to dance', 'https://dancedentampa.com/wp-content/uploads/2023/02/industry-hip-hop-transformed.jpg');
-INSERT INTO `community` VALUES ('0000000004', 'Sports', '1', 'Here you can find posts related to sports', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqOJQE2AsHIEAqZOGdH_Q_yr41jy9SSrK54Q&usqp=CAU');
+INSERT INTO `community` VALUES ('0000000001', 'Hoboken', '1', 'Here you can find posts related to Hoboken', 'https://assets.online.berklee.edu/catalog-site-heroes/careers-illustration-v2.png');
+INSERT INTO `community` VALUES ('0000000002', 'Weehawken', '1', 'Here you can find posts related to Weehawken', 'https://c8.alamy.com/comp/2JWN0J8/hands-up-group-of-people-of-diverse-culture-or-friends-holding-musical-notes-community-of-fans-musicians-collaborators-who-share-or-exchange-music-2JWN0J8.jpg');
+INSERT INTO `community` VALUES ('0000000003', 'Union City', '1', 'Here you can find posts related to Union City', 'https://dancedentampa.com/wp-content/uploads/2023/02/industry-hip-hop-transformed.jpg');
+INSERT INTO `community` VALUES ('0000000004', 'Jersey City', '1', 'Here you can find posts related to Jersey City', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqOJQE2AsHIEAqZOGdH_Q_yr41jy9SSrK54Q&usqp=CAU.');
+INSERT INTO `community` VALUES ('0000000005', 'Manhattan', '1', 'Here you can find posts related to Manhattan', 'https://assets.online.berklee.edu/catalog-site-heroes/careers-illustration-v2.png');
+INSERT INTO `community` VALUES ('0000000006', 'New York', '1', 'Here you can find posts related to New York', 'https://assets.online.berklee.edu/catalog-site-heroes/careers-illustration-v2.png');
 
 -- ----------------------------
 -- Table structure for follow
@@ -133,7 +137,7 @@ CREATE TABLE `post` (
   KEY `postCreater` (`userId`),
   CONSTRAINT `community` FOREIGN KEY (`communityId`) REFERENCES `community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `postCreater` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of post
@@ -150,6 +154,8 @@ INSERT INTO `post` VALUES ('0000000010', '1', '3', 'Hip-Hop Culture: The Beat an
 INSERT INTO `post` VALUES ('0000000011', '1', '4', 'Basketball Fever: The Game & Strategies', 'Let\'s discuss the latest in basketball. What strategies do you find most effective on the court?', '0', '0', '2023-11-04 20:08:24');
 INSERT INTO `post` VALUES ('0000000012', '1', '4', 'Football Frenzy: Legendary Matches', 'Football has seen some epic matches. Which one do you think is the most legendary, and why?', '0', '0', '2023-11-04 20:08:48');
 INSERT INTO `post` VALUES ('0000000013', '1', '4', 'Thrilling Sports Moments: Your Favorites', 'Share some of the most thrilling sports moments that have left a lasting impact on you.', '0', '0', '2023-11-04 20:09:27');
+INSERT INTO `post` VALUES ('0000000014', '1', '1', 'Creating Post Test 1', 'This is test 1 of creating post. This post is in arts community. ', '0', '0', '2023-11-16 21:33:59');
+INSERT INTO `post` VALUES ('0000000015', '1', '1', 'Creating Post Test 2', 'This is test 2 of creating post. This post is in arts community. ', '0', '0', '2023-11-16 21:35:28');
 
 -- ----------------------------
 -- Table structure for postimg
@@ -200,7 +206,8 @@ CREATE TABLE `user` (
   `isAdm` tinyint DEFAULT '0',
   `description` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
