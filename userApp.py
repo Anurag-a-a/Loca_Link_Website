@@ -12,7 +12,8 @@ import re  # Import regular expression module
 app = Flask(__name__)
 app.secret_key = 'team20'
 user_blueprint = Blueprint('user', __name__)
-print(app.url_map)
+
+#Route for Login Page
 @user_blueprint.route('/user_login', methods=['GET', 'POST'])
 def user_login():
     if request.method == 'POST':
@@ -35,7 +36,7 @@ def user_login():
 
 
 
-
+#Route for Signup Page
 @user_blueprint.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == 'POST':
@@ -81,14 +82,14 @@ def signup():
     
     return render_template('signup.html')
 
-
+#Route for logging out of the system
 @user_blueprint.route('/logout')
 def logout():
     session.pop('user_id', None)
     session.clear()
     return redirect(url_for('user.user_login'))
 
-
+#Route for handling likes
 @user_blueprint.route('/like/<int:postId>')
 def like(postId):
     username = session.get("username")
@@ -104,6 +105,7 @@ def like(postId):
         return jsonify({'status': 'failed', 'message': 'An error occurred while liking the post'}), 500
 
 
+#Route for creating a comment
 @user_blueprint.route('/createComment/<int:postId>', methods=["GET", 'POST'])
 def createComment(postId):
     if request.method == "POST":
@@ -119,7 +121,7 @@ def createComment(postId):
         except:
             return jsonify({'status': 'failed', 'message': 'An error occurred while commenting'}), 500
 
-
+#Route for fetching users details 
 @user_blueprint.route("/profile")
 def profile():
     username = session.get("username")
@@ -135,6 +137,7 @@ def profile():
                            email=email, private_password=private_password)
 
 
+#Route for editing User Profile
 @user_blueprint.route("/editProfile", methods=["GET","POST"])
 def editProfile():
     username = session.get("username")
@@ -157,4 +160,3 @@ def editProfile():
                            email=email,private_password=private_password)
 
     return render_template('EditProfile.html',username=username,communityList=communityList)
-

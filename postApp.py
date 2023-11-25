@@ -7,7 +7,7 @@ from model.comment import *
 app = Flask(__name__)
 post_blueprint = Blueprint('post', __name__)
 
-
+#Route for Creating the posts
 @post_blueprint.route("/createPost", methods=["GET", 'POST'])
 def createPost():
     if request.method == 'POST':
@@ -27,7 +27,7 @@ def createPost():
     return render_template('createPost.html')
 
 
-# post list of community
+#Getting a specific posts from all posts
 @post_blueprint.route('/community/<int:community_id>/posts', methods=['GET'])
 def get_posts_by_community(community_id):
     posts = get_postList_in_community(community_id)
