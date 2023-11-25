@@ -11,6 +11,7 @@ app = Flask(__name__)
 community_blueprint = Blueprint('community', __name__)
 
 
+#Create Community Route 
 @community_blueprint.route("/create", methods=["GET", 'POST'])
 def createCommunity():
     if request.method == 'POST':
@@ -26,7 +27,7 @@ def createCommunity():
             return render_template('home.html', username=username)
     return render_template('createCommunity.html')
 
-
+#Route for loading community Page
 @community_blueprint.route("/<int:id>")
 def community(id):
     username = session.get("username")
@@ -41,7 +42,7 @@ def community(id):
                            username=username,community=community,posts=posts)
 
 
-
+#Route for loading all posts from the database from all communities
 @community_blueprint.route("/topPosts")
 def topPosts():
     username = session.get("username")
@@ -50,27 +51,9 @@ def topPosts():
 
     communityList = get_communityList()[:]
     all_posts = []
-    # print(communityList)
-    # Fetch posts from all communities
     for community in communityList:
-        # print(community)
         posts = get_postList_in_community(community['id'])[:]
         all_posts.extend(posts)
 
-    # Sort the combined posts based on a specific criterion (for example, by the number of likes)
-    #all_posts.sort(key=lambda post: post['likes'], reverse=True)
-
     return render_template('topPosts.html', communityList=communityList,
                            username=username, posts=all_posts)
-
-# @community_blueprint.route("/post/<int:id>", methods=["GET"])
-# def show_post(id):
-#     if request.method == 'GET':
-#         username = session.get("username")
-#         if not username:
-#             return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-#
-#         post = get_post_by_id(id)
-#         # print(post)
-#
-#         return render_template('post_template.html', post=post)
