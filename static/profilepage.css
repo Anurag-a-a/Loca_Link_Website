@@ -63,7 +63,6 @@
 }
 
 .content-block {
-  flex: 1;
   background-color: #f0f0f0;
   padding: 20px;
   border: 1px solid #ddd;
@@ -71,7 +70,16 @@
 
 .posts-container {
   display: block;
-  justify-content: space-between;
+  width: 40%;
+  max-width: 70%;
+
+}
+
+.posts-container a {
+  display: block;
+  margin-top: 10px;
+  text-decoration: none;
+
 }
 
 .posts-block {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create a Post</title>
+    <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -49,6 +50,12 @@
     </style>
 </head>
 <body>
+    <div class="navbar">
+      <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
+      <a href="{{ url_for('user.profile') }}">My Profile</a>
+      <a href="#">Scavenger Hunt</a>
+      <a href="{{ url_for('post.createPost') }}">Create Post</a>
+    </div>
 
     <h2>Create a post</h2>
 
@@ -56,10 +63,10 @@
         <!-- Existing form fields for community selection, title, and content -->
         <label for="communityName">Choose a community:</label>
         <select id="communityName" name="communityName">
-            <option value="Arts">Arts</option>
-            <option value="Music">Music</option>
-            <option value="Dance">Dance</option>
-            <option value="Sports">Sports</option>
+            <option value="Arts">Hoboken</option>
+            <option value="Music">Jersey CIty</option>
+            <option value="Dance">Union City</option>
+            <option value="Sports">Manhattan</option>
         </select>
 
         <label for="title">Title:</label>

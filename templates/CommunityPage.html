@@ -10,6 +10,7 @@
       <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
       <a href="{{ url_for('user.profile') }}">My Profile</a>
       <a href="#">Scavenger Hunt</a>
+      <a href="{{ url_for('post.createPost') }}">Create Post</a>
       <div class="dropdown">
         <a href="#">All Communities</a>
         <div class="dropdown-content">
@@ -46,9 +47,6 @@
             <h2>{{ post['title'] }}</h2>
             <p>{{ post['content'] }}</p>
 
-            <!-- Subscribe button -->
-      <button id="subscribe-btn" onclick="subscribeToCommunity()">Subscribe</button>
-    </div>
             <!-- Display Like and Comment information -->
             <p>Likes: {{ post['likeNum'] }}</p>
 
@@ -99,10 +97,6 @@
           .catch(error => console.error('Error:', error));
       }
 
-      function subscribeToCommunity() {
-                // Placeholder function for subscription action
-                alert('Subscribe button clicked!'); // Placeholder alert
-              }
               
     </script>
   </body>
