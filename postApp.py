@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify, Flask, request, render_template, session, redirect
+from werkzeug.utils import secure_filename
+import os
 from model.community import *
 from model.post import *
 from model.user import *
@@ -6,6 +8,12 @@ from model.comment import *
 
 app = Flask(__name__)
 post_blueprint = Blueprint('post', __name__)
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+
+# Function to check if the file extension is allowed
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 #Route for Creating the posts
 @post_blueprint.route("/createPost", methods=["GET", 'POST'])
@@ -19,7 +27,6 @@ def createPost():
         file_path = 'en.txt'  # Path to the curse word dictionary
         
         title = request.form.get("title")
-        
         #checking if curse words are present in the Title 
         result_title = auto_moderator(file_path, title)
         if result_title:
@@ -40,7 +47,22 @@ def createPost():
                 window.location.href = '/post/createPost';  // Redirect back to the createPost page
             </script>
             """
+        # Check if an image file is provided
+        if 'image' in request.files:
+            image = request.files['image']
+            if image.filename != '' and allowed_file(image.filename):
+                # Securely save the uploaded image
 
+                filename = secure_filename(image.filename)
+                image.save(os.path.join('uploads', filename))
+                image_path = os.path.join('uploads', filename)
+                print(image_path)
+            else:
+                # Handle the case where the file is not allowed or not provided
+                image_path = None
+        else:
+            image_path = None
+        
         if exist_post(title):
             createPost_message = "Title has been used. "
             return """
@@ -65,12 +87,10 @@ def get_posts_by_community(community_id):
 #Curse word logic
 def auto_moderator(file_path, search_string):
     try:
-        print(search_string)
         with open(file_path, 'r') as file:
             words = [word.strip().lower() for word in file.read().split(',')]
             search_string_lower = search_string.lower()
             for word in words:
-                print(word)
             
                 if word in search_string_lower: 
                     return True
