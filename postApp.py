@@ -13,9 +13,7 @@ def createPost():
     if request.method == 'POST':
         username = session.get("username")
         user_id = get_user_id_by_username(username)['id']
-        print(user_id)
         communityName = request.form.get("communityName")
-        print(communityName)
         communityId = get_community_id_by_communityName(communityName)['id']
         
         file_path = 'en.txt'  # Path to the curse word dictionary
@@ -67,12 +65,16 @@ def get_posts_by_community(community_id):
 #Curse word logic
 def auto_moderator(file_path, search_string):
     try:
+        print(search_string)
         with open(file_path, 'r') as file:
-            words = file.read().split('\n')
-            if any(word in search_string for word in words):
-                return True
-            else:
-                return False
+            words = [word.strip().lower() for word in file.read().split(',')]
+            search_string_lower = search_string.lower()
+            for word in words:
+                print(word)
+            
+                if word in search_string_lower: 
+                    return True
+        return False
 
     except FileNotFoundError:
         print(f"File not found: {file_path}")
