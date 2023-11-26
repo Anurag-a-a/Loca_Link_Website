@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Events</title>
+    <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      form {
+        max-width: 600px;
+        margin: auto;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        display: inline-block;
+        box-sizing: border-box;
+      }
+
+      textarea {
+        height: 100px;
+        resize: vertical;
+      }
+
+      input[type="submit"] {
+        background-color: #0079d3;
+        color: white;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #005ea6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
+      <a href="{{ url_for('user.profile') }}">My Profile</a>
+      <a href="#">Scavenger Hunt</a>
+      <a href="{{ url_for('post.createPost') }}">Create Post</a>
+    </div>
+
+    <h2>Create a post</h2>
+
+    <form method="post" action="{{ url_for('post.createPost') }}">
+      <label>Create a Event:</label>
+
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required placeholder="Title" />
+
+      <label for="Date">Event Date:</label>
+      <input type="datetime-local" id="Date" name="Date" />
+
+      <label for="content">Event description:</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="6"
+        required
+        placeholder="Text (optional)"
+      ></textarea>
+
+      <label for="registration">registration URL (optional):</label>
+      <input
+        type="url"
+        id="registrationUrl"
+        name="registrationUrl"
+        placeholder="Enter registration URL"
+      />
+
+      <label for="upvote">Upvote:</label>
+      <input
+        type="text"
+        id="upvote"
+        name="upvote"
+        required
+        placeholder="Upvote"
+      />
+
+      <label for="type">Event Type:</label>
+      <select id="type" name="type">
+        <option value="opening">opening</option>
+        <option value="newShop">new shop</option>
+        <option value="cultural">cultural</option>
+        <option value="gathering">gathering</option>
+      </select>
+
+      <!-- Submit button -->
+      <input type="submit" value="Save" />
+    </form>
+  </body>
+</html>
