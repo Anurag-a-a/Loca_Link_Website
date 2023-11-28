@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80034
 File Encoding         : 65001
 
-Date: 2023-11-20 19:09:09
+Date: 2023-11-28 16:00:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,20 +23,24 @@ CREATE TABLE `comment` (
   `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `content` varchar(255) DEFAULT NULL,
   `postId` int(10) unsigned zerofill NOT NULL,
-  `auther` varchar(255) NOT NULL,
+  `author` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `postOfCom` (`postId`),
-  KEY `userWhoCom` (`auther`),
+  KEY `userWhoCom` (`author`),
   CONSTRAINT `postOfCom` FOREIGN KEY (`postId`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `userWhoCom` FOREIGN KEY (`auther`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `userWhoCom` FOREIGN KEY (`author`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of comment
 -- ----------------------------
 INSERT INTO `comment` VALUES ('0000000001', 'This is the content of this example of comment. ', '0000000002', 'UserName', '2023-11-20 19:02:52');
 INSERT INTO `comment` VALUES ('0000000002', 'This is the second example of comment. ', '0000000002', 'UserName1', '2023-11-20 19:07:12');
+INSERT INTO `comment` VALUES ('0000000003', 'This is test of adding a new comment', '0000000002', 'UserName', '2023-11-25 14:08:56');
+INSERT INTO `comment` VALUES ('0000000004', 'This is test of adding a new comment', '0000000002', 'UserName', '2023-11-25 14:08:59');
+INSERT INTO `comment` VALUES ('0000000005', 'This is test of adding a new comment', '0000000002', 'UserName', '2023-11-25 14:09:17');
+INSERT INTO `comment` VALUES ('0000000006', 'This is test of adding a new comment.', '0000000002', 'UserName', '2023-11-25 14:10:25');
 
 -- ----------------------------
 -- Table structure for commentimg
@@ -113,11 +117,12 @@ CREATE TABLE `likestate` (
   KEY `postLiked` (`postId`),
   CONSTRAINT `postLiked` FOREIGN KEY (`postId`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `userWhoLike` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of likestate
 -- ----------------------------
+INSERT INTO `likestate` VALUES ('0000000001', '0000000001', '0000000002');
 
 -- ----------------------------
 -- Table structure for post
@@ -203,15 +208,17 @@ CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `isAdm` tinyint DEFAULT '0',
+  `location` int(10) unsigned zerofill DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `username` (`username`)
+  KEY `username` (`username`),
+  KEY `locationId` (`location`),
+  CONSTRAINT `locationId` FOREIGN KEY (`location`) REFERENCES `community` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('0000000001', 'UserName', 'Password123@', 'mail@mail.com', '0', null, null);
-INSERT INTO `user` VALUES ('0000000005', 'UserName1', 'Password123@', 'mail1@mail1.com', '0', null, null);
+INSERT INTO `user` VALUES ('0000000001', 'UserName', 'Password123@', 'mail@mail.com', null, null, null);
+INSERT INTO `user` VALUES ('0000000005', 'UserName1', 'Password123@', 'mail1@mail1.com', null, null, null);
