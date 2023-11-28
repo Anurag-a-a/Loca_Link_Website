@@ -107,13 +107,25 @@ def logout():
     session.clear()
     return redirect(url_for('user.user_login'))
 
+def check_session():
+    username = session.get("username")
+    communityName = session.get("location")
+    
+    if not username:
+        return False, jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+    return True, (username, communityName)
+
+
 #Route for handling likes
 @user_blueprint.route('/like/<int:postId>')
 def like(postId):
-    username = session.get("username")
-    if not username:
-        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-
+    user_check, user_data = check_session()
+    
+    if not user_check:
+        return user_data
+    username, communityName = user_data
+    
     user_id = get_user_id_by_username(username)
     try:
         add_like(user_id, postId)
@@ -127,10 +139,12 @@ def like(postId):
 @user_blueprint.route('/createComment/<int:postId>', methods=["GET", 'POST'])
 def createComment(postId):
     if request.method == "POST":
-        username = session.get("username")
-        if not username:
-            return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-
+        user_check, user_data = check_session()
+    
+        if not user_check:
+            return user_data
+        username, communityName = user_data
+    
         user_id = get_user_id_by_username(username)
         content = request.form.get('content')
         try:
@@ -142,10 +156,12 @@ def createComment(postId):
 #Route for fetching users details 
 @user_blueprint.route("/profile")
 def profile():
-    username = session.get("username")
-    if not username:
-        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-
+    user_check, user_data = check_session()
+    
+    if not user_check:
+        return user_data
+    username, communityName = user_data
+    
     communityList = get_communityList()[:]
     email = get_email_by_username(username)
     password = get_password_by_username(username)
@@ -158,10 +174,12 @@ def profile():
 #Route for editing User Profile
 @user_blueprint.route("/editProfile", methods=["GET","POST"])
 def editProfile():
-    username = session.get("username")
-    if not username:
-        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-
+    user_check, user_data = check_session()
+    
+    if not user_check:
+        return user_data
+    username, communityName = user_data
+    
     communityList = get_communityList()[:]
 
     if request.method == 'POST':

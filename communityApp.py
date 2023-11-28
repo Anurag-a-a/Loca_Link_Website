@@ -1,6 +1,4 @@
 from flask import Flask, render_template, Blueprint, session
-from flask import redirect
-from flask import url_for
 from flask import request
 from model.community import *
 from model.post import *
@@ -27,13 +25,23 @@ def createCommunity():
             return render_template('home.html', username=username)
     return render_template('createCommunity.html')
 
+def check_session():
+    username = session.get("username")
+    communityName = session.get("location")
+    
+    if not username:
+        return False, jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+    return True, (username, communityName)
+
 #Route for loading community Page
 @community_blueprint.route("/<int:id>")
 def community(id):
-    username = session.get("username")
-    if not username:
-        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-
+    user_check, user_data = check_session()
+    
+    if not user_check:
+        return user_data
+    username, communityName = user_data
     communityList = get_communityList()[:]
     community = get_community_by_id(id)
     posts = get_postList_in_community(id)[:]
@@ -45,10 +53,12 @@ def community(id):
 #Route for loading all posts from the database from all communities
 @community_blueprint.route("/topPosts")
 def topPosts():
-    username = session.get("username")
-    if not username:
-        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-
+    user_check, user_data = check_session()
+    
+    if not user_check:
+        return user_data
+    username, communityName = user_data
+    
     communityList = get_communityList()[:]
     all_posts = []
     for community in communityList:
@@ -60,9 +70,9 @@ def topPosts():
 
 @community_blueprint.route("/createEvent")
 def createEvent():
-    username = session.get("username")
-    communityName = session.get("location")
-    if not username:
-        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-
+    user_check, user_data = check_session()
+    
+    if not user_check:
+        return user_data
+    username, communityName = user_data
     return render_template('createEvent.html',username=username,communityName = communityName )

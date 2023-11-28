@@ -15,13 +15,26 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def check_session():
+    username = session.get("username")
+    communityName = session.get("location")
+    
+    if not username:
+        return False, jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+    return True, (username, communityName)
+
 #Route for Creating the posts
 @post_blueprint.route("/createPost", methods=["GET", 'POST'])
 def createPost():
     if request.method == 'POST':
-        username = session.get("username")
+        user_check, user_data = check_session()
+    
+        if not user_check:
+            return user_data
+        username, communityName = user_data
         user_id = get_user_id_by_username(username)['id']
-        communityName = session.get("location")
+        
         communityId = get_community_id_by_communityName(communityName)['id']
         
         file_path = 'en.txt'  # Path to the curse word dictionary
@@ -87,6 +100,12 @@ def createPost():
 #Getting a specific posts from all posts
 @post_blueprint.route('/community/<int:community_id>/posts', methods=['GET'])
 def get_posts_by_community(community_id):
+    user_check, user_data = check_session()
+    
+    if not user_check:
+        return user_data
+    username, communityName = user_data
+    
     posts = get_postList_in_community(community_id)
     return render_template('PostList.html',posts=posts,community_id=community_id)
 
@@ -109,10 +128,12 @@ def auto_moderator(file_path, search_string):
 @post_blueprint.route("/<int:id>", methods=["GET"])
 def show_post(id):
     if request.method == 'GET':
-        username = session.get("username")
-        if not username:
-            return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
-
+        user_check, user_data = check_session()
+    
+        if not user_check:
+            return user_data
+        username, communityName = user_data
+    
         post = get_post_by_id(id)
         communityList = get_communityList()[:]
         comments = get_comments_by_postId(id)

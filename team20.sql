@@ -222,5 +222,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('0000000001', 'UserName', 'Password123@', 'mail@mail.com', 'Hoboken', null, null);
-INSERT INTO `user` VALUES ('0000000005', 'UserName1', 'Password123@', 'mail1@mail1.com', 'Hoboken', null, null);
+
+--we are using encryted password so if you want to use this pass password then original password is Password1234@ 
+INSERT INTO `user` VALUES ('0000000001', 'UserName', '$2b$12$PUrlmbRTStKgR/FQAOsyIuhyB9ARvSuRZKshWfpgqO9ROf.X8sCvm', 'mail@mail.com', 'Hoboken', null, null);
+INSERT INTO `user` VALUES ('0000000005', 'UserName1', '$2b$12$PUrlmbRTStKgR/FQAOsyIuhyB9ARvSuRZKshWfpgqO9ROf.X8sCvm', 'mail1@mail1.com', 'Hoboken', null, null);
