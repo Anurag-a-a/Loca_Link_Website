@@ -22,8 +22,8 @@ def is_null_signup(username, password, email):
         return False
     
 
-def is_existed(username, password):
-    sql = "SELECT * FROM user WHERE username ='" + username + "' and password ='" + password + "'"
+def is_existed(username):
+    sql = "SELECT id, username, password,location FROM user WHERE username ='" + username + "'"
     conn.ping(reconnect=True)
     cur.execute(sql)
     result = cur.fetchall()
@@ -31,7 +31,7 @@ def is_existed(username, password):
     if (len(result) == 0):
         return False
     else:
-        return True
+        return result[0]
 
 
 def exist_user(username):
@@ -46,8 +46,8 @@ def exist_user(username):
         return True
 
 
-def add_user(username, password, email):
-    sql = "INSERT INTO user(username, password, email) VALUES ('" + username + "','" + password + "','" + email + "')"
+def add_user(username, password, email,location):
+    sql = "INSERT INTO user(username, password, email, location) VALUES ('" + username + "','" + password + "','" + email + "','" + location +"')"
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()

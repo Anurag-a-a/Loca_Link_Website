@@ -12,6 +12,10 @@ File Encoding         : 65001
 
 Date: 2023-11-28 16:00:54
 */
+use team20;
+drop database team20;
+create database team20;
+use team20;
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -208,17 +212,15 @@ CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `location` int(10) unsigned zerofill DEFAULT NULL,
+  `location` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `username` (`username`),
-  KEY `locationId` (`location`),
-  CONSTRAINT `locationId` FOREIGN KEY (`location`) REFERENCES `community` (`id`) ON DELETE SET NULL ON UPDATE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `username` (`username`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('0000000001', 'UserName', 'Password123@', 'mail@mail.com', null, null, null);
-INSERT INTO `user` VALUES ('0000000005', 'UserName1', 'Password123@', 'mail1@mail1.com', null, null, null);
+INSERT INTO `user` VALUES ('0000000001', 'UserName', 'Password123@', 'mail@mail.com', 'Hoboken', null, null);
+INSERT INTO `user` VALUES ('0000000005', 'UserName1', 'Password123@', 'mail1@mail1.com', 'Hoboken', null, null);

@@ -26,9 +26,15 @@
                 Email ID:
                 <input type="email" name="email" placeholder="Your email" required />
                 <br/>
-                {% if message %}
-                    <p>{{ message }}</p>
-                {% endif %}
+                Location:
+                <select id="communityName" name="communityName">
+                    {% for community in communities %}
+                        <option value="{{ community }}">{{ community }}</option>
+                    {% endfor %}
+                </select>
+                        {% if message %}
+                            <p>{{ message }}</p>
+                        {% endif %}
                 <br/>
 
                 <div class="button-container">

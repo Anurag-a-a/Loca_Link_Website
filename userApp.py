@@ -1,6 +1,7 @@
 from flask import Flask, render_template, Blueprint, session
 from flask import redirect
 from flask import url_for
+from flask_bcrypt import Bcrypt
 from flask import request
 from model.comment import *
 from model.community import *
@@ -12,6 +13,8 @@ import re  # Import regular expression module
 app = Flask(__name__)
 app.secret_key = 'team20'
 user_blueprint = Blueprint('user', __name__)
+bcrypt = Bcrypt(app)
+
 
 #Route for Login Page
 @user_blueprint.route('/user_login', methods=['GET', 'POST'])
@@ -19,19 +22,24 @@ def user_login():
     if request.method == 'POST':
         username = request.form.get('username')
         password = request.form.get('password')
-        if is_null_login(username, password):
-            login_message = "Please input username and password. "
-            return render_template('login.html', message=login_message)
-        elif is_existed(username, password):
 
-            user_id = get_user_id_by_username(username)
-            session['user_id'] = user_id
+        if is_null_login(username, password):
+            login_message = "Please input username and password."
+            return render_template('login.html', message=login_message)
+
+        user = is_existed(username)
+
+        if user and bcrypt.check_password_hash(user['password'], password):
+            # Passwords match, user is authenticated
+            session['user_id'] = user['id']
             session['username'] = username
+            session['location'] = user['location']
 
             return render_template('refresh_and_redirect.html')
         else:
-            login_message = "Please input correctly. "
+            login_message = "Invalid username or password."
             return render_template('login.html', message=login_message)
+
     return render_template('login.html')
 
 
@@ -46,8 +54,9 @@ def signup():
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
         email = request.form.get('email')
+        location = request.form.get("communityName")
 
-        if not all([username, password, confirm_password, email]):
+        if not all([username, password, confirm_password, email,location]):
             login_message = "Please fill in all fields."
             return render_template('signup.html', message=login_message)
 
@@ -60,7 +69,6 @@ def signup():
         if not re.match(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email):
             login_message = "Invalid email format."
             return render_template('signup.html', message=login_message)
-
         # Password validation
         if len(password) < 8 or not re.match(r"^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", password):
             login_message = "Invalid password. Password should be at least 8 characters long and include numbers, alphabets, and special characters."
@@ -69,6 +77,8 @@ def signup():
         if password != confirm_password:
             login_message = "Passwords do not match."
             return render_template('signup.html', message=login_message)
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
 
         if exist_user(username):
             login_message = "Username has been used."
@@ -76,11 +86,19 @@ def signup():
         else:
             # Implement secure password storage (hashing) before storing in the database
             # Add the user to the database with hashed password
-            add_user(username, password, email)  # Replace this with your secure database storage function
+            add_user(username, hashed_password, email,location)
+            print('here')
+            user = is_existed(username)
+            session['user_id'] = user['id']
+            session['username'] = username
+            session['location'] = user['location']
 
-            return render_template('home.html', username=username)
+            return render_template('refresh_and_redirect.html')
     
-    return render_template('signup.html')
+    communities =  get_communityList()
+    community_names = [community['name'] for community in communities]
+
+    return render_template('signup.html',communities=community_names)
 
 #Route for logging out of the system
 @user_blueprint.route('/logout')
