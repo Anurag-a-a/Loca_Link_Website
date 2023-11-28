@@ -61,7 +61,8 @@ def topPosts():
 @community_blueprint.route("/createEvent")
 def createEvent():
     username = session.get("username")
+    communityName = session.get("location")
     if not username:
         return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
 
-    return render_template('createEvent.html',username=username)
+    return render_template('createEvent.html',username=username,communityName = communityName )

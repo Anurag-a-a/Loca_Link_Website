@@ -21,7 +21,7 @@ def createPost():
     if request.method == 'POST':
         username = session.get("username")
         user_id = get_user_id_by_username(username)['id']
-        communityName = request.form.get("communityName")
+        communityName = session.get("location")
         communityId = get_community_id_by_communityName(communityName)['id']
         
         file_path = 'en.txt'  # Path to the curse word dictionary
@@ -75,7 +75,13 @@ def createPost():
             add_post(user_id, communityId, title, content)
             return redirect("/community/{}".format(communityId))
     
-    return render_template('/createPost.html')
+    username = session.get("username")
+    communityName = session.get("location")
+
+    if not username:
+        return jsonify({'status': 'failed', 'message': 'Please log in firstly'}), 401
+
+    return render_template('/createPost.html',communityName = communityName)
 
 
 #Getting a specific posts from all posts
