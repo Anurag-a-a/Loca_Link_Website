@@ -94,3 +94,25 @@ button[type="submit"]:hover, button[type="reset"]:hover {
   text-align: center;
   color: red;
 }
+
+.signup-container select {
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  width: 97%;
+  box-sizing: border-box;
+}
+
+.signup-container select:hover {
+  border-color: #555;
+}
+
+.signup-container select:focus {
+  outline: none;
+  border-color: #540f65;
+  box-shadow: 0 0 5px rgba(84, 15, 101, 0.5);
+}

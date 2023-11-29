@@ -6,21 +6,26 @@
   position: fixed;
   top: 0;
   left: 0;
-  padding: 20px;
+  padding: 50px auto;
 }
 
 .navbar a {
   display: block;
   color: #fff;
   text-decoration: none;
-  padding: 10px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  margin-top: 50px;
+  padding: 10px 50px;
+  font-weight: bold; /* Set the font weight */
+  letter-spacing: 1px; /* Adjust letter spacing */
+  transition: color 0.3s ease; /* Add a smooth color transition on hover */
 }
 
 .navbar a:hover {
   background-color: #555;
 }
 
-/* Styling for the dropdown menu */
 .dropdown {
   position: relative;
   display: inline-block;
@@ -34,7 +39,6 @@
   z-index: 1;
   left: 20px;
 
-  /* Adjust the value to shift the menu to the right */
 }
 
 .dropdown-content a {
@@ -49,8 +53,9 @@
 
 /* Styling for the profile page content */
 .profile {
-  margin-left: 220px;
+  margin: 50px auto;
   padding: 20px;
+  width: 70%;
 }
 
 .profile-icon {
@@ -70,9 +75,8 @@
 
 .posts-container {
   display: block;
-  width: 40%;
-  max-width: 70%;
-
+  margin:20px auto;
+  width: 70%;
 }
 
 .posts-container a {
@@ -94,10 +98,6 @@
   max-width: 100%;
   height: auto;
 }
-
-
-
-
 
 .posts-block, .comments, .comment-form {
     background-color: #f0f0f0;
