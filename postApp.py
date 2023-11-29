@@ -125,6 +125,21 @@ def auto_moderator(file_path, search_string):
         print(f"File not found: {file_path}")
         return False
 
+@post_blueprint.route("/deletePost/<int:id>", methods=["POST"])
+def deletePost(id):
+    if request.method == 'POST':
+        user_check, user_data = check_session()
+        print(id)
+        if not user_check:
+            return user_data
+        username, communityName = user_data
+    
+        post = delete_post_by_id(id)
+        if post:
+            return jsonify({'success': True, 'message': 'Post deleted successfully'})
+        else:
+            return jsonify({'success': False, 'message': 'Failed to delete post'})
+
 @post_blueprint.route("/<int:id>", methods=["GET"])
 def show_post(id):
     if request.method == 'GET':
@@ -140,3 +155,17 @@ def show_post(id):
 
         return render_template('singlePost.html', post=post, communityList=communityList,
                                comments=comments)
+    
+@post_blueprint.route("/usersPosts", methods=["GET"])
+def usersPosts():
+    if request.method == 'GET':
+        user_check, user_data = check_session()
+    
+        if not user_check:
+            return user_data
+        username, communityName = user_data
+        id = session.get("user_id")
+
+        post = get_usersPosts(id)
+
+        return render_template('usersPosts.html', posts=post)

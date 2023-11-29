@@ -78,7 +78,7 @@ def get_community_id_by_communityName(name):
         return None
 
 def get_communityList():
-    sql = "SELECT id,name FROM community where userid = 1"
+    sql = "SELECT id,name FROM community"
     conn.ping(reconnect=True)
     cur.execute(sql)
     result = cur.fetchall()
@@ -87,6 +87,7 @@ def get_communityList():
         return result
     else:
         return []
+
 
 
 def addSubscription(userid,communityId):

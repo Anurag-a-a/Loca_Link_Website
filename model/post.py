@@ -88,3 +88,33 @@ def delete_likeNum(post_id):
     conn.commit()
     conn.cursor()
     conn.close()
+
+def get_usersPosts(id):
+    sql = "SELECT id, title, content, createTime FROM post where userid = %s and isDeleted = 0"
+    conn.ping(reconnect=True)
+    cur.execute(sql, (id,))
+    result = cur.fetchall()
+    conn.commit()
+    if result:
+        return result
+    else:
+        return []
+
+def delete_post_by_id(id):
+    
+    sql = "UPDATE post SET isDeleted = 1 WHERE id = %s"
+    try:
+        conn.ping(reconnect=True)
+        cur = conn.cursor()
+        cur.execute(sql, (id,))
+        conn.commit()
+        rows_affected = cur.rowcount
+        print(rows_affected)
+        if rows_affected == 1:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(e)
+        return False
+
