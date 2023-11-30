@@ -65,7 +65,10 @@
 .content-container {
   display: flex;
   flex-wrap: wrap;
+<<<<<<< Updated upstream
   justify-content: space-evenly; 
+=======
+>>>>>>> Stashed changes
   align-items: center;
 }
 
@@ -75,7 +78,11 @@ text-decoration: none;
 
 .content-block {
   background-color: #fff;
+<<<<<<< Updated upstream
   width: 40%; 
+=======
+  width: 40%;
+>>>>>>> Stashed changes
   margin: 20px;
   padding: 20px;
   border-radius: 15px;

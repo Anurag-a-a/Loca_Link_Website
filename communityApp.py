@@ -104,9 +104,10 @@ def usersEvents():
         username, communityName = user_data
         id = session.get("user_id")
 
-        post = get_usersEvents(id)
+        events = get_usersEvents(id)
 
-        return render_template('usersEvents.html', posts=post)
+
+        return render_template('usersEvents.html', events=events)
 #Curse word logic
 def auto_moderator(file_path, search_string):
     try:
@@ -197,5 +198,9 @@ def createEvent():
         return user_data
     username, communityName = user_data
     current_date = datetime.datetime.now().strftime('%Y-%m-%d')  # Get the current date
+<<<<<<< Updated upstream
     
+=======
+   
+>>>>>>> Stashed changes
     return render_template('/createEvent.html',username=username,communityName = communityName,current_date=current_date )

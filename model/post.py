@@ -134,7 +134,7 @@ def get_usersPosts(id):
         return []
 
 def get_usersEvents(id):
-    sql = "SELECT id, title, eventDesc, createTime FROM event where userid = %s"
+    sql = "SELECT * FROM event where userid = %s"
     conn.ping(reconnect=True)
     cur.execute(sql, (id,))
     result = cur.fetchall()
@@ -160,7 +160,3 @@ def delete_post_by_id(id):
             return False
     except Exception as e:
         return False
-
-
-
-

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Users Post</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
+      <a href="#">Event Explorer</a>
+      <a href="{{ url_for('post.createPost') }}">Create Post</a>
+      <div class="dropdown">
+        <a href="#">All Communities</a>
+        <div class="dropdown-content">
+          {% for communities in communityList %}
+          <a href="{{ url_for('community.community',id=communities['id']) }}">{{ communities['name'] }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      <a href="{{ url_for('user.profile') }}">User Profile</a>
+      <a href="{{ url_for('community.createEvent') }}">Create Event</a>
+      <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
+      <a href="{{ url_for('user.logout') }}">Logout</a>
+
+    </div>
+    <div class="profile">
+      <div class="posts-container">
+        {% for event_type, events_by_type in events|groupby('eventType') %}
+        <h2>{{ event_type }}</h2>
+        <div class="content-container">
+          {% for event in events_by_type %}
+            <div class="content-block">
+              <h3>{{ event['title'] }}</h3>
+              <p>{{ event['eventDesc'] }}</p>
+              <p>Date: {{ event['edate'] }}</p>
+              <p>Event Type: {{ event['eventType'] }}</p>
+              <p>Registration URL: {{ event['regURL'] }}</p>
+              <!-- Add more fields as needed -->
+
+              <!-- If there's an image URL, you can display it as well -->
+              {% if event['imgURL'] %}
+                <img src="{{ event['imgURL'] }}" alt="Event Image" />
+              {% endif %}
+            </div>
+            <br />
+          {% endfor %}
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+
+    <script>
+      function confirmDelete(postId) {
+        var confirmDelete = window.confirm("Are you sure you want to delete this post?");
+         
+        if (confirmDelete) {
+          fetch(`/post/deletePost/${postId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              postId: postId
+            }),
+          })
+          .then(response => response.json())
+          .then(data => {
+            // Handle the response as needed
+            if (data.success) {
+              window.location.reload();
+            } else {
+              alert("Failed to delete the post. Please try again.");
+            }
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+        }
+      }
+
+
+    </script>
+  </body>
+</html>
+
+
+
