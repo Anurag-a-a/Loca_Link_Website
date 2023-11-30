@@ -63,11 +63,11 @@
 
     <h2>Create a post</h2>
 
-    <form method="post" action="{{ url_for('post.createPost') }}">
+    <form method="post" action="{{ url_for('community.createEvent') }}">
 
       <h1> Create Event for {{ communityName }} Community </h1>
 
-      <label for="title">Title:</label>
+      <label for="title">Event Title:</label>
       <input type="text" id="title" name="title" required placeholder="Title" />
 
       <label for="Date">Event Date:</label>
@@ -90,21 +90,15 @@
         placeholder="Enter registration URL"
       />
 
-      <label for="upvote">Upvote:</label>
-      <input
-        type="text"
-        id="upvote"
-        name="upvote"
-        required
-        placeholder="Upvote"
-      />
+      <label for="image">Upload Image:</label>
+      <input type="file" name="image">
 
-      <label for="type">Event Type:</label>
-      <select id="type" name="type">
-        <option value="opening">opening</option>
-        <option value="newShop">new shop</option>
-        <option value="cultural">cultural</option>
-        <option value="gathering">gathering</option>
+
+      <label for="etype">Event Type:</label>
+      <select id="etype" name="etype">
+        <option value="Promotions">Promotion</option>
+        <option value="Cultural">Cultural</option>
+        <option value="Workshops">Workshops</option>
       </select>
 
       <!-- Submit button -->
@@ -112,3 +106,6 @@
     </form>
   </body>
 </html>
+
+
+

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ART Community</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
+  </head>
+  <body>
+    <!-- Navigation bar -->
+    <div class="navbar">
+      <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
+      <a href="#">Event Explorer</a>
+      <a href="{{ url_for('post.createPost') }}">Create Post</a>
+      <div class="dropdown">
+        <a href="#">All Communities</a>
+        <div class="dropdown-content">
+          {% for communities in communityList %}
+          <a href="{{ url_for('community.community',id=communities['id']) }}">{{ communities['name'] }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      <a href="{{ url_for('user.profile') }}">User Profile</a>
+      <a href="{{ url_for('community.createEvent') }}">Create Event</a>
+      <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
+      <a href="{{ url_for('user.logout') }}">Logout</a>
+
+    </div>
+
+    <!-- Profile page content -->
+    <div class="profile">
+      <h1>Welcome to your Virtual Community {{username}}</h1>
+      <br />
+      <div class="posts-container">
+        {% for event in events %}
+          <div class="posts-block">
+            <h2>{{ event['title'] }}</h2>
+            <p>{{ event['eventDesc'] }}</p>
+          </div>
+        </a>
+        <br />
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+</html>
+
+
+

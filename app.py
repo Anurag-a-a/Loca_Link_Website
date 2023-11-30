@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-
+from flask import Flask, render_template,send_from_directory
+import os
 from postApp import post_blueprint
 from userApp import user_blueprint
 from communityApp import community_blueprint
@@ -15,5 +15,11 @@ app.secret_key = 'team20'
 def index():
     return render_template('index.html')
 
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(os.path.join(app.root_path, 'uploads'), filename)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+

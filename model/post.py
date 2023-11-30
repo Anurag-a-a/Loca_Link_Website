@@ -9,9 +9,18 @@ conn = pymysql.connect(host=config.DB_HOST, user=config.DB_USER, password=config
 cur = conn.cursor()
 
 
-def add_post(userId, communityId, title, content):
-    sql = ("INSERT INTO post(userId,communityId,title,content) VALUES ('" + str(userId) + "','" + str(communityId)
-           + "','" + title + "','" + content + "')")
+def add_post(userId, communityId, title, content, image_path):
+    sql = ("INSERT INTO post( userId, communityId, title, content, imgURL) VALUES ('" + str(userId) + "','" + str(communityId)
+           + "','" + title + "','" + content + "','" + image_path + "')")
+    conn.ping(reconnect=True)
+    cur.execute(sql)
+    conn.commit()
+    conn.cursor()
+    conn.close()
+
+def add_event(userId, communityId, title, date, eventDesc, regURL, eventType, image_path):
+    sql = ("INSERT INTO event( userId, communityId, title,  eventDesc, regURL, eventType, imgURL) VALUES ('" + str(userId) + "','" + str(communityId)
+           + "','" + title +  "','" + eventDesc +  "','" + regURL + "','" + eventType + "','" + image_path + "')")
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()
@@ -21,6 +30,17 @@ def add_post(userId, communityId, title, content):
 
 def exist_post(title):
     sql = "SELECT * FROM post WHERE title ='" + title + "'"
+    conn.ping(reconnect=True)
+    cur.execute(sql)
+    result = cur.fetchall()
+    conn.commit()
+    if (len(result) == 0):
+        return False
+    else:
+        return True
+
+def exist_event(title):
+    sql = "SELECT * FROM event WHERE title ='" + title + "'"
     conn.ping(reconnect=True)
     cur.execute(sql)
     result = cur.fetchall()
@@ -43,6 +63,19 @@ def get_postList_in_community(community_id):
         return []
 
 
+def get_eventList_in_community(community_id):
+    sql = "SELECT * FROM event WHERE communityId = '" + str(community_id) + "'"
+    conn.ping(reconnect=True)
+    cur.execute(sql)
+    result = cur.fetchall()
+    conn.commit()
+    if result:
+        return result
+    else:
+        return []
+
+
+
 def add_like(user_id, post_id):
     sql = "INSERT INTO likestate(userId,postId) VALUES ('" + str(user_id) + "','" + str(post_id) + "')"
     conn.ping(reconnect=True)
@@ -62,7 +95,7 @@ def get_post_by_id(post_id):
     else:
         return None
 
-    
+   
 def add_likeNum(post_id):
     sql = "UPDATE post SET likeNum=likeNum+1 WHERE id = '" + str(post_id) + "'"
     conn.ping(reconnect=True)
@@ -100,8 +133,20 @@ def get_usersPosts(id):
     else:
         return []
 
+def get_usersEvents(id):
+    sql = "SELECT id, title, eventDesc, createTime FROM event where userid = %s"
+    conn.ping(reconnect=True)
+    cur.execute(sql, (id,))
+    result = cur.fetchall()
+    conn.commit()
+    if result:
+        return result
+    else:
+        return []
+
+
 def delete_post_by_id(id):
-    
+   
     sql = "UPDATE post SET isDeleted = 1 WHERE id = %s"
     try:
         conn.ping(reconnect=True)
@@ -117,4 +162,7 @@ def delete_post_by_id(id):
     except Exception as e:
         print(e)
         return False
+
+
+
 
