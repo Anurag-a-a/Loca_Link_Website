@@ -19,8 +19,8 @@ def add_post(userId, communityId, title, content, image_path):
     conn.close()
 
 def add_event(userId, communityId, title, date, eventDesc, regURL, eventType, image_path):
-    sql = ("INSERT INTO event( userId, communityId, title,  eventDesc, regURL, eventType, imgURL) VALUES ('" + str(userId) + "','" + str(communityId)
-           + "','" + title +  "','" + eventDesc +  "','" + regURL + "','" + eventType + "','" + image_path + "')")
+    sql = ("INSERT INTO event( userId, communityId, title, edate, eventDesc, regURL, eventType, imgURL) VALUES ('" + str(userId) + "','" + str(communityId)
+           + "','" + title +  "','" + date +  "','" + eventDesc +  "','" + regURL + "','" + eventType + "','" + image_path + "')")
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()

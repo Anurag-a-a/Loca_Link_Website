@@ -159,6 +159,7 @@ CREATE TABLE `event` (
   `userId` int unsigned NOT NULL,
   `communityId` int unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
+  `edate` date NOT Null,
   `eventDesc` varchar(255) DEFAULT '',
   `eventType` varchar(255) NOT NULL,
   `regURL` varchar(255) DEFAULT '',

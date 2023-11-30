@@ -55,7 +55,7 @@
 .profile {
   margin: 50px auto;
   padding: 20px;
-  width: 70%;
+  width: 75%;
 }
 
 .profile-icon {
@@ -63,24 +63,30 @@
 }
 
 .content-container {
-  display: block;
-  block-size: auto;
-  margin: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly; 
+  align-items: center;
+}
+
+.content-container a {
+text-decoration: none;
 }
 
 .content-block {
   background-color: #fff;
-  margin: 50px;
-  padding: 50px;
+  width: 40%; 
+  margin: 20px;
+  padding: 20px;
   border-radius: 15px;
-  border:1px solid grey;
-  align-items: center;
+  border:1px solid #ccc;
+  box-sizing: border-box;
 }
 
 .posts-container {
   display: block;
-  margin:20px auto;
-  width: 70%;
+  block-size: auto;
+  margin: 50px;
 }
 
 .posts-container a {
@@ -91,11 +97,12 @@
 }
 
 .posts-block {
-  flex: 1;
-  background-color: #f0f0f0;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
+  background-color: #fff;
+  margin: 50px;
+  padding: 50px;
+  border-radius: 15px;
+  border:1px solid grey;
+  align-items: center;
 }
 
 .profile-icon img {
@@ -103,8 +110,8 @@
   height: auto;
 }
 
-.posts-block, .comments, .comment-form {
-    background-color: #f0f0f0;
+.comments, .comment-form {
+    background-color: #fff;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 20px;
@@ -145,7 +152,8 @@
 }
 
 .comment {
-    background-color: #e0e0e0;
+    background-color: #fff;
+    border: 2px solid #ccc;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 10px;

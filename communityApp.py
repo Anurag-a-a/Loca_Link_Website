@@ -7,6 +7,8 @@ from model.post import *
 from model.user import *
 from flask import jsonify
 from collections import defaultdict
+import datetime
+import re
 app = Flask(__name__)
 community_blueprint = Blueprint('community', __name__)
 
@@ -73,7 +75,7 @@ def topPosts():
     return render_template('topPosts.html', communityList=communityList,
                            username=username, posts=all_posts)
 
-#Route for loading all posts from the database from all communities
+#Route for loading all event from the database from all communities
 @community_blueprint.route("/eventExplorer")
 def eventExplorer():
     user_check, user_data = check_session()
@@ -88,6 +90,7 @@ def eventExplorer():
         events = get_eventList_in_community(community['id'])[:]
         all_events.extend(events)
 
+    print(all_events)
     return render_template('eventExplorer.html', communityList=communityList,
                            username=username, events=all_events)
 
@@ -108,19 +111,17 @@ def usersEvents():
 def auto_moderator(file_path, search_string):
     try:
         with open(file_path, 'r') as file:
-            words = [word.strip().lower() for word in file.read().split(',')]
-            search_string_lower = search_string.lower()
-            for word in words:
-           
-                if word in search_string_lower:
-                    return True
+            bad_words = [word.strip().lower() for word in file.read().split(',')]
+            pattern = re.compile(r'\b(?:' + '|'.join(re.escape(word) for word in bad_words) + r')\b', flags=re.IGNORECASE)
+            if pattern.search(search_string):
+                return True
         return False
 
     except FileNotFoundError:
         print(f"File not found: {file_path}")
         return False
 
-    #Route for Creating the posts
+    #Route for Creating the events
 @community_blueprint.route("/createEvent", methods=["GET", 'POST'])
 def createEvent():
     if request.method == 'POST':
@@ -140,14 +141,14 @@ def createEvent():
         eventDesc = request.form.get("description")
         regURL = request.form.get("registrationUrl")
         eventType = request.form.get("etype")
-
+        print(title,date,eventDesc,regURL,eventType)
         #checking if curse words are present in the Title
         result_title = auto_moderator(file_path, title)
         if result_title:
             return """
             <script>
                 alert("Title contains a curse word. Please choose another title.");
-                window.location.href = '/post/createPost';  // Redirect back to the createPost page
+                window.location.href = '/community/createEvent';  // Redirect back to the createPost page
             </script>
             """
 
@@ -157,7 +158,7 @@ def createEvent():
             return """
             <script>
                 alert("Content contains a curse word. Please enter different content.");
-                window.location.href = '/post/createPost';  // Redirect back to the createPost page
+                window.location.href = '/community/createEvent';  // Redirect back to the createPost page
             </script>
             """
         # Check if an image file is provided
@@ -165,13 +166,10 @@ def createEvent():
             image = request.files['image']
             if image.filename != '' and allowed_file(image.filename):
                 # Securely save the uploaded image
-
+                print("here")
                 filename = secure_filename(image.filename)
-                image.save(os.path.join('uploads', filename))
-                image_path = os.path.join('uploads', filename)
-            else:
-                # Handle the case where the file is not allowed or not provided
-                image_path = ''
+                image.save(os.path.join('uploads/', filename))
+                image_path = os.path.join('../uploads/', filename)
         else:
             image_path = ''
        
@@ -185,7 +183,7 @@ def createEvent():
             """
         else:
             add_event(user_id, communityId, title, date, eventDesc, regURL,eventType, image_path)
-            return redirect("/community/{}".format(communityId))
+            return redirect("/community/eventExplorer")
    
     username = session.get("username")
     communityName = session.get("location")
@@ -198,7 +196,6 @@ def createEvent():
     if not user_check:
         return user_data
     username, communityName = user_data
-    return render_template('/createEvent.html',username=username,communityName = communityName )
-
-
-
+    current_date = datetime.datetime.now().strftime('%Y-%m-%d')  # Get the current date
+    
+    return render_template('/createEvent.html',username=username,communityName = communityName,current_date=current_date )

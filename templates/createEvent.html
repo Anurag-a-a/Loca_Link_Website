@@ -63,15 +63,15 @@
 
     <h2>Create a post</h2>
 
-    <form method="post" action="{{ url_for('community.createEvent') }}">
+    <form method="post" action="{{ url_for('community.createEvent') }}" enctype="multipart/form-data">
 
       <h1> Create Event for {{ communityName }} Community </h1>
 
       <label for="title">Event Title:</label>
-      <input type="text" id="title" name="title" required placeholder="Title" />
+      <input type="text" id="title" name="title" required placeholder="Title" required/>
 
       <label for="Date">Event Date:</label>
-      <input type="datetime-local" id="Date" name="Date" />
+      <input type="date" id="Date" name="Date" min="{{ current_date }}" required />
 
       <label for="content">Event description:</label>
       <textarea
