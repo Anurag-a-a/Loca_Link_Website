@@ -154,13 +154,11 @@ def delete_post_by_id(id):
         cur.execute(sql, (id,))
         conn.commit()
         rows_affected = cur.rowcount
-        print(rows_affected)
         if rows_affected == 1:
             return True
         else:
             return False
     except Exception as e:
-        print(e)
         return False
 
 

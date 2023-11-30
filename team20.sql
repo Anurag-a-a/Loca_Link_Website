@@ -151,6 +151,28 @@ CREATE TABLE `event` (
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
+-- Table structure for Event
+-- ----------------------------
+DROP TABLE IF EXISTS `event`;
+CREATE TABLE `event` (
+  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `userId` int unsigned NOT NULL,
+  `communityId` int unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `eventDesc` varchar(255) DEFAULT '',
+  `eventType` varchar(255) NOT NULL,
+  `regURL` varchar(255) DEFAULT '',
+  `imgURL` varchar(255) DEFAULT '',  
+  `likeNum` int NOT NULL DEFAULT '0',
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `ecommunity` (`communityId`),
+  KEY `eventCreater` (`userId`),
+  CONSTRAINT `ecommunity` FOREIGN KEY (`communityId`) REFERENCES `community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `eventCreater` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
 -- Table structure for post
 -- ----------------------------
 DROP TABLE IF EXISTS `post`;

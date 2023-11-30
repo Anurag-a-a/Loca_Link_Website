@@ -23,7 +23,6 @@ def createCommunity():
         communityName = request.form.get('name')
         username = request.form.get('username')
         user_id = get_user_id_by_username(username)
-        # print(type(communityName), type(username), type(user_id))
         if exist_community(communityName):
             createCommunity_message = "Community name has been used. "
             return render_template('createCommunity.html', message=createCommunity_message)
@@ -52,7 +51,6 @@ def community(id):
     communityList = get_communityList()[:]
     community = get_community_by_id(id)
     posts = get_postList_in_community(id)[:]
-    print(posts)
     return render_template('CommunityPage.html',communityList=communityList,
                            username=username,community=community,posts=posts)
 
@@ -171,7 +169,6 @@ def createEvent():
                 filename = secure_filename(image.filename)
                 image.save(os.path.join('uploads', filename))
                 image_path = os.path.join('uploads', filename)
-                print(image_path)
             else:
                 # Handle the case where the file is not allowed or not provided
                 image_path = ''
@@ -187,7 +184,6 @@ def createEvent():
             </script>
             """
         else:
-            print(user_id, communityId, title, date, eventDesc, regURL,eventType, image_path)
             add_event(user_id, communityId, title, date, eventDesc, regURL,eventType, image_path)
             return redirect("/community/{}".format(communityId))
    

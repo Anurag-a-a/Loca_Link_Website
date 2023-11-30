@@ -87,7 +87,6 @@ def signup():
             # Implement secure password storage (hashing) before storing in the database
             # Add the user to the database with hashed password
             add_user(username, hashed_password, email,location)
-            print('here')
             user = is_existed(username)
             session['user_id'] = user['id']
             session['username'] = username

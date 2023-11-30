@@ -63,14 +63,18 @@
 }
 
 .content-container {
-  display: flex;
-  justify-content: space-between;
+  display: block;
+  block-size: auto;
+  margin: 50px;
 }
 
 .content-block {
-  background-color: #f0f0f0;
-  padding: 20px;
-  border: 1px solid #ddd;
+  background-color: #fff;
+  margin: 50px;
+  padding: 50px;
+  border-radius: 15px;
+  border:1px solid grey;
+  align-items: center;
 }
 
 .posts-container {
@@ -120,6 +124,13 @@
     font-size: 12px
 }
 
+.button-all {
+  padding: 20px;
+  width: 100px;
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+}
 .like-button, .unlike-button {
     background-color: #4CAF50;
     color: white;

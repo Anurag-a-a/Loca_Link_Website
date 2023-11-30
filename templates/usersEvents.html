@@ -29,11 +29,10 @@
     </div>
     <div class="profile">
       <div class="posts-container">
-        {% for singlePost in posts %}
+        {% for event in events %}
         <div class="posts-block">
-            <h2 class="post-title">{{ singlePost['title'] }}</h2>
-            <p class="post-content">{{ singlePost['content'] }}</p>
-            <p class="post-createTime">{{ singlePost['createTime'] }}</p>
+            <h2 class="event-title">{{ event['title'] }}</h2>
+            <p class="event-content">{{ event['eventDesc'] }}</p>
 
             <button class = "button-all"onclick="confirmDelete('{{ singlePost['id'] }}')">Delete</button>
   

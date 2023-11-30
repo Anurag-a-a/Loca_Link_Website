@@ -26,7 +26,10 @@
 
     <!-- Profile page content -->
     <div class="profile">
-      <h1>Welcome to your Virtual Community {{username}}</h1>
+      <div >
+        <h1>Welcome to the {{ community['name'] }} Community</h1>
+        <p>{{ community['description'] }}</p>
+      </div>
 
       <a href="{{ url_for('user.logout') }}">Exit</a>
       <br />
@@ -39,16 +42,18 @@
           height="300"
         />
       </div>
-      <div class="content-block">
-        <h1>Welcome to the {{ community['name'] }} Community</h1>
-        <p>{{ community['description'] }}</p>
-      </div>
       <div class="content-container">
         {% for post in posts %}
           <div class="content-block">
             <h2>{{ post['title'] }}</h2>
             <p>{{ post['content'] }}</p>
-
+            {% if post['imgURL'] %}
+              <img
+                src={{ url_for('uploaded_file', filename=post['imgURL']) }}
+                width="600"
+                height="400"
+              />
+            {% endif %} 
             <!-- Display Like and Comment information -->
             <p>Likes: {{ post['likeNum'] }}</p>
 

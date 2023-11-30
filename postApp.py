@@ -70,7 +70,6 @@ def createPost():
                 filename = secure_filename(image.filename)
                 image.save(os.path.join('uploads/', filename))
                 image_path = os.path.join('../uploads/', filename)
-                print(image_path)
             else:
                 # Handle the case where the file is not allowed or not provided
                 image_path = None
@@ -129,7 +128,6 @@ def auto_moderator(file_path, search_string):
 def deletePost(id):
     if request.method == 'POST':
         user_check, user_data = check_session()
-        print(id)
         if not user_check:
             return user_data
         username, communityName = user_data

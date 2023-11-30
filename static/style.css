@@ -4,7 +4,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f3f3f3;
+  background-image: url("../uploads/Background.png");
+  background-size: cover;
   width: 100%;
 }
 
@@ -18,9 +19,9 @@ body {
 }
 
 .page-title {
-  background-color: #2626a1;
   text-align: center;
   padding: 50px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   width: 100%;
   box-sizing: border-box;
  /* Ensures padding is included in the width */
@@ -33,15 +34,16 @@ body {
 }
 
 .login-container,.signup-container {
-  background-color: #fff;
+  background-color: transparent;
+  color: whitesmoke;
   padding: 50px;
   padding-top: 0%;
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  border: 2px solid #ddd;
+  border: 8px solid #ddd;
   width: 80%;
   max-width: 700px;
-  margin-top: 5%;
+  font-size: 30px;
 }
 
 .login-container h2,.signup-container h2 {
@@ -49,7 +51,7 @@ body {
   text-align: center;
   margin-bottom: 20px;
   padding: 50px;
-  color: #333;
+  color: whitesmoke;
 }
 
 input[type="text"], input[type="password"], input[type="email"], input[type="submit"], input[type="reset"] {
@@ -67,7 +69,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="sub
   margin-top: 10px;
 }
 
-button[type="submit"], button[type="reset"] {
+button[type="submit"] {
   background-color: #4caf50;
   color: white;
   cursor: pointer;
@@ -78,16 +80,36 @@ button[type="submit"], button[type="reset"] {
   border: 1px solid #ccc;
 }
 
-button[type="submit"]:hover, button[type="reset"]:hover {
+button[type="reset"] {
+  background-color: rgb(138, 24, 24);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 20px;
+  width: 50%;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+}
+
+button[type="submit"]:hover {
   background-color: #45a049;
 }
 
-.signup-link a,.login-link a {
+button[type="reset"]:hover {
+  background-color: rgb(109, 15, 15);
+}
+.signup-link ,.login-link {
   display: block;
   text-align: center;
+  font-size: 30px;
   margin-top: 10px;
+  color: whitesmoke;
+}
+
+
+.signup-link a,.login-link a {
   text-decoration: none;
-  color: #0000EE;
+  color: whitesmoke;
 }
 
 .message {
