@@ -29,15 +29,27 @@
     </div>
     <div class="profile">
       <div class="posts-container">
-        {% for event in events %}
-        <div class="posts-block">
-            <h2 class="event-title">{{ event['title'] }}</h2>
-            <p class="event-content">{{ event['eventDesc'] }}</p>
+        {% for event_type, events_by_type in events|groupby('eventType') %}
+        <h2>{{ event_type }}</h2>
+        <div class="content-container">
+          {% for event in events_by_type %}
+            <div class="content-block">
+              <h3>{{ event['title'] }}</h3>
+              <p>{{ event['eventDesc'] }}</p>
+              <p>Date: {{ event['edate'] }}</p>
+              <p>Event Type: {{ event['eventType'] }}</p>
+              <p>Registration URL: {{ event['regURL'] }}</p>
+              <!-- Add more fields as needed -->
 
-            <button class = "button-all"onclick="confirmDelete('{{ singlePost['id'] }}')">Delete</button>
-  
+              <!-- If there's an image URL, you can display it as well -->
+              {% if event['imgURL'] %}
+                <img src="{{ event['imgURL'] }}" alt="Event Image" />
+              {% endif %}
+            </div>
+            <br />
+          {% endfor %}
         </div>
-        {% endfor %}
+      {% endfor %}
       </div>
     </div>
 
