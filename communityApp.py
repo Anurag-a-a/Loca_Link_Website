@@ -198,9 +198,5 @@ def createEvent():
         return user_data
     username, communityName = user_data
     current_date = datetime.datetime.now().strftime('%Y-%m-%d')  # Get the current date
-<<<<<<< Updated upstream
     
-=======
-   
->>>>>>> Stashed changes
     return render_template('/createEvent.html',username=username,communityName = communityName,current_date=current_date )
