@@ -40,6 +40,12 @@ def user_login():
             login_message = "Invalid username or password."
             return render_template('login.html', message=login_message)
 
+    username = session.get("username")
+    communityName = session.get("location")
+
+    if username:
+        return render_template('refresh_and_redirect.html')
+
     return render_template('login.html')
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ART Community</title>
+    <title>Event Explorer</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
@@ -12,7 +12,7 @@
     <!-- Navigation bar -->
     <div class="navbar">
       <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
-      <a href="#">Event Explorer</a>
+      <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
       <a href="{{ url_for('post.createPost') }}">Create Post</a>
       <div class="dropdown">
         <a href="#">All Communities</a>
@@ -25,6 +25,7 @@
       <a href="{{ url_for('user.profile') }}">User Profile</a>
       <a href="{{ url_for('community.createEvent') }}">Create Event</a>
       <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
+      <a href="{{ url_for('community.usersEvents') }}">Users Events</a>
       <a href="{{ url_for('user.logout') }}">Logout</a>
 
     </div>

@@ -3,16 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Events</title>
+    <title> Create Events </title>
     <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
-
       form {
-        max-width: 600px;
+        max-width: 80%;
+        font-family: Arial, sans-serif;
         margin: auto;
       }
 
@@ -29,11 +25,18 @@
         margin-bottom: 15px;
         display: inline-block;
         box-sizing: border-box;
+        border-radius: 10px;
       }
 
       textarea {
         height: 100px;
         resize: vertical;
+        border-radius: 10px;
+      }
+
+      h2 {
+      text-align: center;
+      color: #0079d3;
       }
 
       input[type="submit"] {
@@ -41,7 +44,7 @@
         color: white;
         padding: 15px;
         border: none;
-        border-radius: 5px;
+        border-radius: 10px;
         cursor: pointer;
         font-size: 16px;
       }
@@ -54,18 +57,39 @@
   <body>
     <div class="navbar">
       <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
-      <a href="{{ url_for('user.profile') }}">My Profile</a>
-      <a href="#">Event Explorer</a>
+      <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
       <a href="{{ url_for('post.createPost') }}">Create Post</a>
+      <a href="{{ url_for('user.profile') }}">User Profile</a>
       <a href="{{ url_for('community.createEvent') }}">Create Event</a>
+      <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
+      <a href="{{ url_for('community.usersEvents') }}">Users Events</a>
+      <a href="{{ url_for('user.logout') }}">Logout</a>
 
     </div>
 
-    <h2>Create a post</h2>
+    <div class="attractive-content">
+      <div class="posts-block">
+      <h2>Create Your Next Exciting Event!</h2>
 
-    <form method="post" action="{{ url_for('community.createEvent') }}" enctype="multipart/form-data">
+      <p>Welcome to the event creation page! Here, you have the power to bring your community together and create unforgettable experiences. Follow the steps below to craft an event that stands out:</p>
 
-      <h1> Create Event for {{ communityName }} Community </h1>
+      <ul>
+        <li>Choose a captivating title that reflects the essence of your event.</li>
+        <li>Select a date that suits your community members and ensures a successful turnout.</li>
+        <li>Craft a compelling description that sparks interest and excitement.</li>
+        <li>Provide a registration URL if applicable, making it easy for attendees to sign up.</li>
+        <li>Upload a stunning image to make your event visually appealing.</li>
+        <li>Select the event type that best categorizes your gathering: Promotion, Cultural, or Workshops.</li>
+      </ul>
+      </div>
+    </div>
+
+    <div class="profile">
+    <div class="posts-block">
+
+      <h3>Ready to make a lasting impact? Start by filling out the form below and let the creativity flow!</h3>
+
+      <form method="post" action="{{ url_for('community.createEvent') }}" enctype="multipart/form-data">
 
       <label for="title">Event Title:</label>
       <input type="text" id="title" name="title" required placeholder="Title" required/>
@@ -104,6 +128,9 @@
       <!-- Submit button -->
       <input type="submit" value="Save" />
     </form>
+  </div>
+</div>
+
   </body>
 </html>
 

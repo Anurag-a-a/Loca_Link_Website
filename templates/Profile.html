@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>User Profile</title>
+    <title>{{username}} Profile</title>
     <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
     <style>
       body {
@@ -112,7 +112,7 @@
   <body>
     <div class="navbar">
       <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
-      <a href="#">Event Explorer</a>
+      <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
       <a href="{{ url_for('post.createPost') }}">Create Post</a>
       <div class="dropdown">
         <a href="#">All Communities</a>
@@ -125,6 +125,7 @@
       <a href="{{ url_for('user.profile') }}">User Profile</a>
       <a href="{{ url_for('community.createEvent') }}">Create Event</a>
       <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
+      <a href="{{ url_for('community.usersEvents') }}">Users Events</a>
       <a href="{{ url_for('user.logout') }}">Logout</a>
 
     </div>

@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create a Post</title>
+    <title>Create Post</title>
     <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
 
         form {
             max-width: 600px;
@@ -51,31 +47,35 @@
 </head>
 <body>
     <div class="navbar">
-      <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
-      <a href="{{ url_for('user.profile') }}">My Profile</a>
-      <a href="#">Event Explorer</a>
-      <a href="{{ url_for('post.createPost') }}">Create Post</a>
-      <a href="{{ url_for('community.createEvent') }}">Create Event</a>
+        <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
+        <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
+        <a href="{{ url_for('post.createPost') }}">Create Post</a>
+        <a href="{{ url_for('user.profile') }}">User Profile</a>
+        <a href="{{ url_for('community.createEvent') }}">Create Event</a>
+        <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
+        <a href="{{ url_for('community.usersEvents') }}">Users Events</a>
+        <a href="{{ url_for('user.logout') }}">Logout</a>
+  
+      </div>
+  
+    <div class="page-content">
+        <h2>Welcome to the Community!</h2>
+        <p>Share your thoughts, experiences, and creativity with the community by creating a post. We value your contributions and look forward to hearing from you.</p>
 
+        <h2>Create a Post for {{ communityName }} Community </h2>
+        
+        <form method="post" action="{{ url_for('post.createPost') }}" enctype="multipart/form-data">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required placeholder="Title">
+
+            <label for="content">Post Content:</label>
+            <textarea id="content" name="content" rows="6" required placeholder="Text (optional)"></textarea>
+
+            <label for="image">Upload Image:</label>
+            <input type="file" name="image">
+
+            <input type="submit" value="Post">
+        </form>
     </div>
-
-    <h2>Create a post</h2>
-
-    <form method="post" action="{{ url_for('post.createPost') }}" enctype="multipart/form-data">
-        <!-- Existing form fields for community selection, title, and content -->
-        <h1> Create post for {{ communityName }} Community </h1>
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required placeholder="Title">
-
-        <label for="content">Post Content:</label>
-        <textarea id="content" name="content" rows="6" required placeholder="Text (optional)"></textarea>
-
-        <label for="image">Upload Image:</label>
-        <input type="file" name="image">
-
-        <!-- Submit button -->
-        <input type="submit" value="Post">
-    </form>
-
 </body>
 </html>
