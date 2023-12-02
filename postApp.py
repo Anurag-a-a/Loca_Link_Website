@@ -164,8 +164,10 @@ def show_post(id):
             if ifLiked:
                 likeId = get_like(userId,id)['id']
                 delete_like(likeId)
+                delete_likeNum(id)
             else:
                 add_like(userId,id)
+                add_likeNum(id)
 
         return redirect(url_for('post.show_post',id=id))
 
