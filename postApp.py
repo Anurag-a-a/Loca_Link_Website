@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, Flask, request, render_template, session, redirect,send_from_directory
+from flask import Blueprint, jsonify, Flask, request, render_template, session, redirect, send_from_directory, url_for
 from werkzeug.utils import secure_filename
 
 import os
@@ -6,6 +6,7 @@ from model.community import *
 from model.post import *
 from model.user import *
 from model.comment import *
+from model.like import *
 
 app = Flask(__name__)
 post_blueprint = Blueprint('post', __name__)
@@ -138,21 +139,38 @@ def deletePost(id):
         else:
             return jsonify({'success': False, 'message': 'Failed to delete post'})
 
-@post_blueprint.route("/<int:id>", methods=["GET"])
+@post_blueprint.route("/<int:id>", methods=["POST","GET"])
 def show_post(id):
-    if request.method == 'GET':
-        user_check, user_data = check_session()
+    user_check, user_data = check_session()
    
-        if not user_check:
-            return user_data
-        username, communityName = user_data
+    if not user_check:
+        return user_data
+    username, communityName = user_data
    
-        post = get_post_by_id(id)
-        communityList = get_communityList()[:]
-        comments = get_comments_by_postId(id)
+    post = get_post_by_id(id)
+    communityList = get_communityList()[:]
+    comments = get_comments_by_postId(id)
+    userId = get_user_id_by_username(username)['id']
+    ifLiked = if_liked(userId, id)
 
-        return render_template('singlePost.html', post=post, communityList=communityList,
-                               comments=comments)
+    if request.method == "POST":
+        action = request.form.get('action')
+
+        if action == 'comment':
+            content = request.form.get('content')
+            add_comment(content,id,username)
+
+        if action == 'like':
+            if ifLiked:
+                likeId = get_like(userId,id)['id']
+                delete_like(likeId)
+            else:
+                add_like(userId,id)
+
+        return redirect(url_for('post.show_post',id=id))
+
+    return render_template('singlePost.html', post=post, communityList=communityList,
+                               comments=comments,ifLiked=ifLiked,postId=id)
    
 @post_blueprint.route("/usersPosts", methods=["GET"])
 def usersPosts():

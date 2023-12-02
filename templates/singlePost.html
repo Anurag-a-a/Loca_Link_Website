@@ -30,15 +30,22 @@
             <h2 class="post-title">{{ post['title'] }}</h2>
             <p class="post-content">{{ post['content'] }}</p>
             <p class="post-createTime">{{ post['createTime'] }}</p>
-            <button class="like-button">Like</button>
-            <button class="unlike-button">Quit Like</button>
+            <form action="{{ url_for('post.show_post',id=postId) }}" method="post">
+                <input type="hidden" name="action" value="like">
+                {% if ifLiked %}
+                    <button type="submit" class="unlike-button">Cancel Like</button>
+                {% else %}
+                    <button type="submit" class="like-button">Like</button>
+                {% endif %}
+            </form>
         </div>
 
         <div class="comment-form">
             <h3>Add a new comment. </h3>
-            <form action="submit_comment.php" method="post">
-                <textarea name="comment" placeholder="Input your comment. "></textarea>
-                <input type="submit" value="Add">
+            <form action="{{ url_for('post.show_post',id=postId) }}" method="post">
+                <input type="hidden" name="action" value="comment">
+                <textarea name="content" placeholder="Input your comment. "></textarea>
+                <button type="submit">Add Comment</button>
             </form>
         </div>
 

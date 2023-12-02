@@ -8,10 +8,10 @@ conn = pymysql.connect(host=config.DB_HOST, user=config.DB_USER, password=config
 
 cur = conn.cursor()
 
-def add_comment(content, postId, userId):
-    sql = "INSERT INTO comment (content, postId, userId) VALUES (%s, %s, %s)"
+def add_comment(content, postId, author):
+    sql = "INSERT INTO comment (content, postId, author) VALUES (%s, %s, %s)"
     conn.ping(reconnect=True)
-    cur.execute(sql, (content, postId, userId))
+    cur.execute(sql, (content, postId, author))
     conn.commit()
 
 def get_comments_by_userId(userId):
