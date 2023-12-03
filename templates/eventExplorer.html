@@ -32,7 +32,7 @@
 
     <!-- Profile page content -->
     <div class="profile">
-      <h1>Welcome to your Virtual Community {{username}}</h1>
+      <h1>Explore and participate in the exciting events that are happening arround your community and around the world</h1>
       <br />
       {% for event_type, events_by_type in all_events|groupby('eventType') %}
         <h2>{{ event_type }}</h2>

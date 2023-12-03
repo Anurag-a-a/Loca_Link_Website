@@ -104,7 +104,7 @@ text-decoration: none;
   box-sizing: border-box;
 }
 
-.posts-container {
+.posts-container , .events-container {
   display: block;
   block-size: auto;
   margin: 50px auto;
@@ -117,7 +117,7 @@ text-decoration: none;
 
 }
 
-.posts-block {
+.posts-block ,.events-block {
   background-color: #fff;
   margin: 50px;
   padding: 50px;
@@ -139,16 +139,16 @@ text-decoration: none;
     margin-bottom: 20px;
 }
 
-.post-title {
+.post-title , .event-title {
     color: #333;
     font-size: 24px;
 }
 
-.post-content {
+.post-content , .event-content {
     font-size: 16px;
 }
 
-.post-createTime {
+.post-createTime , .event-createTime {
     font-size: 12px
 }
 

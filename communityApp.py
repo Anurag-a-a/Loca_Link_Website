@@ -69,7 +69,6 @@ def topPosts():
     communityList = get_communityList()[:]
     all_posts = []
     user_community_id = get_community_id_by_communityName(communityName)  
-    print(user_community_id['id'])
     user_community_posts = get_postList_in_community(user_community_id['id'])
     all_posts.extend(user_community_posts)
 
@@ -79,7 +78,6 @@ def topPosts():
             posts = get_postList_in_community(community['id'])[:]
             all_posts.extend(posts)
 
-    print(all_posts)
     return render_template('topPosts.html', communityList=communityList,
                            username=username, posts=all_posts)
 

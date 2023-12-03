@@ -39,7 +39,7 @@ def createPost():
        
         communityId = get_community_id_by_communityName(communityName)['id']
        
-        file_path = 'en.txt'  # Path to the curse word dictionary
+        file_path = os.path.join(os.path.dirname(__file__), 'en.txt')  # Path to the curse word dictionary
        
         title = request.form.get("title")
         #checking if curse words are present in the Title
@@ -139,13 +139,15 @@ def deletePost(id):
         else:
             return jsonify({'success': False, 'message': 'Failed to delete post'})
 
+
+# Single post route
 @post_blueprint.route("/<int:id>", methods=["POST","GET"])
 def show_post(id):
     user_check, user_data = check_session()
    
     if not user_check:
         return user_data
-    username, communityName = user_data
+    username = user_data[0]
    
     post = get_post_by_id(id)
     communityList = get_communityList()[:]
@@ -185,8 +187,6 @@ def usersPosts():
         id = session.get("user_id")
 
         post = get_usersPosts(id)
-        print(post)
-
 
         return render_template('usersPosts.html', posts=post)
 

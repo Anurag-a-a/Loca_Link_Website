@@ -41,7 +41,6 @@ def user_login():
             return render_template('login.html', message=login_message)
 
     username = session.get("username")
-    communityName = session.get("location")
 
     if username:
         return render_template('refresh_and_redirect.html')
