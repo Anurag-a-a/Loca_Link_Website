@@ -18,6 +18,9 @@ jobs:
     runs-on : ${{ matrix.os }}
 
     steps:
+    - name: Import MySQL dump file
+      run: |
+        mysql --host 127.0.0.1 --port 3306 -root -rootroot testdb < team20.sql
     - name : checkout code
       uses : actions/checkout@v3
 
