@@ -6,7 +6,7 @@ on:
 
 jobs:
   create-database:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     services:
       mysql:
