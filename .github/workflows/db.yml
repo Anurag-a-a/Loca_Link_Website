@@ -1,0 +1,25 @@
+name: Create MySQL database
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  create-database:
+    runs-on: windows-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: rootroot
+          MYSQL_DATABASE: team20
+        ports:
+          - "3306:3306"
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Create database
+        run: |
+          mysql -u root -rootroot -e "CREATE DATABASE IF NOT EXISTS testdb;"
