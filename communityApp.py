@@ -68,10 +68,18 @@ def topPosts():
    
     communityList = get_communityList()[:]
     all_posts = []
-    for community in communityList:
-        posts = get_postList_in_community(community['id'])[:]
-        all_posts.extend(posts)
+    user_community_id = get_community_id_by_communityName(communityName)  
+    print(user_community_id['id'])
+    user_community_posts = get_postList_in_community(user_community_id['id'])
+    all_posts.extend(user_community_posts)
 
+    # Then, get posts from other communities
+    for community in communityList:
+        if community['id'] != user_community_id:
+            posts = get_postList_in_community(community['id'])[:]
+            all_posts.extend(posts)
+
+    print(all_posts)
     return render_template('topPosts.html', communityList=communityList,
                            username=username, posts=all_posts)
 
@@ -86,13 +94,18 @@ def eventExplorer():
    
     communityList = get_communityList()[:]
     all_events = []
-    for community in communityList:
-        events = get_eventList_in_community(community['id'])[:]
-        all_events.extend(events)
 
-    print(all_events)
+    user_community_id = get_community_id_by_communityName(communityName)
+    user_community_events = get_eventList_in_community(user_community_id['id'])[:]
+    all_events.extend(user_community_events)
+
+    # Then, get events from other communities
+    for community in communityList:
+        if community['id'] != user_community_id:
+            events = get_eventList_in_community(community['id'])[:]
+            all_events.extend(events)
     return render_template('eventExplorer.html', communityList=communityList,
-                           username=username, events=all_events)
+                           username=username,all_events=all_events)
 
 @community_blueprint.route("/usersEvents", methods=["GET"])
 def usersEvents():

@@ -41,6 +41,10 @@
             <h2>{{ singlePost['title'] }}</h2>
             <p>{{ singlePost['content'] }}</p>
 
+            {% if singlePost['imgURL'] %}
+              <img src="{{ singlePost['imgURL'] }}" alt="Post Image" width="400" height="300"/>
+            {% endif %}
+
             <p>Likes: {{ singlePost['likeNum'] }}</p>
 
           </div>

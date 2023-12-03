@@ -29,6 +29,10 @@
             <p class="post-content">{{ singlePost['content'] }}</p>
             <p class="post-createTime">{{ singlePost['createTime'] }}</p>
 
+              {% if singlePost['imgURL'] %}
+                <img src="{{ singlePost['imgURL'] }}" alt="Post Image" />
+              {% endif %}
+
             <button class = "button-all"onclick="confirmDelete('{{ singlePost['id'] }}')">Delete</button>
   
         </div>

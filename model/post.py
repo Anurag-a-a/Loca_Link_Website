@@ -52,7 +52,7 @@ def exist_event(title):
 
 
 def get_postList_in_community(community_id):
-    sql = "SELECT * FROM post WHERE communityId = '" + str(community_id) + "'"
+    sql = "SELECT * FROM post WHERE isdeleted=0 and communityId = '" + str(community_id) + "'"
     conn.ping(reconnect=True)
     cur.execute(sql)
     result = cur.fetchall()

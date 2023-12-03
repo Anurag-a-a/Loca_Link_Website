@@ -187,7 +187,7 @@ CREATE TABLE `post` (
   `likeNum` int NOT NULL DEFAULT '0',
   `isTop` tinyint NOT NULL DEFAULT '0',
   `isDeleted` int NOT NULL DEFAULT '0',
-  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ,
   PRIMARY KEY (`id`),
   KEY `community` (`communityId`),
   KEY `postCreater` (`userId`),

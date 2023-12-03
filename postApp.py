@@ -73,9 +73,9 @@ def createPost():
                 image_path = os.path.join('../uploads/', filename)
             else:
                 # Handle the case where the file is not allowed or not provided
-                image_path = None
+                image_path = ''
         else:
-            image_path = None
+            image_path = ''
        
         if exist_post(title):
             createPost_message = "Title has been used. "
@@ -185,6 +185,8 @@ def usersPosts():
         id = session.get("user_id")
 
         post = get_usersPosts(id)
+        print(post)
+
 
         return render_template('usersPosts.html', posts=post)
 

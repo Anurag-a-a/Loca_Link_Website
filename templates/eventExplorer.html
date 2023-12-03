@@ -34,21 +34,19 @@
     <div class="profile">
       <h1>Welcome to your Virtual Community {{username}}</h1>
       <br />
-      {% for event_type, events_by_type in events|groupby('eventType') %}
+      {% for event_type, events_by_type in all_events|groupby('eventType') %}
         <h2>{{ event_type }}</h2>
         <div class="content-container">
           {% for event in events_by_type %}
             <div class="content-block">
-              <h3>{{ event['title'] }}</h3>
-              <p>{{ event['eventDesc'] }}</p>
-              <p>Date: {{ event['edate'] }}</p>
-              <p>Event Type: {{ event['eventType'] }}</p>
-              <p>Registration URL: {{ event['regURL'] }}</p>
-              <!-- Add more fields as needed -->
+              <h3 class="post-title">{{ event['title'] }}</h3>
+              <p class="post-createTime">Date: {{ event['edate'] }}</p>
+              <p class="post-createTime">Event Type: {{ event['eventType'] }}</p>
+              <p class="post-createTime">Registration URL: {{ event['regURL'] }}</p>
+              <p class="post-content">{{ event['eventDesc'] }}</p>
 
-              <!-- If there's an image URL, you can display it as well -->
               {% if event['imgURL'] %}
-                <img src="{{ event['imgURL'] }}" alt="Event Image" />
+                <img src="{{ event['imgURL'] }}" alt="Event Image" width="400" height="300"/>
               {% endif %}
             </div>
             <br />
