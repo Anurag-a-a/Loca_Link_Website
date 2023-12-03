@@ -75,15 +75,6 @@ def get_eventList_in_community(community_id):
         return []
 
 
-
-def add_like(user_id, post_id):
-    sql = "INSERT INTO likestate(userId,postId) VALUES ('" + str(user_id) + "','" + str(post_id) + "')"
-    conn.ping(reconnect=True)
-    cur.execute(sql)
-    conn.commit()
-    conn.cursor()
-    conn.close()
-
 def get_post_by_id(post_id):
     sql = "SELECT * from post where id = '" + str(post_id) + "'"
     conn.ping(reconnect=True)
@@ -98,15 +89,6 @@ def get_post_by_id(post_id):
    
 def add_likeNum(post_id):
     sql = "UPDATE post SET likeNum=likeNum+1 WHERE id = '" + str(post_id) + "'"
-    conn.ping(reconnect=True)
-    cur.execute(sql)
-    conn.commit()
-    conn.cursor()
-    conn.close()
-
-
-def delete_like(user_id, post_id):
-    sql = "DELETE likestate WHERE userId = '" + str(user_id) + "' AND postId = '" + str(post_id) + "'"
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()

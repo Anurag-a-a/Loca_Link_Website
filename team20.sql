@@ -10,12 +10,8 @@ Target Server Type    : MYSQL
 Target Server Version : 80034
 File Encoding         : 65001
 
-Date: 2023-11-28 16:00:54
+Date: 2023-12-03 13:13:38
 */
-use team20;
-drop database team20;
-create database team20;
-use team20;
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -34,7 +30,7 @@ CREATE TABLE `comment` (
   KEY `userWhoCom` (`author`),
   CONSTRAINT `postOfCom` FOREIGN KEY (`postId`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `userWhoCom` FOREIGN KEY (`author`) REFERENCES `user` (`username`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of comment
@@ -45,6 +41,8 @@ INSERT INTO `comment` VALUES ('0000000003', 'This is test of adding a new commen
 INSERT INTO `comment` VALUES ('0000000004', 'This is test of adding a new comment', '0000000002', 'UserName', '2023-11-25 14:08:59');
 INSERT INTO `comment` VALUES ('0000000005', 'This is test of adding a new comment', '0000000002', 'UserName', '2023-11-25 14:09:17');
 INSERT INTO `comment` VALUES ('0000000006', 'This is test of adding a new comment.', '0000000002', 'UserName', '2023-11-25 14:10:25');
+INSERT INTO `comment` VALUES ('0000000007', null, '0000000002', 'UserName', '2023-12-02 11:33:57');
+INSERT INTO `comment` VALUES ('0000000008', 'Test of adding comment', '0000000002', 'UserName', '2023-12-02 15:05:25');
 
 -- ----------------------------
 -- Table structure for commentimg
@@ -90,6 +88,33 @@ INSERT INTO `community` VALUES ('0000000005', 'Manhattan', '1', 'Here you can fi
 INSERT INTO `community` VALUES ('0000000006', 'New York', '1', 'Here you can find posts related to New York', 'https://assets.online.berklee.edu/catalog-site-heroes/careers-illustration-v2.png');
 
 -- ----------------------------
+-- Table structure for event
+-- ----------------------------
+DROP TABLE IF EXISTS `event`;
+CREATE TABLE `event` (
+  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `userId` int unsigned NOT NULL,
+  `communityId` int unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `edate` date NOT NULL,
+  `eventDesc` varchar(255) DEFAULT '',
+  `eventType` varchar(255) NOT NULL,
+  `regURL` varchar(255) DEFAULT '',
+  `imgURL` varchar(255) DEFAULT '',
+  `interestedNum` int NOT NULL DEFAULT '0',
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `ecommunity` (`communityId`),
+  KEY `eventCreater` (`userId`),
+  CONSTRAINT `ecommunity` FOREIGN KEY (`communityId`) REFERENCES `community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `eventCreater` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of event
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for follow
 -- ----------------------------
 DROP TABLE IF EXISTS `follow`;
@@ -109,6 +134,25 @@ CREATE TABLE `follow` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for interested
+-- ----------------------------
+DROP TABLE IF EXISTS `interested`;
+CREATE TABLE `interested` (
+  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `userId` int(10) unsigned zerofill NOT NULL,
+  `eventId` int(10) unsigned zerofill NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userInter` (`userId`),
+  KEY `eventInter` (`eventId`),
+  CONSTRAINT `eventInter` FOREIGN KEY (`eventId`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `userInter` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- ----------------------------
+-- Records of interested
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for likestate
 -- ----------------------------
 DROP TABLE IF EXISTS `likestate`;
@@ -121,57 +165,12 @@ CREATE TABLE `likestate` (
   KEY `postLiked` (`postId`),
   CONSTRAINT `postLiked` FOREIGN KEY (`postId`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `userWhoLike` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of likestate
 -- ----------------------------
-INSERT INTO `likestate` VALUES ('0000000001', '0000000001', '0000000002');
-
--- ----------------------------
--- Table structure for Event
--- ----------------------------
-DROP TABLE IF EXISTS `event`;
-CREATE TABLE `event` (
-  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `userId` int unsigned NOT NULL,
-  `communityId` int unsigned NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `eventDesc` varchar(255) DEFAULT '',
-  `eventType` varchar(255) NOT NULL,
-  `regURL` varchar(255) DEFAULT '',
-  `imgURL` varchar(255) DEFAULT '',  
-  `likeNum` int NOT NULL DEFAULT '0',
-  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `ecommunity` (`communityId`),
-  KEY `eventCreater` (`userId`),
-  CONSTRAINT `ecommunity` FOREIGN KEY (`communityId`) REFERENCES `community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `eventCreater` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- ----------------------------
--- Table structure for Event
--- ----------------------------
-DROP TABLE IF EXISTS `event`;
-CREATE TABLE `event` (
-  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `userId` int unsigned NOT NULL,
-  `communityId` int unsigned NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `edate` date NOT Null,
-  `eventDesc` varchar(255) DEFAULT '',
-  `eventType` varchar(255) NOT NULL,
-  `regURL` varchar(255) DEFAULT '',
-  `imgURL` varchar(255) DEFAULT '',  
-  `likeNum` int NOT NULL DEFAULT '0',
-  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `ecommunity` (`communityId`),
-  KEY `eventCreater` (`userId`),
-  CONSTRAINT `ecommunity` FOREIGN KEY (`communityId`) REFERENCES `community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `eventCreater` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO `likestate` VALUES ('0000000003', '0000000001', '0000000002');
 
 -- ----------------------------
 -- Table structure for post
@@ -187,7 +186,7 @@ CREATE TABLE `post` (
   `likeNum` int NOT NULL DEFAULT '0',
   `isTop` tinyint NOT NULL DEFAULT '0',
   `isDeleted` int NOT NULL DEFAULT '0',
-  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ,
+  `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `community` (`communityId`),
   KEY `postCreater` (`userId`),
@@ -198,7 +197,7 @@ CREATE TABLE `post` (
 -- ----------------------------
 -- Records of post
 -- ----------------------------
-INSERT INTO `post` VALUES ('0000000002', '1', '1', 'Exploring the Beauty of Oil Painting', 'Hey, fellow art enthusiasts! I\'ve been diving into the world of oil painting lately. Here\'s my latest creation, a serene landscape inspired by the countryside. What do you think?.', '', '0', '0', '0', '2023-11-04 20:00:54');
+INSERT INTO `post` VALUES ('0000000002', '1', '1', 'Exploring the Beauty of Oil Painting', 'Hey, fellow art enthusiasts! I\'ve been diving into the world of oil painting lately. Here\'s my latest creation, a serene landscape inspired by the countryside. What do you think?.', '', '1', '0', '0', '2023-12-02 15:38:53');
 INSERT INTO `post` VALUES ('0000000003', '1', '1', 'Discovering Street Art in Barcelona', 'Street art has always fascinated me. During my recent trip to Barcelona, I stumbled upon some amazing street art. Here\'s a photo diary of my findings.', '', '0', '0', '0', '2023-11-04 20:01:42');
 INSERT INTO `post` VALUES ('0000000004', '1', '1', 'Sculpting Dreams: My Journey with Clay', 'I\'ve recently taken up sculpting with clay. It\'s been a therapeutic and creative journey. Here\'s one of my latest clay sculptures, inspired by nature.', '', '0', '0', '0', '2023-11-04 20:02:20');
 INSERT INTO `post` VALUES ('0000000005', '1', '2', 'Exploring Jazz: The Soulful Rhythms', 'Hey music lovers! Let\'s delve into the world of Jazz. I\'ve been captivated by its soulful rhythms. What are your favorite Jazz tunes?', '', '0', '0', '0', '2023-11-04 20:06:06');
@@ -264,15 +263,10 @@ CREATE TABLE `user` (
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
-  ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-
--- we are using encryted password so if you want to use this pass password then original password is Password1234@
 INSERT INTO `user` VALUES ('0000000001', 'UserName', '$2b$12$PUrlmbRTStKgR/FQAOsyIuhyB9ARvSuRZKshWfpgqO9ROf.X8sCvm', 'mail@mail.com', 'Hoboken', null, null);
 INSERT INTO `user` VALUES ('0000000005', 'UserName1', '$2b$12$PUrlmbRTStKgR/FQAOsyIuhyB9ARvSuRZKshWfpgqO9ROf.X8sCvm', 'mail1@mail1.com', 'Hoboken', null, null);
-
-
-

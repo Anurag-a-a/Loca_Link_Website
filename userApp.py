@@ -122,41 +122,41 @@ def check_session():
     return True, (username, communityName)
 
 
-#Route for handling likes
-@user_blueprint.route('/like/<int:postId>')
-def like(postId):
-    user_check, user_data = check_session()
-    
-    if not user_check:
-        return user_data
-    username, communityName = user_data
-    
-    user_id = get_user_id_by_username(username)
-    try:
-        add_like(user_id, postId)
-        add_likeNum(postId)
-        return jsonify({'status': 'success', 'message': 'Post liked successfully'}), 200
-    except:
-        return jsonify({'status': 'failed', 'message': 'An error occurred while liking the post'}), 500
+# #Route for handling likes
+# @user_blueprint.route('/like/<int:postId>')
+# def like(postId):
+#     user_check, user_data = check_session()
+#
+#     if not user_check:
+#         return user_data
+#     username, communityName = user_data
+#
+#     user_id = get_user_id_by_username(username)
+#     try:
+#         add_like(user_id, postId)
+#         add_likeNum(postId)
+#         return jsonify({'status': 'success', 'message': 'Post liked successfully'}), 200
+#     except:
+#         return jsonify({'status': 'failed', 'message': 'An error occurred while liking the post'}), 500
 
 
-#Route for creating a comment
-@user_blueprint.route('/createComment/<int:postId>', methods=["GET", 'POST'])
-def createComment(postId):
-    if request.method == "POST":
-        user_check, user_data = check_session()
-    
-        if not user_check:
-            return user_data
-        username, communityName = user_data
-    
-        user_id = get_user_id_by_username(username)
-        content = request.form.get('content')
-        try:
-            add_comment(content, user_id, postId)
-            return jsonify({'status': 'success', 'message': 'Comment successfully'}), 200
-        except:
-            return jsonify({'status': 'failed', 'message': 'An error occurred while commenting'}), 500
+# #Route for creating a comment
+# @user_blueprint.route('/createComment/<int:postId>', methods=["GET", 'POST'])
+# def createComment(postId):
+#     if request.method == "POST":
+#         user_check, user_data = check_session()
+#
+#         if not user_check:
+#             return user_data
+#         username, communityName = user_data
+#
+#         user_id = get_user_id_by_username(username)
+#         content = request.form.get('content')
+#         try:
+#             add_comment(content, user_id, postId)
+#             return jsonify({'status': 'success', 'message': 'Comment successfully'}), 200
+#         except:
+#             return jsonify({'status': 'failed', 'message': 'An error occurred while commenting'}), 500
 
 #Route for fetching users details 
 @user_blueprint.route("/profile")
