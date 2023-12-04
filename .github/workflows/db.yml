@@ -1,27 +1,42 @@
-name: Create MySQL database
-
+name: MySQL database
+env:
+  MYSQL_DATABASE : team20
+  MYSQL_USER : root
+  MYSQL_PASSWORD : rootroot
+  MYSQL_HOST : mysql-master
+  NODE_ENV: test
 on:
   push:
     branches: [ main ]
 
 jobs:
-  create-database:
+  ci:
     runs-on: ubuntu-latest
-
+    container :
+      image: node:15.5.0-alpine
     services:
-      mysql:
+      mysql-master :
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: rootroot
-          MYSQL_DATABASE: team20
+          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
+          MYSQL_USER : ${{ env.MYSQL_USER}}
+          MYSQL_PASSWORD : ${{ env.MYSQL_PASSWORD}}
+          MYSQL_ROOT_PASSWORD : ${{ env.MYSQL_PASSWORD}}
+        options: >-
+          --name = mysql-master
+          --health-cmd = "mysqladmin ping"
+          --health-interval = 10s
+          --health-timeout=5s
+          --health-retries=3
+
         ports:
           - "3306:3306"
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
-      - name: Create database
+      - name: Set root password
         run: |
-          sudo systemctl start mysql
-          sudo mysql_secure_installation
-          mysql -u root -ppassword -e "CREATE DATABASE IF NOT EXISTS team20;"
+          mysqladmin -u root password rootroot
+      - name: setup database
+        run: mysql -u root -root -e "CREATE DATABASE IF NOT EXISTS team20;"

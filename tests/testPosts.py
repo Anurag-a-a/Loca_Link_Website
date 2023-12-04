@@ -147,12 +147,6 @@ class PostsTestCase(unittest.TestCase):
 
     def test_singlePosts(self):
         tester = app.test_client(self)
-
-        from model.post import get_post_by_id
-        # Attempt to delete the post
-
-        post=    get_post_by_id(4)
-        print(post)
         
         # Log in the user first
         response_login = tester.post(
