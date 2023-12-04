@@ -47,7 +47,7 @@ def exist_user(username):
 
 
 def add_user(username, password, email,location):
-    sql = "INSERT INTO user(username, password, email, location) VALUES ('" + username + "','" + password + "','" + email + "','" + location +"')"
+    sql = "INSERT INTO user( username, password, email, location) VALUES ('" + username + "','" + password + "','" + email + "','" + location +"')"
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()
@@ -64,27 +64,14 @@ def get_user_id_by_username(username):
     else:
         return None
 
-
-def get_password_by_username(username):
-    sql = "SELECT password FROM user WHERE username = '" + username + "'"
+def get_profile(username):
+    sql = "SELECT * FROM user WHERE username = '" + username + "'"
     conn.ping(reconnect=True)
     cur.execute(sql)
     result = cur.fetchone()
     conn.commit()
     if result:
-        return result["password"]
-    else:
-        return None
-
-
-def get_email_by_username(username):
-    sql = "SELECT email FROM user WHERE username = '" + username + "'"
-    conn.ping(reconnect=True)
-    cur.execute(sql)
-    result = cur.fetchone()
-    conn.commit()
-    if result:
-        return result["email"]
+        return result
     else:
         return None
 
@@ -95,13 +82,19 @@ def change_user_password(username, new_password):
     cur.execute(sql)
     conn.commit()
 
-
-def change_email(username, new_email):
-    sql = "UPDATE user SET email = '" + new_email + "' WHERE username = '" + username + "'"
+def updatePass(username,password):
+    sql = "UPDATE user SET  password = %s WHERE username = %s"
+    values = (password,username)
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,values)
     conn.commit()
 
+def updateDetails(username,email,description,address,phone,avatar):
+    sql = "UPDATE user SET  email = %s,description = %s, address = %s, phone = %s, avatar = %s WHERE username = %s"
+    values = (email,description, address, phone, avatar, username)
+    conn.ping(reconnect=True)
+    cur.execute(sql,values)
+    conn.commit()
 
 def close(conn, cur):
     if cur:

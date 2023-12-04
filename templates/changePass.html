@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{username}} Profile</title>
+    <title>Edit Profile</title>
     <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
     <style>
       body {
@@ -129,27 +129,28 @@
       <a href="{{ url_for('user.logout') }}">Logout</a>
 
     </div>
-
-    <form>
+    <form id="edit-form" method="POST" action="{{ url_for('user.changePass') }}" >
       <div class="profile-container" id="edit-form-hidden">
-        <h1>User Profile</h1>
-        <div class="profile-info">
-          <p><strong>Username: </strong> <span id="profile-name">{{ username }}</span></p>
-          <p><strong>email: </strong> <span id="profile-name">{{ email }}</span></p>
-          <p><strong>location: </strong> <span id="profile-name">{{ location }}</span></p>
-          {% if description %}
-          <p><strong>description: </strong> <span id="profile-name">{{ description }}</span></p>
-          {% endif %}
-          {% if avatar %}
-          <p><strong>avatar: </strong> <span id="profile-name">{{ avatar }}</span></p>
-          {% endif %}
-        </div>
-        <button id="edit-button" class="edit-button">
-          <a href="{{ url_for('user.editProfile') }}">Edit Profile</a>
-        </button>
-        <button id="change-password-button" class="edit-button">
-          <a href="{{ url_for('user.changePass') }}">Change Password</a>
-        </button>
+        <h1>Edit User Profile</h1>
+        <p>
+          <label for="og-password">og Password:
+            <input type="password" name="og-password" id="og-password" required/>
+          </label>
+        </p>
+        <p>
+          <label for="edit-password">Update Password:
+            <input type="password" name="edit-password" id="edit-password" required/>
+          </label>
+        </p>
+        <p>
+          <label for="conf-password">conf Password:
+            <input type="password" name="conf-password" id="conf-password" required/>
+          </label>
+        </p>
+        <p class="error-message">{{ error_message }}</p>
+        <p>
+          <button type="submit" value="Save">Save</button>
+        </p>
       </div>
     </form>
   </body>
