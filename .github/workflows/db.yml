@@ -23,4 +23,5 @@ jobs:
       - name: Create database
         run: |
           sudo systemctl start mysql
-          mysql -u root -rootroot -e "CREATE DATABASE IF NOT EXISTS team20;"
+          sudo mysql_secure_installation
+          mysql -u root -ppassword -e "CREATE DATABASE IF NOT EXISTS team20;"
