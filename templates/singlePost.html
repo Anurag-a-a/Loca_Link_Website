@@ -33,7 +33,7 @@
             <form action="{{ url_for('post.show_post',id=postId) }}" method="post">
                 <input type="hidden" name="action" value="like">
                 {% if ifLiked %}
-                    <button type="submit" class="unlike-button">Cancel Like</button>
+                    <button type="submit" class="unlike-button">Unlike</button>
                 {% else %}
                     <button type="submit" class="like-button">Like</button>
                 {% endif %}

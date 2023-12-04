@@ -1,8 +1,10 @@
-from flask import Flask, render_template, Blueprint, session,redirect
+from flask import Flask, render_template, Blueprint, session,redirect,url_for
 from flask import request
 from werkzeug.utils import secure_filename
 import os
 from model.community import *
+from model.comment import *
+from model.like import *
 from model.post import *
 from model.user import *
 from flask import jsonify
@@ -52,10 +54,61 @@ def community(id):
     username, communityName = user_data
     communityList = get_communityList()[:]
     community = get_community_by_id(id)
-    posts = get_postList_in_community(id)[:]
-    return render_template('CommunityPage.html',communityList=communityList,
-                           username=username,community=community,posts=posts)
+    posts = get_extended_post_list_in_community(id, username)
+    print(posts)
+    return render_template('CommunityPage.html', communityList=communityList,
+                           username=username, community=community, posts=posts)
 
+
+def get_extended_post_list_in_community(community_id, username):
+    posts = get_postList_in_community(community_id)[:]
+    user_id = get_user_id_by_username(username)['id']
+
+    for post in posts:
+        post['ifLiked'] = if_liked(user_id, post['id'])
+        post['comments'] = get_comments_by_postId(post['id'])
+
+    return posts        
+@community_blueprint.route('/toggleLike/<int:id>', methods=['POST'])
+def toggle_like(id):
+    # Check if the user has already liked the post
+    user_check, user_data = check_session()
+   
+    if not user_check:
+        return user_data
+    username, communityName = user_data
+
+    comm_id = get_community_id_by_communityName(communityName)
+    userId = get_user_id_by_username(username)['id']
+
+    if_liked_status = if_liked(userId, id)
+    if if_liked_status:
+        # If liked, unlike the post
+        like_id = get_like(userId, id)['id']
+        delete_like(like_id)
+        delete_likeNum(id)
+    else:
+        # If not liked, like the post
+        add_like(userId, id)
+        add_likeNum(id)
+
+    # You can return a JSON response or any other response as needed
+    return redirect(url_for('community.community', id=comm_id['id']))
+
+@community_blueprint.route('/addComment/<int:post_id>', methods=['POST'])
+def addComment(post_id):
+    user_check, user_data = check_session()
+    if not user_check:
+        return user_data
+
+    username, communityName = user_data
+
+    content = request.form.get('content')
+    add_comment(content, post_id, username)
+
+    # Redirect back to the community page after adding the comment
+    comm_id = get_community_id_by_communityName(communityName)
+    return redirect(url_for('community.community', id=comm_id['id']))
 
 #Route for loading all posts from the database from all communities
 @community_blueprint.route("/topPosts")
@@ -99,7 +152,7 @@ def eventExplorer():
 
     # Then, get events from other communities
     for community in communityList:
-        if community['id'] != user_community_id:
+        if community['id'] != user_community_id['id']:
             events = get_eventList_in_community(community['id'])[:]
             all_events.extend(events)
     return render_template('eventExplorer.html', communityList=communityList,

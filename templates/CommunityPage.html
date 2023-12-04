@@ -59,53 +59,32 @@
             <p>Likes: {{ post['likeNum'] }}</p>
 
             <!-- Like and Comment buttons with AJAX functionality -->
-            <button onclick="likePost( post['id'] )">
-              <i class="fas fa-heart"></i> Like
-            </button>
-            <button onclick="showComments(post['id'] )">Show Comments</button>
-
-
-            <!-- Comment input form -->
-            <form id="commentForm{{ post['id'] }}" style="display: none;">
-              <input type="text" name="content" placeholder="Enter your comment">
-              <button onclick="addComment(post['id'])">Add Comment</button>
+            <form action="{{ url_for('community.toggle_like',id=post['id']) }}" method="post">
+              <input type="hidden" name="action" value="like">
+              {% if post['ifLiked'] %}
+                  <button type="submit" class="unlike-button">UnLike</button>
+              {% else %}
+                  <button type="submit" class="like-button">Like</button>
+              {% endif %}
             </form>
+
+            <div class="comments">
+              <h3>Comments:</h3>
+              {% for comment in post['comments'] %}
+              <div class="comment-header">
+                <span class="comment-author">{{ comment['author'] }}</span> - <span class="comment-date">{{ comment['createTime'] }}</span>
+              </div>
+              <p class="comment-body">{{ comment['content'] }} </p>
+              {% endfor %}
+              <!-- Comment input form -->
+              <form action="{{ url_for('community.addComment', post_id=post['id']) }}" method="post">
+                <input type="text" name="content" placeholder="Add a comment">
+                <button type="submit">Add Comment</button>
+              </form>
+            </div>
           </div>
         {% endfor %}
       </div>
     </div>
-    <script>
-      function likePost(postId) {
-        fetch(`/like/${postId}`)
-          .then(response => response.json())
-          .then(data => {
-            alert(data.message);
-          })
-          .catch(error => console.error('Error:', error));
-      }
-
-      function showComments(postId) {
-        const commentForm = document.getElementById(`commentForm${postId}`);
-        commentForm.style.display = commentForm.style.display === 'none' ? 'block' : 'none';
-      }
-
-      function addComment(postId) {
-        const content = document.querySelector(`#commentForm${postId} input[name="content"]`).value;
-        fetch(`/createComment/${postId}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-          },
-          body: `content=${content}`,
-        })
-          .then(response => response.json())
-          .then(data => {
-            alert(data.message);
-          })
-          .catch(error => console.error('Error:', error));
-      }
-
-              
-    </script>
   </body>
 </html>
