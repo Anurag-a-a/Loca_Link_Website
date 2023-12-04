@@ -15,7 +15,7 @@ jobs:
     container :
       image: node:15.5.0-alpine
     services:
-      mysql-master :
+      mysql:
         image: mysql:8.0
         env:
           MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
