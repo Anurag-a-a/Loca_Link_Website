@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80034
 File Encoding         : 65001
 
-Date: 2023-12-03 13:13:38
+Date: 2023-12-05 17:59:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,7 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE `comment` (
   `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `content` TEXT,
+  `content` text,
   `postId` int(10) unsigned zerofill NOT NULL,
   `author` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `createTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -41,26 +41,6 @@ INSERT INTO `comment` VALUES ('0000000003', 'This is test of adding a new commen
 INSERT INTO `comment` VALUES ('0000000004', 'This is test of adding a new comment', '0000000002', 'UserName', '2023-11-25 14:08:59');
 INSERT INTO `comment` VALUES ('0000000005', 'This is test of adding a new comment', '0000000002', 'UserName', '2023-11-25 14:09:17');
 INSERT INTO `comment` VALUES ('0000000006', 'This is test of adding a new comment.', '0000000002', 'UserName', '2023-11-25 14:10:25');
-INSERT INTO `comment` VALUES ('0000000007', null, '0000000002', 'UserName', '2023-12-02 11:33:57');
-INSERT INTO `comment` VALUES ('0000000008', 'Test of adding comment', '0000000002', 'UserName', '2023-12-02 15:05:25');
-
--- ----------------------------
--- Table structure for commentimg
--- ----------------------------
-DROP TABLE IF EXISTS `commentimg`;
-CREATE TABLE `commentimg` (
-  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `commentId` int(10) unsigned zerofill NOT NULL,
-  `order` int DEFAULT NULL,
-  `file` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `comOfImg` (`commentId`),
-  CONSTRAINT `comOfImg` FOREIGN KEY (`commentId`) REFERENCES `comment` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- ----------------------------
--- Records of commentimg
--- ----------------------------
 
 -- ----------------------------
 -- Table structure for community
@@ -97,7 +77,7 @@ CREATE TABLE `event` (
   `communityId` int unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
   `edate` date NOT NULL,
-  `eventDesc` TEXT,
+  `eventDesc` text,
   `eventType` varchar(255) NOT NULL,
   `regURL` varchar(255) DEFAULT '',
   `imgURL` varchar(255) DEFAULT '',
@@ -108,30 +88,12 @@ CREATE TABLE `event` (
   KEY `eventCreater` (`userId`),
   CONSTRAINT `ecommunity` FOREIGN KEY (`communityId`) REFERENCES `community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `eventCreater` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of event
 -- ----------------------------
-
--- ----------------------------
--- Table structure for follow
--- ----------------------------
-DROP TABLE IF EXISTS `follow`;
-CREATE TABLE `follow` (
-  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `followerId` int(10) unsigned zerofill NOT NULL,
-  `followedId` int(10) unsigned zerofill NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `follower` (`followerId`),
-  KEY `followed` (`followedId`),
-  CONSTRAINT `followed` FOREIGN KEY (`followedId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `follower` FOREIGN KEY (`followerId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- ----------------------------
--- Records of follow
--- ----------------------------
+INSERT INTO `event` VALUES ('0000000016', '6', '1', 'Event test', '2023-12-05', 'This is a test of creating an event', 'Promotions', '', '../uploads/kaggle_pets2.png', '1', '2023-12-05 17:23:30');
 
 -- ----------------------------
 -- Table structure for interested
@@ -146,11 +108,12 @@ CREATE TABLE `interested` (
   KEY `eventInter` (`eventId`),
   CONSTRAINT `eventInter` FOREIGN KEY (`eventId`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `userInter` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of interested
 -- ----------------------------
+INSERT INTO `interested` VALUES ('0000000002', '0000000006', '0000000016');
 
 -- ----------------------------
 -- Table structure for likestate
@@ -165,12 +128,13 @@ CREATE TABLE `likestate` (
   KEY `postLiked` (`postId`),
   CONSTRAINT `postLiked` FOREIGN KEY (`postId`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `userWhoLike` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of likestate
 -- ----------------------------
 INSERT INTO `likestate` VALUES ('0000000003', '0000000001', '0000000002');
+INSERT INTO `likestate` VALUES ('0000000004', '0000000006', '0000000002');
 
 -- ----------------------------
 -- Table structure for post
@@ -181,7 +145,7 @@ CREATE TABLE `post` (
   `userId` int unsigned NOT NULL,
   `communityId` int unsigned NOT NULL,
   `title` varchar(255) NOT NULL,
-  `content` TEXT ,
+  `content` text,
   `imgURL` varchar(255) DEFAULT '',
   `likeNum` int NOT NULL DEFAULT '0',
   `isTop` tinyint NOT NULL DEFAULT '0',
@@ -197,7 +161,7 @@ CREATE TABLE `post` (
 -- ----------------------------
 -- Records of post
 -- ----------------------------
-INSERT INTO `post` VALUES ('0000000002', '1', '1', 'Exploring the Beauty of Oil Painting', 'Hey, fellow art enthusiasts! I\'ve been diving into the world of oil painting lately. Here\'s my latest creation, a serene landscape inspired by the countryside. What do you think?.', '', '1', '0', '0', '2023-12-02 15:38:53');
+INSERT INTO `post` VALUES ('0000000002', '1', '1', 'Exploring the Beauty of Oil Painting', 'Hey, fellow art enthusiasts! I\'ve been diving into the world of oil painting lately. Here\'s my latest creation, a serene landscape inspired by the countryside. What do you think?.', '', '2', '0', '0', '2023-12-05 17:19:27');
 INSERT INTO `post` VALUES ('0000000003', '1', '1', 'Discovering Street Art in Barcelona', 'Street art has always fascinated me. During my recent trip to Barcelona, I stumbled upon some amazing street art. Here\'s a photo diary of my findings.', '', '0', '0', '0', '2023-11-04 20:01:42');
 INSERT INTO `post` VALUES ('0000000004', '1', '1', 'Sculpting Dreams: My Journey with Clay', 'I\'ve recently taken up sculpting with clay. It\'s been a therapeutic and creative journey. Here\'s one of my latest clay sculptures, inspired by nature.', '', '0', '0', '0', '2023-11-04 20:02:20');
 INSERT INTO `post` VALUES ('0000000005', '1', '2', 'Exploring Jazz: The Soulful Rhythms', 'Hey music lovers! Let\'s delve into the world of Jazz. I\'ve been captivated by its soulful rhythms. What are your favorite Jazz tunes?', '', '0', '0', '0', '2023-11-04 20:06:06');
@@ -213,43 +177,6 @@ INSERT INTO `post` VALUES ('0000000014', '1', '1', 'Creating Post Test 1', 'This
 INSERT INTO `post` VALUES ('0000000015', '1', '1', 'Creating Post Test 2', 'This is test 2 of creating post. This post is in arts community. ', '', '0', '0', '0', '2023-11-16 21:35:28');
 
 -- ----------------------------
--- Table structure for postimg
--- ----------------------------
-DROP TABLE IF EXISTS `postimg`;
-CREATE TABLE `postimg` (
-  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `postId` int(10) unsigned zerofill NOT NULL,
-  `order` int DEFAULT NULL,
-  `file` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `postOfImg` (`postId`),
-  CONSTRAINT `postOfImg` FOREIGN KEY (`postId`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- ----------------------------
--- Records of postimg
--- ----------------------------
-
--- ----------------------------
--- Table structure for subscription
--- ----------------------------
-DROP TABLE IF EXISTS `subscription`;
-CREATE TABLE `subscription` (
-  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
-  `userId` int(10) unsigned zerofill NOT NULL,
-  `communityId` int(10) unsigned zerofill NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `userWhoSub` (`userId`),
-  KEY `comSubed` (`communityId`),
-  CONSTRAINT `comSubed` FOREIGN KEY (`communityId`) REFERENCES `community` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `userWhoSub` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- ----------------------------
--- Records of subscription
--- ----------------------------
-
--- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -258,17 +185,14 @@ CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `address` varchar(255) DEFAULT NULL,
   `location` varchar(255) NOT NULL,
-  `description` TEXT,
-  `phone` varchar(255) DEFAULT NULL,
-  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('0000000001', 'UserName', '$2b$12$PUrlmbRTStKgR/FQAOsyIuhyB9ARvSuRZKshWfpgqO9ROf.X8sCvm', 'mail@mail.com','', 'Hoboken', '','', '');
-INSERT INTO `user` VALUES ('0000000005', 'UserName1', '$2b$12$PUrlmbRTStKgR/FQAOsyIuhyB9ARvSuRZKshWfpgqO9ROf.X8sCvm', 'mail1@mail1.com','', 'Hoboken','', '', '');
+INSERT INTO `user` VALUES ('0000000001', 'UserName', '$2b$12$PUrlmbRTStKgR/FQAOsyIuhyB9ARvSuRZKshWfpgqO9ROf.X8sCvm', 'mail@mail.com', 'Hoboken');
+INSERT INTO `user` VALUES ('0000000005', 'UserName1', '$2b$12$PUrlmbRTStKgR/FQAOsyIuhyB9ARvSuRZKshWfpgqO9ROf.X8sCvm', 'mail1@mail1.com', 'Hoboken');
+INSERT INTO `user` VALUES ('0000000006', 'UserName2', '$2b$12$DIfnDYwol2RJwsJ67wn2rO.TsUvaQwVBEsTUD3V.0WraSzgp0z2qy', 'mail2@mail2.com', 'Hoboken');

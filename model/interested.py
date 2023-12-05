@@ -11,7 +11,7 @@ cur = conn.cursor()
 def add_interested(userId,eventId):
     sql = "INSERT INTO interested (userId, eventId) VALUES (%s, %s)"
     conn.ping(reconnect=True)
-    cur.execute(sql, (str(userId), str(eventId)))
+    cur.execute(sql, (str(userId), eventId))
     conn.commit()
 
 

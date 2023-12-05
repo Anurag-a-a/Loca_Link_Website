@@ -48,6 +48,18 @@
               {% if event['imgURL'] %}
                 <img src="{{ event['imgURL'] }}" alt="Event Image" width="400" height="300"/>
               {% endif %}
+
+              {% if  interestDict[event['id']] %}
+              <form action="{{ url_for('community.eventExplorer') }}" method="POST">
+                <input type="hidden" name="eventId" value="{{ event['id'] }}">
+                <input type="submit" value="Cancel Interested">
+              </form>
+              {% else %}
+              <form action="{{ url_for('community.eventExplorer') }}" method="POST">
+                <input type="hidden" name="eventId" value="{{ event['id'] }}">
+                <input type="submit" value="Interested">
+              </form>
+              {% endif %}
             </div>
             <br />
           {% endfor %}

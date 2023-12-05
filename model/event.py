@@ -55,7 +55,7 @@ def get_event_by_id(event_id):
 
 
 def add_interestedNum(event_id):
-    sql = "UPDATE post SET interestedNum = interestedNum + 1 WHERE id = %s"
+    sql = "UPDATE event SET interestedNum = interestedNum + 1 WHERE id = %s"
     conn.ping(reconnect=True)
     cur.execute(sql,(str(event_id)))
     conn.commit()
@@ -64,7 +64,7 @@ def add_interestedNum(event_id):
 
 
 def delete_interestedNum(event_id):
-    sql = "UPDATE post SET interestedNum = interestedNum - 1 WHERE id = %s"
+    sql = "UPDATE event SET interestedNum = interestedNum - 1 WHERE id = %s"
     conn.ping(reconnect=True)
     cur.execute(sql,(str(event_id)))
     conn.commit()

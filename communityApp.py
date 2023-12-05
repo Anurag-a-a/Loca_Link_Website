@@ -4,6 +4,8 @@ from werkzeug.utils import secure_filename
 import os
 from model.community import *
 from model.comment import *
+from model.event import *
+from model.interested import *
 from model.like import *
 from model.post import *
 from model.user import *
@@ -135,13 +137,15 @@ def topPosts():
                            username=username, posts=all_posts)
 
 #Route for loading all event from the database from all communities
-@community_blueprint.route("/eventExplorer")
+@community_blueprint.route("/eventExplorer",methods=["POST", "GET"])
 def eventExplorer():
     user_check, user_data = check_session()
    
     if not user_check:
         return user_data
     username, communityName = user_data
+
+    userId = get_user_id_by_username(username)['id']
    
     communityList = get_communityList()[:]
     all_events = []
@@ -155,8 +159,28 @@ def eventExplorer():
         if community['id'] != user_community_id['id']:
             events = get_eventList_in_community(community['id'])[:]
             all_events.extend(events)
+
+    interestDict = {}
+    for event in all_events:
+        eventId = event['id']
+        ifInterested = if_interested(userId,eventId)
+        interestDict[eventId] = ifInterested
+
+    if request.method == "POST":
+        event_id = request.form.get('eventId')
+        if_Interested = if_interested(userId,event_id)
+        if if_Interested:
+            interestedId = get_interested(userId, event_id)['id']
+            delete_interested(interestedId)
+            delete_interestedNum(event_id)
+        else:
+            add_interested(userId, event_id)
+            add_interestedNum(event_id)
+
+        return redirect(url_for('community.eventExplorer'))
+
     return render_template('eventExplorer.html', communityList=communityList,
-                           username=username,all_events=all_events)
+                           username=username,all_events=all_events,interestDict=interestDict)
 
 @community_blueprint.route("/usersEvents", methods=["GET"])
 def usersEvents():

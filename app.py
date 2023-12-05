@@ -3,13 +3,11 @@ import os
 from postApp import post_blueprint
 from userApp import user_blueprint
 from communityApp import community_blueprint
-from eventApp import event_blueprint
 
 app = Flask(__name__)
 app.register_blueprint(user_blueprint, url_prefix='/user')
 app.register_blueprint(community_blueprint, url_prefix='/community')
 app.register_blueprint(post_blueprint, url_prefix='/post')
-app.register_blueprint(event_blueprint, url_prefix='/event')
 app.secret_key = 'team20'
 
 
