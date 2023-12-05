@@ -63,6 +63,8 @@ def createPost():
                 window.location.href = '/post/createPost';  // Redirect back to the createPost page
             </script>
             """
+        image_path = ''
+
         # Check if an image file is provided
         if 'image' in request.files:
             image = request.files['image']
@@ -72,12 +74,7 @@ def createPost():
                 filename = secure_filename(image.filename)
                 image.save(os.path.join('uploads/', filename))
                 image_path = os.path.join('../uploads/', filename)
-            else:
-                # Handle the case where the file is not allowed or not provided
-                image_path = ''
-        else:
-            image_path = ''
-       
+        
         if exist_post(title):
             createPost_message = "Title has been used. "
             return """

@@ -250,6 +250,8 @@ def createEvent():
                 window.location.href = '/community/createEvent';  // Redirect back to the createPost page
             </script>
             """
+        
+        image_path = ''
         # Check if an image file is provided
         if 'image' in request.files:
             image = request.files['image']
@@ -259,8 +261,7 @@ def createEvent():
                 filename = secure_filename(image.filename)
                 image.save(os.path.join('uploads/', filename))
                 image_path = os.path.join('../uploads/', filename)
-        else:
-            image_path = ''
+            
        
         if exist_event(title):
             createPost_message = "Title has been used. "
