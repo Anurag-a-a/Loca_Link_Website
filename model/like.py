@@ -16,9 +16,9 @@ def add_like(userId,postId):
 
 
 def if_liked(userId, postId):
-    sql = "SELECT * FROM likestate WHERE userId ='" + str(userId) + "' and postId ='" + str(postId) + "'"
+    sql = "SELECT * FROM likestate WHERE userId = %s and postId = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(str(userId),str(postId)))
     result = cur.fetchall()
     conn.commit()
     if (len(result) == 0):
@@ -28,9 +28,9 @@ def if_liked(userId, postId):
 
 
 def get_like(userId, postId):
-    sql = "SELECT id FROM likestate WHERE userId = '" + str(userId) + "' and postId = '" + str(postId) + "'"
+    sql = "SELECT id FROM likestate WHERE userId = %s and postId = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(str(userId),str(postId) ))
     result = cur.fetchone()
     conn.commit()
     if result:

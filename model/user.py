@@ -23,9 +23,9 @@ def is_null_signup(username, password, email):
     
 
 def is_existed(username):
-    sql = "SELECT id, username, password,location FROM user WHERE username ='" + username + "'"
+    sql = "SELECT id, username, password,location FROM user WHERE username =%s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(username))
     result = cur.fetchall()
     conn.commit()
     if (len(result) == 0):
@@ -35,9 +35,9 @@ def is_existed(username):
 
 
 def exist_user(username):
-    sql = "SELECT * FROM user WHERE username ='" + username + "'"
+    sql = "SELECT * FROM user WHERE username =%s "
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(username))
     result = cur.fetchall()
     conn.commit()
     if (len(result) == 0):
@@ -47,16 +47,16 @@ def exist_user(username):
 
 
 def add_user(username, password, email,location):
-    sql = "INSERT INTO user( username, password, email, location) VALUES ('" + username + "','" + password + "','" + email + "','" + location +"')"
+    sql = "INSERT INTO user( username, password, email, location) VALUES (%s,%s,%s,%s)"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(username,password, email,location))
     conn.commit()
 
 
 def get_user_id_by_username(username):
-    sql = "SELECT id FROM user WHERE username = '" + username + "'"
+    sql = "SELECT id FROM user WHERE username = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(username ))
     result = cur.fetchone()
     conn.commit()
     if result:

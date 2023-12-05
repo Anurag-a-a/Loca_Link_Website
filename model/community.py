@@ -10,18 +10,18 @@ cur = conn.cursor()
 
 
 def add_community(name, userId):
-    sql = "INSERT INTO community(name,userId) VALUES ('" + name + "','" + str(userId) + "')"
+    sql = "INSERT INTO community(name,userId) VALUES (%s,%s)"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(name,str(userId)))
     conn.commit()
     conn.cursor()
     conn.close()
 
 
 def exist_community(name):
-    sql = "SELECT * FROM community WHERE name ='" + name + "'"
+    sql = "SELECT * FROM community WHERE name = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(name))
     result = cur.fetchall()
     conn.commit()
     if (len(result) == 0):
@@ -67,9 +67,9 @@ def get_communityDescription_by_id(id):
 
 
 def get_community_id_by_communityName(name):
-    sql = "SELECT id FROM community WHERE name='{}'".format(name)
+    sql = "SELECT id FROM community WHERE name= %s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(name))
     result = cur.fetchone()
     conn.commit()
     if result:
@@ -91,18 +91,18 @@ def get_communityList():
 
 
 def addSubscription(userid,communityId):
-    sql = "INSERT INTO subscription(communityId,userId) VALUES ('" + str(communityId) + "','" + str(userid) + "')"
+    sql = "INSERT INTO subscription(communityId,userId) VALUES ( %s,%s)"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(str(communityId),str(userid)))
     conn.commit()
     conn.cursor()
     conn.close()
 
 
 def existSubscription(userid,commityId):
-    sql = "SELECT count(1) FROM subscription where communityId='{}' and userId='{}'".format(str(commityId),str(userid))
+    sql = "SELECT count(1) FROM subscription where communityId=%s and userId=%s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(str(commityId),str(userid)))
     result = cur.fetchone()
     conn.commit()
     if result:

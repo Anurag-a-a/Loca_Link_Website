@@ -10,28 +10,26 @@ cur = conn.cursor()
 
 
 def add_post(userId, communityId, title, content, image_path):
-    sql = ("INSERT INTO post( userId, communityId, title, content, imgURL) VALUES ('" + str(userId) + "','" + str(communityId)
-           + "','" + str(title) + "','" + str(content) + "','" + image_path + "')")
+    sql = "INSERT INTO post (userId, communityId, title, content, imgURL) VALUES (%s, %s, %s, %s, %s)"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(userId, communityId, title, content, image_path))
     conn.commit()
     conn.cursor()
     conn.close()
 
 def add_event(userId, communityId, title, date, eventDesc, regURL, eventType, image_path):
-    sql = ("INSERT INTO event( userId, communityId, title, edate, eventDesc, regURL, eventType, imgURL) VALUES ('" + str(userId) + "','" + str(communityId)
-           + "','" + str(title) +  "','" + date +  "','" + str(eventDesc) +  "','" + regURL + "','" + eventType + "','" + image_path + "')")
+    sql = "INSERT INTO event (userId, communityId, title, edate, eventDesc, regURL, eventType, imgURL) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(userId, communityId, title, date, eventDesc, regURL, eventType, image_path))
     conn.commit()
     conn.cursor()
     conn.close()
 
 
 def exist_post(title):
-    sql = "SELECT * FROM post WHERE title ='" + title + "'"
+    sql = "SELECT * FROM post WHERE title = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(title))
     result = cur.fetchall()
     conn.commit()
     if (len(result) == 0):
@@ -40,9 +38,9 @@ def exist_post(title):
         return True
 
 def exist_event(title):
-    sql = "SELECT * FROM event WHERE title ='" + title + "'"
+    sql = "SELECT * FROM event WHERE title = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(title))
     result = cur.fetchall()
     conn.commit()
     if (len(result) == 0):
@@ -52,9 +50,9 @@ def exist_event(title):
 
 
 def get_postList_in_community(community_id):
-    sql = "SELECT * FROM post WHERE isdeleted=0 and communityId = '" + str(community_id) + "'"
+    sql = "SELECT * FROM post WHERE isdeleted=0 and communityId = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,str(community_id))
     result = cur.fetchall()
     conn.commit()
     if result:
@@ -64,9 +62,9 @@ def get_postList_in_community(community_id):
 
 
 def get_eventList_in_community(community_id):
-    sql = "SELECT * FROM event WHERE communityId = '" + str(community_id) + "'"
+    sql = "SELECT * FROM event WHERE communityId = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(community_id))
     result = cur.fetchall()
     conn.commit()
     if result:
@@ -76,9 +74,9 @@ def get_eventList_in_community(community_id):
 
 
 def get_post_by_id(post_id):
-    sql = "SELECT * from post where id = '" + str(post_id) + "'"
+    sql = "SELECT * from post where id = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(str(post_id)))
     result = cur.fetchone()
     conn.commit()
     if result:
@@ -88,18 +86,18 @@ def get_post_by_id(post_id):
 
    
 def add_likeNum(post_id):
-    sql = "UPDATE post SET likeNum=likeNum+1 WHERE id = '" + str(post_id) + "'"
+    sql = "UPDATE post SET likeNum=likeNum+1 WHERE id = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(str(post_id)))
     conn.commit()
     conn.cursor()
     conn.close()
 
 
 def delete_likeNum(post_id):
-    sql = "UPDATE post SET likeNum=likeNum-1 WHERE id = '" + str(post_id) + "'"
+    sql = "UPDATE post SET likeNum=likeNum-1 WHERE id = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql)
+    cur.execute(sql,(str(post_id)))
     conn.commit()
     conn.cursor()
     conn.close()
