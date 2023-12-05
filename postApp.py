@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, Flask, request, render_template, session, redirect, send_from_directory, url_for
 from werkzeug.utils import secure_filename
+import re
 
 import os
 from model.community import *
@@ -113,12 +114,10 @@ def get_posts_by_community(community_id):
 def auto_moderator(file_path, search_string):
     try:
         with open(file_path, 'r') as file:
-            words = [word.strip().lower() for word in file.read().split(',')]
-            search_string_lower = search_string.lower()
-            for word in words:
-           
-                if word in search_string_lower:
-                    return True
+            bad_words = [word.strip().lower() for word in file.read().split(',')]
+            pattern = re.compile(r'\b(?:' + '|'.join(re.escape(word) for word in bad_words) + r')\b', flags=re.IGNORECASE)
+            if pattern.search(search_string):
+                return True
         return False
 
     except FileNotFoundError:

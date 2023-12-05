@@ -11,7 +11,7 @@ cur = conn.cursor()
 def add_interested(userId,eventId):
     sql = "INSERT INTO interested (userId, eventId) VALUES (%s, %s)"
     conn.ping(reconnect=True)
-    cur.execute(sql, (userId, eventId))
+    cur.execute(sql, (str(userId), str(eventId)))
     conn.commit()
 
 
@@ -42,6 +42,6 @@ def get_interested(userId, eventId):
 def delete_interested(id):
     sql = "DELETE FROM interested WHERE id = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql, (id))
+    cur.execute(sql, (str(id)))
     conn.commit()
     conn.close()

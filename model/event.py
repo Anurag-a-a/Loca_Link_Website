@@ -11,7 +11,7 @@ cur = conn.cursor()
 
 def add_event(userId, communityId, title, date, eventDesc, regURL, eventType, image_path):
     sql = ("INSERT INTO event( userId, communityId, title, edate, eventDesc, regURL, eventType, imgURL) VALUES ('" + str(userId) + "','" + str(communityId)
-           + "','" + title +  "','" + date +  "','" + eventDesc +  "','" + regURL + "','" + eventType + "','" + image_path + "')")
+           + "','" + str(title) +  "','" + date +  "','" + str(eventDesc) +  "','" + regURL + "','" + eventType + "','" + image_path + "')")
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()
@@ -20,7 +20,7 @@ def add_event(userId, communityId, title, date, eventDesc, regURL, eventType, im
 
 
 def exist_event(title):
-    sql = "SELECT * FROM event WHERE title ='" + title + "'"
+    sql = "SELECT * FROM event WHERE title ='" + str(title) + "'"
     conn.ping(reconnect=True)
     cur.execute(sql)
     result = cur.fetchall()
@@ -56,7 +56,7 @@ def get_event_by_id(event_id):
 
 
 def add_interestedNum(event_id):
-    sql = "UPDATE post SET interestedNum=interestedNum+1 WHERE id = '" + str(event_id) + "'"
+    sql = "UPDATE post SET interestedNum = interestedNum + 1 WHERE id = '" + str(event_id) + "'"
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()
@@ -65,7 +65,7 @@ def add_interestedNum(event_id):
 
 
 def delete_interestedNum(event_id):
-    sql = "UPDATE post SET interestedNum=interestedNum-1 WHERE id = '" + str(event_id) + "'"
+    sql = "UPDATE post SET interestedNum = interestedNum - 1 WHERE id = '" + str(event_id) + "'"
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()

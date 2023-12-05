@@ -11,7 +11,7 @@ cur = conn.cursor()
 def add_like(userId,postId):
     sql = "INSERT INTO likestate (userId, postId) VALUES (%s, %s)"
     conn.ping(reconnect=True)
-    cur.execute(sql, (userId, postId))
+    cur.execute(sql, (str(userId), str(postId)))
     conn.commit()
 
 
@@ -42,6 +42,6 @@ def get_like(userId, postId):
 def delete_like(id):
     sql = "DELETE FROM likestate WHERE id = %s"
     conn.ping(reconnect=True)
-    cur.execute(sql, (id))
+    cur.execute(sql, (str(id)))
     conn.commit()
     conn.close()

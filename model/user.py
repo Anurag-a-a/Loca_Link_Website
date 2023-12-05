@@ -91,7 +91,7 @@ def updatePass(username,password):
 
 def updateDetails(username,email,description,address,phone,avatar):
     sql = "UPDATE user SET  email = %s,description = %s, address = %s, phone = %s, avatar = %s WHERE username = %s"
-    values = (email,description, address, phone, avatar, username)
+    values = (email,str(description), str(address), str(phone), avatar, username)
     conn.ping(reconnect=True)
     cur.execute(sql,values)
     conn.commit()

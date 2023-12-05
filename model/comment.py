@@ -11,7 +11,7 @@ cur = conn.cursor()
 def add_comment(content, postId, author):
     sql = "INSERT INTO comment (content, postId, author) VALUES (%s, %s, %s)"
     conn.ping(reconnect=True)
-    cur.execute(sql, (content, postId, author))
+    cur.execute(sql, (str(content), postId, author))
     conn.commit()
 
 def get_comments_by_userId(userId):

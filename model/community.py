@@ -91,7 +91,7 @@ def get_communityList():
 
 
 def addSubscription(userid,communityId):
-    sql = "INSERT INTO subscription(communityId,userId) VALUES ('" + communityId + "','" + str(userid) + "')"
+    sql = "INSERT INTO subscription(communityId,userId) VALUES ('" + str(communityId) + "','" + str(userid) + "')"
     conn.ping(reconnect=True)
     cur.execute(sql)
     conn.commit()
@@ -100,7 +100,7 @@ def addSubscription(userid,communityId):
 
 
 def existSubscription(userid,commityId):
-    sql = "SELECT count(1) FROM subscription where communityId='{}' and userId='{}'".format(commityId,userid)
+    sql = "SELECT count(1) FROM subscription where communityId='{}' and userId='{}'".format(str(commityId),str(userid))
     conn.ping(reconnect=True)
     cur.execute(sql)
     result = cur.fetchone()
