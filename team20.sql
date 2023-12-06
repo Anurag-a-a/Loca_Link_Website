@@ -185,14 +185,18 @@ CREATE TABLE `user` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `location` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('0000000001', 'UserName', '$2b$12$PUrlmbRTStKgR/FQAOsyIuhyB9ARvSuRZKshWfpgqO9ROf.X8sCvm', 'mail@mail.com', 'Hoboken');
-INSERT INTO `user` VALUES ('0000000005', 'UserName1', '$2b$12$PUrlmbRTStKgR/FQAOsyIuhyB9ARvSuRZKshWfpgqO9ROf.X8sCvm', 'mail1@mail1.com', 'Hoboken');
-INSERT INTO `user` VALUES ('0000000006', 'UserName2', '$2b$12$DIfnDYwol2RJwsJ67wn2rO.TsUvaQwVBEsTUD3V.0WraSzgp0z2qy', 'mail2@mail2.com', 'Hoboken');
+INSERT INTO `user` VALUES ('0000000001', 'UserName', '$2b$12$PUrlmbRTStKgR/FQAOsyIuhyB9ARvSuRZKshWfpgqO9ROf.X8sCvm', 'mail@mail.com','', 'Hoboken','','','');
+INSERT INTO `user` VALUES ('0000000005', 'UserName1', '$2b$12$PUrlmbRTStKgR/FQAOsyIuhyB9ARvSuRZKshWfpgqO9ROf.X8sCvm', 'mail1@mail1.com','', 'Union City','','','' );
+INSERT INTO `user` VALUES ('0000000006', 'UserName2', '$2b$12$DIfnDYwol2RJwsJ67wn2rO.TsUvaQwVBEsTUD3V.0WraSzgp0z2qy', 'mail2@mail2.com','', 'Jersey City','','','');

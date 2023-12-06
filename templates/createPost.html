@@ -70,10 +70,11 @@
 
             <label for="content">Post Content:</label>
             <textarea id="content" name="content" rows="6" required placeholder="Text (optional)"></textarea>
-
-            <label for="image">Upload Image:</label>
-            <input type="file" name="image">
-
+            <div class="file-input-container">
+                <label for="image" class="upload-btn">Upload Image</label>
+                <input type="file" id="file-input" class="file-input" name="image">
+                <span class="file-name">No file chosen</span>
+            </div>
             <input type="submit" value="Post">
         </form>
     </div>

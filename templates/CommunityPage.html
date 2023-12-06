@@ -44,18 +44,20 @@
         {% for post in posts %}
           <div class="content-block">
             <h2>{{ post['title'] }}</h2>
-            <p>{{ post['content'] }}</p>
-            {% if post['imgURL'] %}
-              <img
-                src={{ url_for('uploaded_file', filename=post['imgURL']) }}
-                width="400"
-                height="300"
-              />
-            {% endif %} 
-            <!-- Display Like and Comment information -->
-            <p>Likes: {{ post['likeNum'] }}</p>
-
+            <div class="attractive-content">
+              <p>{{ post['content'] }}</p>
+              {% if post['imgURL'] %}
+                <img
+                  src={{ url_for('uploaded_file', filename=post['imgURL']) }}
+                  width="400"
+                  height="300"
+                />
+              {% endif %} 
+              <!-- Display Like and Comment information -->
+              <p>Likes: {{ post['likeNum'] }}</p>
             <!-- Like and Comment buttons with AJAX functionality -->
+            <div class="comments">
+
             <form action="{{ url_for('community.toggle_like',id=post['id']) }}" method="post">
               <input type="hidden" name="action" value="like">
               {% if post['ifLiked'] %}
@@ -65,7 +67,6 @@
               {% endif %}
             </form>
 
-            <div class="comments">
               <h3>Comments:</h3>
               {% for comment in post['comments'] %}
               <div class="comment-header">
@@ -80,6 +81,7 @@
               </form>
             </div>
           </div>
+        </div>
         {% endfor %}
       </div>
     </div>

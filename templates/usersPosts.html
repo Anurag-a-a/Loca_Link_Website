@@ -29,12 +29,13 @@
         {% for singlePost in posts %}
         <div class="content-block">
             <h2 class="post-title">{{ singlePost['title'] }}</h2>
-            <p class="post-content">{{ singlePost['content'] }}</p>
-            <p class="post-createTime">{{ singlePost['createTime'] }}</p>
-
+            <p class="attractive-content">{{ singlePost['content'] }}</p>
+            
               {% if singlePost['imgURL'] %}
-                <img src="{{ singlePost['imgURL'] }}" alt="Post Image" />
+                <img src="{{ singlePost['imgURL'] }}" width="400" height="300" />
               {% endif %}
+
+              <p class="post-createTime">{{ singlePost['createTime'] }}</p>
 
             <button class = "button-all"onclick="confirmDelete('{{ singlePost['id'] }}')">Delete</button>
   

@@ -45,7 +45,7 @@
 
       .edit-button,
       button {
-        background-color: #9500ae;
+        background-color: #0079d3;
         color: #fff;
         border: none;
         padding: 10px 20px;
@@ -53,11 +53,17 @@
         cursor: pointer;
         border-radius: 5px;
         box-shadow: 0px 5px 15px 0px rgba(28, 0, 181, 0.3);
+        
       }
 
+      a{
+        text-decoration: none;
+        color: white;
+
+      }
       .edit-button:hover,
       button:hover {
-        background-color: #9233d2;
+        background-color: #005ea6;
       }
 
       .edit-mode label,
@@ -141,7 +147,7 @@
           <p><strong>description: </strong> <span id="profile-name">{{ description }}</span></p>
           {% endif %}
           {% if avatar %}
-          <p><strong>avatar: </strong> <img src="{{ avatar }}" alt="avatar"></span></p>
+          <p> <img src="{{ avatar }}" alt="avatar"></span></p>
           {% endif %}
         </div>
         <button id="edit-button" class="edit-button">

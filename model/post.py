@@ -103,7 +103,7 @@ def delete_likeNum(post_id):
     conn.close()
 
 def get_usersPosts(id):
-    sql = "SELECT id, title, content, createTime FROM post where userid = %s and isDeleted = 0"
+    sql = "SELECT id, title, content,imgURL, createTime FROM post where userid = %s and isDeleted = 0"
     conn.ping(reconnect=True)
     cur.execute(sql, (id,))
     result = cur.fetchall()

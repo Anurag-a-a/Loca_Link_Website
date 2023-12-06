@@ -28,16 +28,18 @@
         <h2>{{ event_type }}</h2>
         <div class="content-container">
           {% for event in events_by_type %}
-            <div class="content-block">
+            <div class="content-block ">
               <h3 class="event-title">{{ event['title'] }}</h3>
-              <p class="event-createTime">Date: {{ event['edate'] }}</p>
-              <p class="event-createTime">Event Type: {{ event['eventType'] }}</p>
-              <p class="event-createTime">Registration URL: {{ event['regURL'] }}</p>
+              <div class="attractive-content"><p class="event-content">Event Type: {{ event['eventType'] }}</p>
+              {% if event['imgURL'] %}
+              <p class="event-content">Registration URL: <a href ="{{ event['regURL'] }}"> CLick Here to Register</a></p>
+              {% endif %}
               <p class="event-content">{{ event['eventDesc'] }}</p>
-
               {% if event['imgURL'] %}
                 <img src="{{ event['imgURL'] }}" alt="Event Image" width="400" height="300"/>
               {% endif %}
+              <p class="event-createTime">Date: {{ event['edate'] }}</p>
+            </div>
             </div>
             <br />
           {% endfor %}

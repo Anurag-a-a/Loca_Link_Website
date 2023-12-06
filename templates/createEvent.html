@@ -67,70 +67,67 @@
 
     </div>
 
-    <div class="attractive-content">
-      <div class="posts-block">
-      <h2>Create Your Next Exciting Event!</h2>
+    <div class="profile">
+        <div class="posts-block">
+        <h2>Create Your Next Exciting Event!</h2>
 
-      <p>Welcome to the event creation page! Here, you have the power to bring your community together and create unforgettable experiences. Follow the steps below to craft an event that stands out:</p>
+        <p>Welcome to the event creation page! Here, you have the power to bring your community together and create unforgettable experiences. Follow the steps below to craft an event that stands out:</p>
 
-      <ul>
-        <li>Choose a captivating title that reflects the essence of your event.</li>
-        <li>Select a date that suits your community members and ensures a successful turnout.</li>
-        <li>Craft a compelling description that sparks interest and excitement.</li>
-        <li>Provide a registration URL if applicable, making it easy for attendees to sign up.</li>
-        <li>Upload a stunning image to make your event visually appealing.</li>
-        <li>Select the event type that best categorizes your gathering: Promotion, Cultural, or Workshops.</li>
-      </ul>
+        <ul>
+          <li>Choose a captivating title that reflects the essence of your event.</li>
+          <li>Select a date that suits your community members and ensures a successful turnout.</li>
+          <li>Craft a compelling description that sparks interest and excitement.</li>
+          <li>Provide a registration URL if applicable, making it easy for attendees to sign up.</li>
+          <li>Upload a stunning image to make your event visually appealing.</li>
+          <li>Select the event type that best categorizes your gathering: Promotion, Cultural, or Workshops.</li>
+        </ul>
+      </div>
+      <br><br><br><br>
+        <div class="posts-block">
+
+        <h3>Ready to make a lasting impact? Start by filling out the form below and let the creativity flow!</h3>
+
+        <form method="post" action="{{ url_for('community.createEvent') }}" enctype="multipart/form-data">
+
+          <label for="title">Event Title:</label>
+          <input type="text" id="title" name="title" required placeholder="Title" required/>
+
+          <label for="Date">Event Date:</label>
+          <input type="date" id="Date" name="Date" min="{{ current_date }}" required />
+
+          <label for="content">Event description:</label>
+          <textarea
+            id="description"
+            name="description"
+            rows="6"
+            required
+            placeholder="Text (optional)"
+          ></textarea>
+
+          <label for="registration">registration URL (optional):</label>
+          <input
+            type="url"
+            id="registrationUrl"
+            name="registrationUrl"
+            placeholder="Enter registration URL"
+          />
+
+          <label for="image">Upload Image:</label>
+          <input type="file" name="image">
+
+
+          <label for="etype">Event Type:</label>
+          <select id="etype" name="etype">
+            <option value="Promotions">Promotion</option>
+            <option value="Cultural">Cultural</option>
+            <option value="Workshops">Workshops</option>
+          </select>
+
+          <!-- Submit button -->
+          <input type="submit" value="Save" />
+        </form>
       </div>
     </div>
-
-    <div class="profile">
-    <div class="posts-block">
-
-      <h3>Ready to make a lasting impact? Start by filling out the form below and let the creativity flow!</h3>
-
-      <form method="post" action="{{ url_for('community.createEvent') }}" enctype="multipart/form-data">
-
-      <label for="title">Event Title:</label>
-      <input type="text" id="title" name="title" required placeholder="Title" required/>
-
-      <label for="Date">Event Date:</label>
-      <input type="date" id="Date" name="Date" min="{{ current_date }}" required />
-
-      <label for="content">Event description:</label>
-      <textarea
-        id="description"
-        name="description"
-        rows="6"
-        required
-        placeholder="Text (optional)"
-      ></textarea>
-
-      <label for="registration">registration URL (optional):</label>
-      <input
-        type="url"
-        id="registrationUrl"
-        name="registrationUrl"
-        placeholder="Enter registration URL"
-      />
-
-      <label for="image">Upload Image:</label>
-      <input type="file" name="image">
-
-
-      <label for="etype">Event Type:</label>
-      <select id="etype" name="etype">
-        <option value="Promotions">Promotion</option>
-        <option value="Cultural">Cultural</option>
-        <option value="Workshops">Workshops</option>
-      </select>
-
-      <!-- Submit button -->
-      <input type="submit" value="Save" />
-    </form>
-  </div>
-</div>
-
   </body>
 </html>
 

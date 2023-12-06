@@ -17,7 +17,7 @@ body {
   display: block;
   color: #fff;
   text-decoration: none;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 16px;
   margin-top: 50px;
   padding: 10px 50px;
@@ -27,10 +27,9 @@ body {
 }
 
 .attractive-content {
-  max-width: 70%;
   margin: 20px auto;
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: lightgrey;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -50,7 +49,7 @@ body {
 .dropdown {
   position: relative;
   display: inline-block;
-  }
+}
 
 .dropdown-content {
   display: none;
@@ -59,7 +58,6 @@ body {
   min-width: 160px;
   z-index: 1;
   left: 20px;
-
 }
 
 .dropdown-content a {
@@ -86,25 +84,25 @@ body {
 .content-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly; 
+  justify-content: space-evenly;
   align-items: center;
 }
 
 .content-container a {
-text-decoration: none;
+  text-decoration: none;
 }
 
 .content-block {
-  background-color: #fff;
-  width: 40%; 
-  margin: 20px;
+  margin: 20px auto;
   padding: 20px;
-  border-radius: 15px;
-  border:1px solid #ccc;
+  width: 40%;
+  border: 1px solid #ccc;
+  border-radius: 20px;
   box-sizing: border-box;
 }
 
-.posts-container , .events-container {
+.posts-container,
+.events-container {
   display: block;
   block-size: auto;
   margin: 50px auto;
@@ -114,15 +112,23 @@ text-decoration: none;
   display: block;
   margin-top: 10px;
   text-decoration: none;
-
+  color: black;
+}
+.posts-block
+{
+  margin: 50px;
+  padding: 50px;
+  border-radius: 15px;
+  border: 1px solid grey;
+  align-items: center;
 }
 
-.posts-block ,.events-block {
+.events-block {
   background-color: #fff;
   margin: 50px;
   padding: 50px;
   border-radius: 15px;
-  border:1px solid grey;
+  border: 1px solid grey;
   align-items: center;
 }
 
@@ -131,88 +137,99 @@ text-decoration: none;
   height: auto;
 }
 
-.comments, .comment-form {
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    margin-bottom: 20px;
+.comments,
+.comment-form {
+  background-color: lightgrey;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  margin-bottom: 20px;
 }
 
-.post-title , .event-title {
-    color: #333;
-    font-size: 24px;
+.post-title,
+.event-title {
+  color: #333;
+  font-size: 24px;
+  font-weight: bolder;
+  font: bolder;
 }
 
-.post-content , .event-content {
-    font-size: 16px;
+.post-content,
+.event-content {
+  font-size: 16px;
 }
 
-.post-createTime , .event-createTime {
-    font-size: 12px
+.post-createTime,
+.event-createTime {
+  margin-bottom: 5px;
+  text-align: right;
+  font-size: 12px;
 }
 
 .button-all {
   padding: 20px;
   width: 100px;
-  background-color: #fff;
+  font-size: large;
+  color: white;
+  background-color: #0079d3;
   border: none;
   border-radius: 5px;
 }
-.like-button, .unlike-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+.like-button,
+.unlike-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .unlike-button {
-    background-color: #f44336;
+  background-color: #f44336;
 }
 
 .comment {
-    background-color: #fff;
-    border: 2px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
 }
 
 .comment-header {
-    font-size: 0.9em;
-    color: #555;
-    margin-bottom: 5px;
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 5px;
 }
 
 .comment-author {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .comment-date {
-    font-style: italic;
+  font-style: italic;
 }
 
 .comment-body {
-    font-size: 1em;
+  font-size: 1em;
 }
 
 .comment-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 .comment-form input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .page-content {
@@ -231,4 +248,40 @@ text-decoration: none;
 .page-content p {
   color: #333; /* Set paragraph text color */
   line-height: 1.5; /* Adjust line height for better readability */
+}
+
+.file-input-container {
+  position: relative;
+  margin-top: 10px;
+}
+
+/* Style for the file input */
+.file-input-container input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* Style for the custom button or label */
+.upload-btn {
+  display: inline-block;
+  background-color: #3498db;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Style for hover effect on the custom button or label */
+.upload-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Style for the filename display */
+.file-name {
+  margin-top: 5px;
 }

@@ -38,15 +38,23 @@
         {% for singlePost in posts %}
         <a href="{{ url_for('post.show_post', id=singlePost['id']) }}">
           <div class="posts-block">
-            <h2>{{ singlePost['title'] }}</h2>
-            <p>{{ singlePost['content'] }}</p>
+            <p class="post-title">{{ singlePost['title'] }}</p>
+            <div class="attractive-content">
+
+            <p class="post-content">
+              {% if singlePost['content']|length > 120 %}
+                {{ singlePost['content'][:120] }}...
+              {% else %}
+                {{ singlePost['content'] }}
+              {% endif %}
+            </p>
 
             {% if singlePost['imgURL'] %}
               <img src="{{ singlePost['imgURL'] }}" alt="Post Image" width="400" height="300"/>
             {% endif %}
 
             <p>Likes: {{ singlePost['likeNum'] }}</p>
-
+            </div>
           </div>
         </a>
         <br />

@@ -40,27 +40,29 @@
           {% for event in events_by_type %}
             <div class="content-block">
               <h3 class="post-title">{{ event['title'] }}</h3>
-              <p class="post-createTime">Date: {{ event['edate'] }}</p>
-              <p class="post-createTime">Event Type: {{ event['eventType'] }}</p>
+              <div class="attractive-content">
+              <p class="post-content">Event Type: {{ event['eventType'] }}</p>
               {% if event['regURL'] %}
-              <p class="post-createTime">Registration URL: <a href="{{ event['regURL'] }}"/></p>
+              <p class="post-content">Registration URL: <a href="{{ event['regURL'] }}">CLick Here to Register</a></p>
               {% endif %}              
               <p class="post-content">{{ event['eventDesc'] }}</p>
-              {% if event['imgURL'] %}
+              <p>
+                {% if event['imgURL'] %}
                 <img src="{{ event['imgURL'] }}" alt="Event Image" width="400" height="300"/>
-              {% endif %}
-
-              {% if  interestDict[event['id']] %}
-              <form action="{{ url_for('community.eventExplorer') }}" method="POST">
-                <input type="hidden" name="eventId" value="{{ event['id'] }}">
-                <input type="submit" value="Cancel Interested">
-              </form>
-              {% else %}
-              <form action="{{ url_for('community.eventExplorer') }}" method="POST">
-                <input type="hidden" name="eventId" value="{{ event['id'] }}">
-                <input type="submit" value="Interested">
-              </form>
-              {% endif %}
+                {% endif %}
+              </p>
+              <p class="post-createTime">Date: {{ event['edate'] }}</p>
+            </div>
+              <p>
+                {% if  interestDict[event['id']] %}
+                  Thank you for your Interest !! See you in the Event 
+                {% else %}
+                  <form action="{{ url_for('community.eventExplorer') }}" method="POST">
+                    <input type="hidden" name="eventId" value="{{ event['id'] }}">
+                    <input type="submit" class="button-all"  value="RSVP">
+                  </form>
+                {% endif %}
+              </p>
             </div>
             <br />
           {% endfor %}
