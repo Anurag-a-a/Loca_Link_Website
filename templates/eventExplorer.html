@@ -42,9 +42,10 @@
               <h3 class="post-title">{{ event['title'] }}</h3>
               <p class="post-createTime">Date: {{ event['edate'] }}</p>
               <p class="post-createTime">Event Type: {{ event['eventType'] }}</p>
-              <p class="post-createTime">Registration URL: {{ event['regURL'] }}</p>
+              {% if event['regURL'] %}
+              <p class="post-createTime">Registration URL: <a href="{{ event['regURL'] }}"/></p>
+              {% endif %}              
               <p class="post-content">{{ event['eventDesc'] }}</p>
-
               {% if event['imgURL'] %}
                 <img src="{{ event['imgURL'] }}" alt="Event Image" width="400" height="300"/>
               {% endif %}

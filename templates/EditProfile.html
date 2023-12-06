@@ -74,21 +74,26 @@
 
       input[type="text"],
       input[type="password"],
-      textarea {
-        width: 70%;
+      textarea,
+      input[type="file"] {
+        width: 100%; /* Adjusted width */
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
         font-size: 16px;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box; /* Added box-sizing */
       }
+
       input[type="text"]:focus,
       input[type="password"]:focus,
-      textarea:focus {
+      textarea:focus,
+      input[type="file"]:focus {
         outline: none;
         border-color: #007bff;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
       }
+
       .character-limit {
         font-size: 12px;
         color: #777;
@@ -134,25 +139,25 @@
       <div class="profile-container" id="edit-form-hidden">
         <h1>Edit User Profile</h1>
         <p>
-          <label for="edit-email">Email:<input type="text" id="edit-email" value="{{ email }}" name = "edit-email" required/></label>
+          <label for="edit-email">Email:<br><br><input type="text" id="edit-email" value="{{ email }}" name = "edit-email" required/></label>
         </p>
 
         <p>
             <label for="edit-description">Bio Data: </label>
-            <textarea id="edit-description" name = "edit-description" required>{{ desc }}</textarea>
+            <br><br><textarea id="edit-description" name = "edit-description" required>{{ desc }}</textarea>
           </p>
           <small id="character-counter" class="character-limit">0 / 250 characters</small>
           <p>
             <label for="edit-address">Address: </label>
-            <textarea id="edit-address" name = "edit-address" required>{{ address }}</textarea>
+            <br><br><textarea id="edit-address" name = "edit-address" required>{{ address }}</textarea>
           </p>
 
           <p>
-            <label for="edit-phone">Phone Number:<input type="text" id="edit-phone" value="{{ phone }}" name = "edit-phone" required/></label>
+            <label for="edit-phone">Phone Number:<br><br><input type="text" id="edit-phone" value="{{ phone }}" name = "edit-phone" required/></label>
           </p>
           <p>
             <label for="image">Upload Image:</label>
-            <input type="file" name="image">
+            <br><br><input type="file" name="image">
           </p>
           <p class="error-message">{{ error_message }}</p>
           <p>

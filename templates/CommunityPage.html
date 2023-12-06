@@ -32,9 +32,6 @@
         <p>{{ community['description'] }}</p>
       </div>
 
-      <a href="{{ url_for('user.logout') }}">Exit</a>
-      <br />
-
       <div class="profile-icon">
         <img
           src={{community['avatar']}}
@@ -77,8 +74,8 @@
               <p class="comment-body">{{ comment['content'] }} </p>
               {% endfor %}
               <!-- Comment input form -->
-              <form action="{{ url_for('community.addComment', post_id=post['id']) }}" method="post">
-                <input type="text" name="content" placeholder="Add a comment">
+              <form action="{{ url_for('community.addComment', id = id, post_id=post['id']) }}" method="post">
+                <input type="text" name="content" placeholder="Add a comment" required>
                 <button type="submit">Add Comment</button>
               </form>
             </div>

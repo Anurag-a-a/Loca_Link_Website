@@ -74,21 +74,26 @@
 
       input[type="text"],
       input[type="password"],
-      textarea {
-        width: 70%;
+      textarea,
+      input[type="file"] {
+        width: 100%; /* Adjusted width */
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
         font-size: 16px;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        box-sizing: border-box; /* Added box-sizing */
       }
+
       input[type="text"]:focus,
       input[type="password"]:focus,
-      textarea:focus {
+      textarea:focus,
+      input[type="file"]:focus {
         outline: none;
         border-color: #007bff;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
       }
+
       .character-limit {
         font-size: 12px;
         color: #777;
@@ -133,18 +138,18 @@
       <div class="profile-container" id="edit-form-hidden">
         <h1>Edit User Profile</h1>
         <p>
-          <label for="og-password">og Password:
-            <input type="password" name="og-password" id="og-password" required/>
+          <label for="og-password">Original Password:
+            <br><br><input type="password" name="og-password" id="og-password" required/>
           </label>
         </p>
         <p>
-          <label for="edit-password">Update Password:
-            <input type="password" name="edit-password" id="edit-password" required/>
+          <label for="edit-password">New Password:
+            <br><br><input type="password" name="edit-password" id="edit-password" required/>
           </label>
         </p>
         <p>
-          <label for="conf-password">conf Password:
-            <input type="password" name="conf-password" id="conf-password" required/>
+          <label for="conf-password">Re-Enter Password:
+            <br><br><input type="password" name="conf-password" id="conf-password" required/>
           </label>
         </p>
         <p class="error-message">{{ error_message }}</p>

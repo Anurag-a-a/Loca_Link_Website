@@ -57,9 +57,8 @@ def community(id):
     communityList = get_communityList()[:]
     community = get_community_by_id(id)
     posts = get_extended_post_list_in_community(id, username)
-    print(posts)
     return render_template('CommunityPage.html', communityList=communityList,
-                           username=username, community=community, posts=posts)
+                           username=username, community=community, posts=posts, id = id)
 
 
 def get_extended_post_list_in_community(community_id, username):
@@ -70,7 +69,8 @@ def get_extended_post_list_in_community(community_id, username):
         post['ifLiked'] = if_liked(user_id, post['id'])
         post['comments'] = get_comments_by_postId(post['id'])
 
-    return posts        
+    return posts
+        
 @community_blueprint.route('/toggleLike/<int:id>', methods=['POST'])
 def toggle_like(id):
     # Check if the user has already liked the post
@@ -97,8 +97,8 @@ def toggle_like(id):
     # You can return a JSON response or any other response as needed
     return redirect(url_for('community.community', id=comm_id['id']))
 
-@community_blueprint.route('/addComment/<int:post_id>', methods=['POST'])
-def addComment(post_id):
+@community_blueprint.route('/addComment/<int:id>/<int:post_id>', methods=['POST'])
+def addComment(id, post_id):
     user_check, user_data = check_session()
     if not user_check:
         return user_data
@@ -108,9 +108,7 @@ def addComment(post_id):
     content = request.form.get('content')
     add_comment(content, post_id, username)
 
-    # Redirect back to the community page after adding the comment
-    comm_id = get_community_id_by_communityName(communityName)
-    return redirect(url_for('community.community', id=comm_id['id']))
+    return redirect(url_for('community.community', id=id))
 
 #Route for loading all posts from the database from all communities
 @community_blueprint.route("/topPosts")
