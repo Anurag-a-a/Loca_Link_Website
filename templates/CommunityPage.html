@@ -43,7 +43,7 @@
       <div class="content-container">
         {% for post in posts %}
           <div class="content-block">
-            <h2>{{ post['title'] }}</h2>
+            <h2><a href="{{ url_for('post.show_post',id=post['id']) }}">{{ post['title'] }}</a></h2>
             <div class="attractive-content">
               <p>{{ post['content'] }}</p>
               {% if post['imgURL'] %}

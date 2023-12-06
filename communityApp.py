@@ -114,17 +114,20 @@ def addComment(id, post_id):
     return redirect(url_for('community.community', id=id))
 
 #Route for loading all posts from the database from all communities
-@community_blueprint.route("/topPosts")
+@community_blueprint.route("/topPosts",methods=['GET','POST'])
 def topPosts():
     user_check, user_data = check_session()
    
     if not user_check:
         return user_data
     username, communityName = user_data
+
+    userId = get_user_id_by_username(username)['id']
    
     communityList = get_communityList()[:]
     all_posts = []
-    user_community_id = get_community_id_by_communityName(communityName)  
+    user_community_id = get_community_id_by_communityName(communityName)
+
     user_community_posts = get_postList_in_community(user_community_id['id'])
     all_posts.extend(user_community_posts)
 
@@ -136,8 +139,27 @@ def topPosts():
 
     all_posts.reverse()
 
+    likeDict = {}
+    for post in all_posts:
+        postId = post['id']
+        ifLike = if_liked(userId, postId)
+        likeDict[postId] = ifLike
+
+    if request.method == "POST":
+        post_id = request.form.get('postId')
+        if_Like = if_liked(userId,post_id)
+        if if_Like:
+            likeId = get_like(userId, post_id)['id']
+            delete_like(likeId)
+            delete_likeNum(post_id)
+        else:
+            add_like(userId, post_id)
+            add_likeNum(post_id)
+
+        return redirect(url_for('community.topPosts'))
+
     return render_template('topPosts.html', communityList=communityList,
-                           username=username, posts=all_posts)
+                           username=username, posts=all_posts,likeDict=likeDict)
 
 #Route for loading all event from the database from all communities
 @community_blueprint.route("/eventExplorer",methods=["POST", "GET"])

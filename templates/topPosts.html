@@ -36,9 +36,8 @@
       <br />
       <div class="posts-container">
         {% for singlePost in posts %}
-        <a href="{{ url_for('post.show_post', id=singlePost['id']) }}">
           <div class="posts-block">
-            <p class="post-title">{{ singlePost['title'] }}</p>
+            <p class="post-title"><a href="{{ url_for('post.show_post',id=singlePost['id']) }}">{{ singlePost['title'] }}</a></p>
             <div class="attractive-content">
 
             <p class="post-content">
@@ -54,9 +53,20 @@
             {% endif %}
 
             <p>Likes: {{ singlePost['likeNum'] }}</p>
+
+            <p>
+              <form action="{{ url_for('community.topPosts') }}" method="POST">
+                {% if likeDict[singlePost['id']] %}
+                  <input type="hidden" name="postId" value="{{ singlePost['id'] }}">
+                  <input type="submit" class="unlike-button"  value="Unlike">
+                {% else %}
+                  <input type="hidden" name="postId" value="{{ singlePost['id'] }}">
+                  <input type="submit" class="like-button"  value="Like">
+                {% endif %}
+              </form>
+              </p>
             </div>
           </div>
-        </a>
         <br />
         {% endfor %}
       </div>
