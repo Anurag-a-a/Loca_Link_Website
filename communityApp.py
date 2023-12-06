@@ -129,6 +129,7 @@ def topPosts():
     user_community_id = get_community_id_by_communityName(communityName)
 
     user_community_posts = get_postList_in_community(user_community_id['id'])
+    user_community_posts.reverse()
     all_posts.extend(user_community_posts)
 
     # Then, get posts from other communities

@@ -41,27 +41,24 @@
                     {% endif %}
                 </form>
             </div>
-        </div>
 
-        <div class="comment-form">
-            <h3>Add a new comment. </h3>
-            <form action="{{ url_for('post.show_post',id=postId) }}" method="post">
-                <input type="hidden" name="action" value="comment">
-                <textarea name="content" placeholder="Input your comment. "></textarea>
-                <button type="submit">Add Comment</button>
-            </form>
-        </div>
-
-        <div class="comments">
-            <h3>Comments</h3>
-            {% for comment in comments %}
-            <div class="comment">
-                <div class="comment-header">
-                    <span class="comment-author">{{ comment['author'] }}</span> - <span class="comment-date">{{ comment['createTime'] }}</span>
+            <div class="comment-form">
+                <h3>Add a new comment. </h3>
+                <form action="{{ url_for('post.show_post',id=postId) }}" method="post">
+                    <input type="hidden" name="action" value="comment">
+                    <textarea name="content" placeholder="Input your comment. "></textarea>
+                    <button type="submit">Add Comment</button>
+                </form>
+                <h3>Comments</h3>
+                {% for comment in comments %}
+                <div class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">{{ comment['author'] }}</span> - <span class="comment-date">{{ comment['createTime'] }}</span>
+                    </div>
+                    <p class="comment-body">{{ comment['content'] }} </p>
                 </div>
-                <p class="comment-body">{{ comment['content'] }} </p>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
 </div>
