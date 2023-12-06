@@ -57,6 +57,9 @@ def community(id):
     communityList = get_communityList()[:]
     community = get_community_by_id(id)
     posts = get_extended_post_list_in_community(id, username)
+
+    posts.reverse()
+
     return render_template('CommunityPage.html', communityList=communityList,
                            username=username, community=community, posts=posts, id = id)
 
@@ -131,6 +134,8 @@ def topPosts():
             posts = get_postList_in_community(community['id'])[:]
             all_posts.extend(posts)
 
+    all_posts.reverse()
+
     return render_template('topPosts.html', communityList=communityList,
                            username=username, posts=all_posts)
 
@@ -177,6 +182,8 @@ def eventExplorer():
 
         return redirect(url_for('community.eventExplorer'))
 
+    all_events.reverse()
+
     return render_template('eventExplorer.html', communityList=communityList,
                            username=username,all_events=all_events,interestDict=interestDict)
 
@@ -192,6 +199,7 @@ def usersEvents():
 
         events = get_usersEvents(id)
 
+        events.reverse()
 
         return render_template('usersEvents.html', events=events)
 #Curse word logic

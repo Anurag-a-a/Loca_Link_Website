@@ -105,6 +105,9 @@ def get_posts_by_community(community_id):
     username, communityName = user_data
    
     posts = get_postList_in_community(community_id)
+
+    posts.reverse()
+
     return render_template('PostList.html',posts=posts,community_id=community_id)
 
 #Curse word logic
@@ -169,6 +172,8 @@ def show_post(id):
 
         return redirect(url_for('post.show_post',id=id))
 
+    comments.reverse()
+
     return render_template('singlePost.html', post=post, communityList=communityList,
                                comments=comments,ifLiked=ifLiked,postId=id)
    
@@ -183,6 +188,8 @@ def usersPosts():
         id = session.get("user_id")
 
         post = get_usersPosts(id)
+
+        post.reverse()
 
         return render_template('usersPosts.html', posts=post)
 

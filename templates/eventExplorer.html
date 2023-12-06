@@ -54,6 +54,9 @@
               <p class="post-createTime">Date: {{ event['edate'] }}</p>
             </div>
               <p>
+                Interested: {{ event['interestedNum'] }}
+              </p>
+              <p>
                 {% if  interestDict[event['id']] %}
                   Thank you for your Interest !! See you in the Event 
                 {% else %}
