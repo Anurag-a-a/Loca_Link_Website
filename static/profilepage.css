@@ -33,7 +33,7 @@ body {
 .attractive-content {
   margin: 20px auto;
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: lightgrey;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -119,7 +119,6 @@ body {
   display: block;
   margin-top: 10px;
   text-decoration: none;
-  color: black;
 }
 .posts-block
 {
@@ -163,7 +162,7 @@ body {
 
 .post-title,
 .event-title {
-  color: #333;
+  color: #005a9e;
   font-size: 24px;
   font-weight: bolder;
   font: bolder;
@@ -174,6 +173,9 @@ body {
   font-size: 16px;
 }
 
+.event-content a{
+  color: #005a9e;
+}
 .post-createTime,
 .event-createTime {
   margin-bottom: 5px;

@@ -145,15 +145,15 @@
     <form>
       <div class="profile-container" id="edit-form-hidden">
         <h1>User Profile</h1>
-        <div class="profile-info">
+        <div class="profile-info" style="text-align: center;">
+          {% if avatar %}
+          <p> <img src="{{ avatar }}" alt="avatar" width = "400px" height = "300px"></span></p>
+          {% endif %}
           <p><strong>Username: </strong> <span id="profile-name">{{ username }}</span></p>
           <p><strong>email: </strong> <span id="profile-name">{{ email }}</span></p>
           <p><strong>location: </strong> <span id="profile-name">{{ location }}</span></p>
-          {% if description %}
-          <p><strong>description: </strong> <span id="profile-name">{{ description }}</span></p>
-          {% endif %}
-          {% if avatar %}
-          <p> <img src="{{ avatar }}" alt="avatar"></span></p>
+          {% if desc %}
+          <p><strong>Bio Data: </strong> <span id="profile-name">{{ desc }}</span></p>
           {% endif %}
         </div>
         <button id="edit-button" class="edit-button">

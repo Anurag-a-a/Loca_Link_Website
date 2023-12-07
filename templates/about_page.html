@@ -1,116 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>About Us</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | LocaLink</title>
     <link rel="stylesheet" href="/static/about_page.css">
+    <style>
+        header {
+            background: #000;
+            color: #fff;
+            padding: 8px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-container {
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li {
+            margin: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .login-btn {
+            padding: 6px 12px;
+            background-color: #fff;
+            color: #2626a1;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #f4f4f4;
+        }
+
+        body {
+            font-family: montserrat, sans-serif;
+            width: 100%;
+            color: white;
+            margin-bottom: 10px;
+            background-image: url('https://taxpreparers.com/wp-content/uploads/2019/11/wave-gradient.svg');
+            background-repeat: no-repeat;
+            height: 100%;
+
+            background-size: cover;
+        }
+
+        .communities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .community {
+            flex: 0 0 calc(30% - 20px);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center;
+            color: black;
+        }
+    </style>
 </head>
 
 <body>
     <div class="page-container">
-        <div class="page-title">
-            <h1>LocaLink</h1>
-        </div>
-
-        <header>
-            <h1>About Us</h1>
-            <p class="about-us">We are a dynamic team of Full Stack Developers. 
-                We are a group of seven versatile professionals who are not bound by traditional roles but instead thrive on adaptability, change, and collaboration. 
-                Our mission is to deliver exceptional solutions and innovate across the full spectrum of web development, 
-                and our story is one of constant evolution.</p>
-            <!-- <button type="button"><a href="{{ url_for('user.user_login') }}">Log in</a></button> -->
+        <header id="colorful-navbar">
+            <nav class="navbar">
+                <div class="logo">LocaLink</div>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="aboutPage">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="login-btn">
+                    <button type="button" class="login-btn"><a href="{{ url_for('user.user_login') }}">👤</a></button>
+                </div>
+            </nav>
         </header>
+        <div class="communities">
+            <h1>About Us</h1>
+            <p class="about-us">Welcome to LocaLink, where innovation meets collaboration! We are a dynamic team of
+                Full Stack Developers, a group of seven versatile professionals breaking free from traditional roles.
+                Thriving on adaptability and change, our mission is to deliver exceptional solutions across the
+                full spectrum of web development. Our story is one of constant evolution, fueled by a passion for
+                creativity and excellence.</p>
+            </div>
 
         <section class="communities">
             <div class="community" data-view="view1">
                 <h3>Anurag Athwale</h3>
-                <!-- <p>A community for artists, art enthusiasts, and anyone who loves art.</p> -->
-                <button>View</button>
             </div>
             <div class="community" data-view="view2">
-                <h3>Dhanesh Akolu</h3>
-                <!-- <p>A community for tech enthusiasts, developers, and anyone who loves technology.</p> -->
-                <button>View</button>
+                <h3>Dhanesh Akolu</h3>    
             </div>
-            <div class="community" data-view="view3">
-                <h3>Jessica Patwal</h3>
-                <!-- <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p> -->
-                <button>View</button>
-            </div>
-            <div class="community" data-view="view3">
-                <h3>Pavan</h3>
-                <!-- <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p> -->
-                <button>View</button>
-            </div>
-            <div class="community" data-view="view3">
-                <h3>Qui Li</h3>
-                <!-- <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p> -->
-                <button>View</button>
-            </div>
-            <div class="community" data-view="view3">
+        </section>
+        <section class="communities">
+            <div class="community" data-view="view1">
                 <h3>Lijuan LIU</h3>
-                <!-- <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p> -->
-                <button>View</button>
             </div>
-            <div class="community" data-view="view3">
+            <div class="community" data-view="view2">
+                <h3>Qiyu Li</h3>
+            </div>
+        </section>
+        <section class="communities">
+            <div class="community" data-view="view1">
+                <h3>Pavan Mundru</h3>
+            </div>
+            <div class="community" data-view="view2">
+                <h3>Jessica Patwa</h3>
+            </div>
+        </section>
+        <section class="communities">
+            <div class="community" data-view="view1">
                 <h3>Shantanu T K</h3>
-                <!-- <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p> -->
-                <button>View</button>
             </div>
         </section>
 
-        <section class="events">
-            <div class="event" data-view="view1">
-                <h2>Upcoming events for Art Community</h2>
-                <h3>Community meetup</h3>
-                <p>A meetup for members of the art community to get together and socialize.</p>
-                <p>Date: 2023-10-26</p>
-                <p>Time: 7:00 PM</p>
-                <p>Location: Community center</p>
-            </div>
-            <div class="event" data-view="view2">
-                <h2>Upcoming events for Technology Community</h2>
-                <h3>Hackathon</h3>
-                <p>A 24-hour event where teams of developers come together to build software.</p>
-                <p>Date: 2023-11-03</p>
-                <p>Time: 9:00 AM</p>
-                <p>Location: Tech conference</p>
-            </div>
-            <div class="event" data-view="view3">
-                <h2>Upcoming events for Sports and Health Community</h2>
-                <h3>Charity run</h3>
-                <p>A 5K run to raise money for a local charity.</p>
-                <p>Date: 2023-11-10</p>
-                <p>Time: 8:00 AM</p>
-                <p>Location: City park</p>
-            </div>
-        </section>
     </div>
-
-    <script>
-        const communities = document.querySelectorAll('.community');
-        const events = document.querySelectorAll('.event');
-
-        communities.forEach(community => {
-            community.addEventListener('click', () => {
-                const view = community.getAttribute('data-view');
-                const targetEvent = document.querySelector(`.event[data-view="${view}"]`);
-
-                events.forEach(event => {
-                    if (event !== targetEvent) {
-                        event.style.display = 'none';
-                    }
-                });
-
-                if (targetEvent.style.display === 'block') {
-                    targetEvent.style.display = 'none';
-                } else {
-                    targetEvent.style.display = 'block';
-                }
-            });
-        });
-    </script>
-
 </body>
 
 </html>

@@ -13,6 +13,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f4f4f4;
       background-image: url('https://cdn.pixabay.com/photo/2017/06/30/10/14/social-media-2457842_1280.png');
+      margin-left: 250px;
     }
 
     .container {
@@ -134,8 +135,8 @@
     </div>
 
     <!-- Profile page content -->
-    <div class="content">
-      <div class="profile">
+    <div class="profile">
+    <div class="events-container">
         <h1>Explore and participate in the exciting events happening around your community and the world</h1>
         <br />
         {% for event_type, events_by_type in all_events|groupby('eventType') %}
@@ -152,7 +153,7 @@
                   <p class="post-content">{{ event['eventDesc'] }}</p>
                   <p>
                     {% if event['imgURL'] %}
-                      <img src="{{ event['imgURL'] }}" alt="Event Image" style="width: 100%; height: auto;"/>
+                      <img src="{{ event['imgURL'] }}" alt="Event Image" style="width:400px; height:300px"/>
                     {% endif %}
                   </p>
                   <p class="post-createTime">Date: {{ event['edate'] }}</p>

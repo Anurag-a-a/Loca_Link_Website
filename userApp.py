@@ -112,6 +112,7 @@ def signup():
 
     return render_template('signup.html',communities=community_names)
 
+
 #Route for logging out of the system
 @user_blueprint.route('/logout')
 def logout():

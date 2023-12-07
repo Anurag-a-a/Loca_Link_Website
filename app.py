@@ -14,7 +14,9 @@ app.secret_key = 'team20'
 @app.route('/')
 def index():
     return render_template('index.html')
-
+@app.route('/aboutPage')
+def aboutPage():
+    return render_template('about_page.html')
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(os.path.join(app.root_path, 'uploads'), filename)

@@ -9,27 +9,25 @@
     <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
   </head>
   <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-image: url("https://hls.harvard.edu/wp-content/uploads/2022/07/Culture-Fest-Image-1-1024x576-1.png");
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-      .profile-container {
-        width: 120%;
-        max-width: 500px;
-        background-color: #ffffff;
+    
+      body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      background-image: url('https://cdn.pixabay.com/photo/2017/06/30/10/14/social-media-2457842_1280.png');
+      height: 100vh;
+      margin-left: 250px;  
+    }
+
+    .profile-container {
+        width: 80%;
         background-color: rgba(255, 255, 255, 0.9);
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin-left: auto;
+        margin-right: 50px;
       }
       h1 {
         text-align: center;
@@ -137,7 +135,7 @@
       <a href="{{ url_for('user.logout') }}">Logout</a>
 
     </div>
-    <div class="profile">
+    <div class="profile-container">
       <div class="events-container">
         <h1> List of the events that you created on this site</h1>
         {% for event_type, events_by_type in events|groupby('eventType') %}
@@ -147,12 +145,12 @@
             <div class="content-block ">
               <h3 class="event-title">{{ event['title'] }}</h3>
               <div class="attractive-content"><p class="event-content">Event Type: {{ event['eventType'] }}</p>
-              {% if event['imgURL'] %}
+              {% if event['regURL'] %}
               <p class="event-content">Registration URL: <a href ="{{ event['regURL'] }}"> CLick Here to Register</a></p>
               {% endif %}
               <p class="event-content">{{ event['eventDesc'] }}</p>
               {% if event['imgURL'] %}
-                <img src="{{ event['imgURL'] }}" alt="Event Image" width="400" height="300"/>
+                <img src="{{ event['imgURL'] }}" alt="Event Image" width="400px" height="300px"/>
               {% endif %}
               <p class="event-createTime">Date: {{ event['edate'] }}</p>
             </div>
