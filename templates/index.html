@@ -3,92 +3,330 @@
 
 <head>
     <title>Community Engagement Website</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .page-container {
+            margin: 0 auto;
+        }
+
+        .page-title {
+            background-color: #2626a1;
+            text-align: center;
+            padding: 50px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .page-title h1 {
+            color: #fff;
+            font-size: 80px;
+            margin: 0;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            color: #fff;
+        }
+
+        header {
+            background: #000;
+            color: #fff;
+            padding: 8px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li {
+            margin: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .login-btn {
+            padding: 6px 12px;
+            background-color: #fff;
+            color: #2626a1;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background-color: #f4f4f4;
+        }
+        :root {
+  --primary: #b2102f;
+  --secondary: #ff4569;
+  --dark: #212121;
+  --light: #F3F3F3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: montserrat, sans-serif;
+  width: 100%;
+  margin-bottom: 10px;
+  background-image: url('https://taxpreparers.com/wp-content/uploads/2019/11/wave-gradient.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50vh;
+}
+
+.card-container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.card {
+  margin: 100px auto 0;
+  width: 30%;
+  height: 600px;
+  perspective: 1000px;
+  display: inline-block;
+}
+
+.card__inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+}
+
+.card__inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+
+.card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0px 3px 18px 3px rgba(0, 0, 0, 0.2);
+}
+
+.card__face--front {
+  background-image: linear-gradient(to bottom right, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.card__face--front h2 {
+  color: #FFF;
+  font-size: 32px;
+}
+
+.second {
+  white-space: pre-line;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.card__face--back {
+  background-color: var(--light);
+  transform: rotateY(180deg);
+}
+
+.card__content {
+  width: 100%;
+  height: 100%;
+}
+
+.card__header {
+  position: relative;
+  padding: 30px 30px 40px;
+}
+
+.card__header:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(to bottom left, var(--primary) 10%, var(--secondary) 115%);
+  z-index: -1;
+  border-radius: 0px 0px 50% 0px;
+}
+
+.pp {
+  display: block;
+  width: 128px;
+  height: 128px;
+  margin: 0 auto 30px;
+  border-radius: 50%;
+  background-color: #FFF;
+  border: 5px solid #FFF;
+  object-fit: cover;
+}
+
+.card__header h2 {
+  color: #FFF;
+  font-size: 32px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.card__body {
+  padding: 30px;
+}
+
+.card__body h3 {
+  color: var(--dark);
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.card__body p {
+  color: var(--dark);
+  font-size: 18px;
+  line-height: 1.4;
+}
+    </style>
 </head>
 
 <body>
     <div class="page-container">
-        <div class="page-title">
-            <h1>LocaLink</h1>
-        </div>
-
-        <header>
+        <header id="colorful-navbar">
+            <nav class="navbar">
+                <div class="logo">LocaLink</div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <div class="login-btn">
+                    <button type="button" class="login-btn"><a href="{{ url_for('user.user_login') }}">👤</a></button>                
+                </div>
+            </nav>
+        </header>
+        <div class="header">
             <h1>Find your community</h1>
             <p>Join thousands of people who are passionate about the same things you are.</p>
-            <button type="button"><a href="{{ url_for('user.user_login') }}">Log in</a></button>
-        </header>
-   
-        <section class="communities">
-            <div class="community" data-view="view1">
-                <h3>Art community</h3>
-                <p>A community for artists, art enthusiasts, and anyone who loves art.</p>
-                <button>View</button>
+        </div>
+        <div class="card-container">
+        <div class="card">
+        <div class="card__inner">
+            <div class="card__face card__face--front">
+                <h2>Art community</h2><br>
+                <p class="second">A community for artists, art enthusiasts, and anyone who loves art.</p>
             </div>
-            <div class="community" data-view="view2">
-                <h3>Technology community</h3>
-                <p>A community for tech enthusiasts, developers, and anyone who loves technology.</p>
-                <button>View</button>
+            <div class="card__face card__face--back">
+                <div class="card__content">
+                    <div class="card__header">
+                        <img src="https://www.muralarts.org/wp-content/uploads/2016/01/pph.jpg" alt="" class="pp" />
+                        <h2>Art community</h2>
+                    </div>
+                    <div class="card__body">
+                        <h3>Upcoming events for Art Community</h3>
+                        <p><strong>Community meetup</strong><br> A meetup for members of the art community to get together and socialize.<br>Date: 2023-10-26<br>Time: 7:00 PM<br>Location: Community center</p>
+                    </div>
+                </div>
             </div>
-            <div class="community" data-view="view3">
-                <h3>Sports and health community</h3>
-                <p>A community for sports fans, athletes, and anyone who loves staying healthy.</p>
-                <button>View</button>
-            </div>
-        </section>
-    
-        <section class="events">
-            <div class="event" data-view="view1">
-                <h2>Upcoming events for Art Community</h2>
-                <h3>Community meetup</h3>
-                <p>A meetup for members of the art community to get together and socialize.</p>
-                <p>Date: 2023-10-26</p>
-                <p>Time: 7:00 PM</p>
-                <p>Location: Community center</p>
-            </div>
-            <div class="event" data-view="view2">
-                <h2>Upcoming events for Technology Community</h2>
-                <h3>Hackathon</h3>
-                <p>A 24-hour event where teams of developers come together to build software.</p>
-                <p>Date: 2023-11-03</p>
-                <p>Time: 9:00 AM</p>
-                <p>Location: Tech conference</p>
-            </div>
-            <div class="event" data-view="view3">
-                <h2>Upcoming events for Sports and Health Community</h2>
-                <h3>Charity run</h3>
-                <p>A 5K run to raise money for a local charity.</p>
-                <p>Date: 2023-11-10</p>
-                <p>Time: 8:00 AM</p>
-                <p>Location: City park</p>
-            </div>
-        </section>
-        
+        </div>
     </div>
-    <!-- <p class="about-us">About Us</p> -->
-    <script>
-        const communities = document.querySelectorAll('.community');
-        const events = document.querySelectorAll('.event');
+    <div class="card">
+        <div class="card__inner">
+            <div class="card__face card__face--front">
+                <h2>Technology community</h2><br>
+                <p class="second">A community for tech enthusiasts, developers, and anyone who loves technology.</p>
+            </div>
+            <div class="card__face card__face--back">
+                <div class="card__content">
+                    <div class="card__header">
+                        <img src="https://campustechnology.com/-/media/EDU/CampusTechnology/Images/2015/03/20150324internet2.jpg" alt="" class="pp" />
+                        <h2>Technology community</h2>
+                    </div>
+                    <div class="card__body">
+                        <h3>Upcoming events for Technology Community</h3>
+                        <p><strong>Hackathon</strong><br> A 24-hour event where teams of developers come together to build software.<br>Date: 2023-11-03<br>Time: 9:00 AM<br>Location: Tech conference</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card__inner">
+            <div class="card__face card__face--front">
+                <h2>Sports and health community</h2><br>
+                <p class="second">A community for sports fans, athletes, and anyone who loves staying healthy.</p>
+            </div>
+            <div class="card__face card__face--back">
+                <div class="card__content">
+                    <div class="card__header">
+                        <img src="https://img.freepik.com/free-vector/sport-equipment-concept_1284-13034.jpg?w=2000" alt="" class="pp" />
+                        <h2>Sports community</h2>
+                    </div>
+                    <div class="card__body">
+                        <h3>Upcoming events for Sports and Health Community</h3>
+                        <p><strong>Charity run</strong><br> A 5K run to raise money for a local charity.<br>Date: 2023-11-10<br>Time: 8:00 AM<br>Location: City Park</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cards = document.querySelectorAll(".card__inner");
 
-        communities.forEach(community => {
-            community.addEventListener('click', () => {
-                const view = community.getAttribute('data-view');
-                const targetEvent = document.querySelector(`.event[data-view="${view}"]`);
-
-                events.forEach(event => {
-                    if (event !== targetEvent) {
-                        event.style.display = 'none';
-                    }
-                });
-
-                if (targetEvent.style.display === 'block') {
-                    targetEvent.style.display = 'none';
-                } else {
-                    targetEvent.style.display = 'block';
-                }
+        cards.forEach(card => {
+            card.addEventListener("click", function () {
+                card.classList.toggle('is-flipped');
             });
         });
-    </script>
-    
+    });
+</script>
+
 </body>
 
 </html>

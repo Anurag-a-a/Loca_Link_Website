@@ -115,7 +115,14 @@
     </style>
   </head>
   <body>
-    <div class="navbar">
+    <div class="container">
+      <div class="overlay" id="overlay"></div>
+      <div class="sidebar">
+          <button class="hamburger-btn" onclick="toggleSidebar()">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+          </button>
       <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
       <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
       <a href="{{ url_for('post.createPost') }}">Create Post</a>
@@ -158,5 +165,6 @@
         </p>
       </div>
     </form>
+    </div>
   </body>
 </html>

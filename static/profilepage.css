@@ -1,16 +1,20 @@
-/* Styling for the navigation bar */
 body {
-  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .navbar {
-  width: 210px;
+  width: 220px;
   height: 100%;
   background-color: #062657;
   position: fixed;
   top: 0;
   left: 0;
-  padding: 50px auto;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .navbar a {
@@ -21,21 +25,22 @@ body {
   font-size: 16px;
   margin-top: 50px;
   padding: 10px 50px;
-  font-weight: bold; /* Set the font weight */
-  letter-spacing: 1px; /* Adjust letter spacing */
-  transition: color 0.3s ease; /* Add a smooth color transition on hover */
+  font-weight: bold; 
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
 }
 
 .attractive-content {
   margin: 20px auto;
   padding: 20px;
-  background-color: lightgrey;
+  background-color: #f4f4f4;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .attractive-content p {
   line-height: 1.5;
+  color: #333;
 }
 
 .attractive-content ul {
@@ -70,11 +75,13 @@ body {
   display: block;
 }
 
-/* Styling for the profile page content */
 .profile {
   margin: 50px auto;
   padding: 20px;
-  width: 75%;
+  width: 80%;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 .profile-icon {
@@ -119,8 +126,16 @@ body {
   margin: 50px;
   padding: 50px;
   border-radius: 15px;
-  border: 1px solid grey;
+  border: 1px solid #ddd;
   align-items: center;
+  background-color: #fff;
+}
+
+.posts-block img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 15px;
 }
 
 .events-block {
@@ -183,6 +198,7 @@ body {
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  margin-top: 10px;
 }
 
 .unlike-button {
@@ -233,29 +249,28 @@ body {
 }
 
 .page-content {
-  max-width: 800px; /* Adjust the maximum width as needed */
-  margin: 6% auto; /* Center the content and add margin */
-  padding: 20px; /* Add padding for better readability */
-  background-color: #fff; /* Set a background color */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-  border-radius: 8px; /* Add rounded corners */
+  max-width: 800px; 
+  margin: 6% auto; 
+  padding: 20px; 
+  background-color: #fff; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  border-radius: 8px;
 }
 
 .page-content h2 {
-  color: #0079d3; /* Set heading color */
+  color: #0079d3;
 }
 
 .page-content p {
-  color: #333; /* Set paragraph text color */
-  line-height: 1.5; /* Adjust line height for better readability */
+  color: #333;
+  line-height: 1.5; 
 }
 
 .file-input-container {
-  position: relative;
+  /* position: relative; */
   margin-top: 10px;
 }
 
-/* Style for the file input */
 .file-input-container input[type="file"] {
   opacity: 0;
   position: absolute;
@@ -266,7 +281,6 @@ body {
   cursor: pointer;
 }
 
-/* Style for the custom button or label */
 .upload-btn {
   display: inline-block;
   background-color: #3498db;
@@ -274,14 +288,100 @@ body {
   padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* Style for hover effect on the custom button or label */
 .upload-btn:hover {
   background-color: #2980b9;
 }
 
-/* Style for the filename display */
 .file-name {
   margin-top: 5px;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    width: 100%;
+    position: static;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 15px 0;
+  }
+
+  .navbar a {
+    margin: 0;
+    padding: 10px;
+  }
+
+  .dropdown-content {
+    left: 0;
+  }
+
+  .profile {
+    width: 90%;
+  }
+}
+
+.container {
+  display: flex;
+}
+
+.hamburger-btn {
+  background: #062657;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px 0;
+}
+
+
+.sidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #062657;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 50px;
+  transition: 0.5s;
+  z-index: 1;
+}
+
+.sidebar a {
+  padding: 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #fff;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: #555;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.5s;
+  margin-left: 300px;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+
+  .sidebar a {
+    font-size: 16px;
+  }
 }

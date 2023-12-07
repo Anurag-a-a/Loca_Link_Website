@@ -1,16 +1,120 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Event Explorer</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
-  </head>
-  <body>
-    <!-- Navigation bar -->
-    <div class="navbar">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Explorer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      background-image: url('https://cdn.pixabay.com/photo/2017/06/30/10/14/social-media-2457842_1280.png');
+    }
+
+    .container {
+      display: flex;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+      transition: margin-left 0.5s;
+    }
+
+    .profile {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile h1 {
+      color: #062657;
+    }
+
+    .content-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: flex-start; /* Adjust alignment for a better look */
+    }
+
+    .content-block {
+      margin: 20px;
+      padding: 20px;
+      width: 40%;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      box-sizing: border-box;
+      background-color: #fff; /* Set a light background color for each block */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-title {
+      color: #062657;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .attractive-content {
+      margin-top: 20px;
+    }
+
+    .attractive-content p {
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .attractive-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-all {
+      padding: 10px;
+      font-size: large;
+      color: white;
+      background-color: #0079d3;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 0;
+        padding: 20px 0;
+      }
+
+      .sidebar a {
+        font-size: 16px;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+
+      .content-block {
+        width: 80%; /* Adjust width for smaller screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <button class="hamburger-btn">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
       <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
       <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
       <a href="{{ url_for('post.createPost') }}">Create Post</a>
@@ -27,53 +131,82 @@
       <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
       <a href="{{ url_for('community.usersEvents') }}">Users Events</a>
       <a href="{{ url_for('user.logout') }}">Logout</a>
-
     </div>
 
     <!-- Profile page content -->
-    <div class="profile">
-      <h1>Explore and participate in the exciting events that are happening arround your community and around the world</h1>
-      <br />
-      {% for event_type, events_by_type in all_events|groupby('eventType') %}
-        <h2>{{ event_type }}</h2>
-        <div class="content-container">
-          {% for event in events_by_type %}
-            <div class="content-block">
-              <h3 class="post-title">{{ event['title'] }}</h3>
-              <div class="attractive-content">
-              <p class="post-content">Event Type: {{ event['eventType'] }}</p>
-              {% if event['regURL'] %}
-              <p class="post-content">Registration URL: <a href="{{ event['regURL'] }}">CLick Here to Register</a></p>
-              {% endif %}              
-              <p class="post-content">{{ event['eventDesc'] }}</p>
-              <p>
-                {% if event['imgURL'] %}
-                <img src="{{ event['imgURL'] }}" alt="Event Image" width="400" height="300"/>
-                {% endif %}
-              </p>
-              <p class="post-createTime">Date: {{ event['edate'] }}</p>
-            </div>
-              <p>
-                Interested: {{ event['interestedNum'] }}
-              </p>
-              <p>
-                {% if  interestDict[event['id']] %}
-                  Thank you for your Interest !! See you in the Event 
-                {% else %}
-                  <form action="{{ url_for('community.eventExplorer') }}" method="POST">
-                    <input type="hidden" name="eventId" value="{{ event['id'] }}">
-                    <input type="submit" class="button-all"  value="RSVP">
-                  </form>
-                {% endif %}
-              </p>
-            </div>
-            <br />
-          {% endfor %}
-        </div>
-      {% endfor %}
+    <div class="content">
+      <div class="profile">
+        <h1>Explore and participate in the exciting events happening around your community and the world</h1>
+        <br />
+        {% for event_type, events_by_type in all_events|groupby('eventType') %}
+          <h2>{{ event_type }}</h2>
+          <div class="content-container">
+            {% for event in events_by_type %}
+              <div class="content-block">
+                <h3 class="post-title">{{ event['title'] }}</h3>
+                <div class="attractive-content">
+                  <p class="post-content">Event Type: {{ event['eventType'] }}</p>
+                  {% if event['regURL'] %}
+                    <p class="post-content">Registration URL: <a href="{{ event['regURL'] }}">Click Here to Register</a></p>
+                  {% endif %}
+                  <p class="post-content">{{ event['eventDesc'] }}</p>
+                  <p>
+                    {% if event['imgURL'] %}
+                      <img src="{{ event['imgURL'] }}" alt="Event Image" style="width: 100%; height: auto;"/>
+                    {% endif %}
+                  </p>
+                  <p class="post-createTime">Date: {{ event['edate'] }}</p>
+                </div>
+                <p>
+                  Interested: {{ event['interestedNum'] }}
+                </p>
+                <p>
+                  {% if  interestDict[event['id']] %}
+                    Thank you for your Interest!! See you at the Event 
+                  {% else %}
+                    <form action="{{ url_for('community.eventExplorer') }}" method="POST">
+                      <input type="hidden" name="eventId" value="{{ event['id'] }}">
+                      <input type="submit" class="button-all" value="RSVP">
+                    </form>
+                  {% endif %}
+                </p>
+              </div>
+              <br />
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
     </div>
-  </body>
+  </div>
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const content = document.querySelector('.content');
+      
+      // Get all navbar links
+      const navbarLinks = document.querySelectorAll('.sidebar a');
+  
+      if (sidebar.style.width === '250px') {
+        // If sidebar is open, close it
+        sidebar.style.width = '0';
+        content.style.marginLeft = '0';
+  
+        // Hide all navbar links when sidebar is closed
+        navbarLinks.forEach(link => {
+          link.style.display = 'none';
+        });
+      } else {
+        // If sidebar is closed, open it
+        sidebar.style.width = '250px';
+        content.style.marginLeft = '250px';
+  
+        // Show all navbar links when sidebar is open
+        navbarLinks.forEach(link => {
+          link.style.display = 'block';
+        });
+      }
+    }
+  </script>
+  
+</body>
 </html>
-
-
-

@@ -4,8 +4,146 @@
     <title>{{ post['title'] }}</title>
     <link rel="stylesheet" type="text/css" href="/static/profilepage.css">
 </head>
+<style>
+    body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #212121;
+}
+
+img {
+            width: 300px; /* Adjust the width as needed */
+            height: auto; /* Maintain the aspect ratio */
+            margin: 20px; /* Adjust the margin as needed */
+            border-radius: 8px; /* Optional: Add rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+        }
+
+    .container {
+      display: flex;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+      transition: margin-left 0.5s;
+      margin-left: 250px;
+    }
+
+    .profile {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-left: 300px;
+    }
+
+    .profile h1 {
+      color: #062657;
+    }
+
+    .content-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: flex-start; 
+    }
+
+    .content-block {
+      margin: 20px;
+      padding: 20px;
+      width: 40%;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      box-sizing: border-box;
+      background-color: #fff; /* Set a light background color for each block */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-title {
+      color: #062657;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .attractive-content {
+      margin-top: 20px;
+    }
+
+    .attractive-content p {
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .attractive-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-all {
+      padding: 10px;
+      font-size: large;
+      color: white;
+      background-color: #0079d3;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 0;
+        padding: 20px 0;
+      }
+
+      .sidebar a {
+        font-size: 16px;
+      }
+
+      .content {
+        margin-left: 250px;
+      }
+
+      .content-block {
+        width: 80%; /* Adjust width for smaller screens */
+      }
+    }
+    .addcolor{
+      color: #2196f3;
+    }
+    .submitcomment{
+        width:100px;
+        height: 50px;
+        border-radius: 10px;
+        background-color: #0d96ff;
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+    }
+    .contentarea{
+        max-width: 150vh;
+    }
+    :root {
+  --primary: #18ffff;
+  --secondary: #00bfa5;
+  --dark: #212121;
+  --light: #F3F3F3;
+}
+</style>
 <body>
-    <div class="navbar">
+    <div class="container">
+        <div class="sidebar">
+          <button class="hamburger-btn">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
         <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
         <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
         <a href="{{ url_for('post.createPost') }}">Create Post</a>
@@ -47,8 +185,8 @@
             <h3>Add a new comment. </h3>
             <form action="{{ url_for('post.show_post',id=postId) }}" method="post">
                 <input type="hidden" name="action" value="comment">
-                <textarea name="content" placeholder="Input your comment. "></textarea>
-                <button type="submit">Add Comment</button>
+                <textarea name="content" class="contentarea" placeholder="Input your comment. " style="border-radius: 10px;" required></textarea>
+                <button type="submit" class="submitcomment">Add Comment</button>
             </form>
         </div>
 
@@ -65,6 +203,6 @@
         </div>
     </div>
 </div>
-
+</div>
 </body>
 </html>

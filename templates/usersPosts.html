@@ -8,9 +8,125 @@
     />
     <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
   </head>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url("https://hls.harvard.edu/wp-content/uploads/2022/07/Culture-Fest-Image-1-1024x576-1.png");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .profile-container {
+        width: 120%;
+        max-width: 500px;
+        background-color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .profile-info {
+        text-align: left;
+        margin-top: 20px;
+      }
+
+      .profile-info p {
+        margin: 10px 0;
+      }
+
+      .profile-info strong {
+        font-weight: bold;
+      }
+
+      .edit-button,
+      button {
+        background-color: #0079d3;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        margin: 10px 0;
+        cursor: pointer;
+        border-radius: 5px;
+        box-shadow: 0px 5px 15px 0px rgba(28, 0, 181, 0.3);
+        
+      }
+
+      a{
+        text-decoration: none;
+        color: white;
+
+      }
+      .edit-button:hover,
+      button:hover {
+        background-color: #005ea6;
+      }
+
+      .edit-mode label,
+      .edit-mode input,
+      .edit-mode textarea {
+        display: block;
+        margin: 10px 0;
+      }
+
+      .error-message {
+        color: red;
+        margin-top: 10px;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      textarea {
+        width: 70%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+      input[type="text"]:focus,
+      input[type="password"]:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      }
+      .character-limit {
+        font-size: 12px;
+        color: #777;
+        margin-top: 5px;
+      }
+
+      .profile-info,
+      .edit-mode {
+        display: none;
+      }
+
+      #edit-form-displayed .edit-mode {
+        display: block;
+      }
+
+      #edit-form-hidden .profile-info {
+        display: block;
+      }
+  </style>
   <body>
-    <!-- Navigation bar -->
-    <div class="navbar">
+    <div class="container">
+      <div class="sidebar">
+        <button class="hamburger-btn">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
       <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
       <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
       <a href="{{ url_for('post.createPost') }}">Create Post</a>
@@ -43,6 +159,7 @@
         {% endfor %}
       </div>
     </div>
+    </div>
 
     <script>
       function confirmDelete(postId) {
@@ -74,6 +191,35 @@
       }
 
 
+    </script>
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.querySelector('.content');
+        
+        // Get all navbar links
+        const navbarLinks = document.querySelectorAll('.sidebar a');
+    
+        if (sidebar.style.width === '250px') {
+          // If sidebar is open, close it
+          sidebar.style.width = '0';
+          content.style.marginLeft = '0';
+    
+          // Hide all navbar links when sidebar is closed
+          navbarLinks.forEach(link => {
+            link.style.display = 'none';
+          });
+        } else {
+          // If sidebar is closed, open it
+          sidebar.style.width = '250px';
+          content.style.marginLeft = '250px';
+    
+          // Show all navbar links when sidebar is open
+          navbarLinks.forEach(link => {
+            link.style.display = 'block';
+          });
+        }
+      }
     </script>
   </body>
 </html>

@@ -116,7 +116,13 @@
     </style>
   </head>
   <body>
-    <div class="navbar">
+    <div class="container">
+      <div class="sidebar">
+        <button class="hamburger-btn">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
       <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
       <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
       <a href="{{ url_for('post.createPost') }}">Create Post</a>
@@ -158,5 +164,34 @@
         </button>
       </div>
     </form>
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.querySelector('.content');
+        
+        // Get all navbar links
+        const navbarLinks = document.querySelectorAll('.sidebar a');
+    
+        if (sidebar.style.width === '250px') {
+          // If sidebar is open, close it
+          sidebar.style.width = '0';
+          content.style.marginLeft = '0';
+    
+          // Hide all navbar links when sidebar is closed
+          navbarLinks.forEach(link => {
+            link.style.display = 'none';
+          });
+        } else {
+          // If sidebar is closed, open it
+          sidebar.style.width = '250px';
+          content.style.marginLeft = '250px';
+    
+          // Show all navbar links when sidebar is open
+          navbarLinks.forEach(link => {
+            link.style.display = 'block';
+          });
+        }
+      }
+    </script>
   </body>
 </html>

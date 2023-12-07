@@ -1,89 +1,299 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>{{ community['name'] }} Community</title>
     <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
-  </head>
-  <body>
-    <div class="navbar">
-      <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
-      <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
-      <a href="{{ url_for('post.createPost') }}">Create Post</a>
-      <div class="dropdown">
-        <a href="#">All Communities</a>
-        <div class="dropdown-content">
-          {% for communities in communityList %}
-          <a href="{{ url_for('community.community',id=communities['id']) }}">{{ communities['name'] }}</a>
-          {% endfor %}
-        </div>
-      </div>
-      <a href="{{ url_for('user.profile') }}">User Profile</a>
-      <a href="{{ url_for('community.createEvent') }}">Create Event</a>
-      <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
-      <a href="{{ url_for('community.usersEvents') }}">Users Events</a>
-      <a href="{{ url_for('user.logout') }}">Logout</a>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* background-image: #212121; */
+        background-color: #212121; /* Fallback color if the image doesn't load or cover the entire background */
+    }
 
-    </div>
+    img {
+        width: 300px; /* Adjust the width as needed */
+        height: auto; /* Maintain the aspect ratio */
+        margin: 20px; /* Adjust the margin as needed */
+        border-radius: 8px; /* Optional: Add rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    }
 
-    <!-- Profile page content -->
-    <div class="profile">
-      <div >
-        <h1>Welcome to the {{ community['name'] }} Community</h1>
-        <p>{{ community['description'] }}</p>
-      </div>
+    .container {
+        display: flex;
+    }
 
-      <div class="profile-icon">
-        <img
-          src={{community['avatar']}}
-          alt="Profile Icon"
-          width="900"
-          height="300"
-        />
-      </div>
-      <div class="content-container">
-        {% for post in posts %}
-          <div class="content-block">
-            <h2><a href="{{ url_for('post.show_post',id=post['id']) }}">{{ post['title'] }}</a></h2>
-            <div class="attractive-content">
-              <p>{{ post['content'] }}</p>
-              {% if post['imgURL'] %}
-                <img
-                  src={{ url_for('uploaded_file', filename=post['imgURL']) }}
-                  width="400"
-                  height="300"
-                />
-              {% endif %} 
-              <!-- Display Like and Comment information -->
-              <p>Likes: {{ post['likeNum'] }}</p>
-            <!-- Like and Comment buttons with AJAX functionality -->
-            <div class="comments">
+    .content {
+        flex-grow: 1;
+        padding: 20px;
+        transition: margin-left 0.5s;
+    }
 
-            <form action="{{ url_for('community.toggle_like',id=post['id']) }}" method="post">
-              <input type="hidden" name="action" value="like">
-              {% if post['ifLiked'] %}
-                  <button type="submit" class="unlike-button">UnLike</button>
-              {% else %}
-                  <button type="submit" class="like-button">Like</button>
-              {% endif %}
-            </form>
+    .profile {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-              <h3>Comments:</h3>
-              {% for comment in post['comments'] %}
-              <div class="comment-header">
-                <span class="comment-author">{{ comment['author'] }}</span> - <span class="comment-date">{{ comment['createTime'] }}</span>
-              </div>
-              <p class="comment-body">{{ comment['content'] }} </p>
-              {% endfor %}
-              <!-- Comment input form -->
-              <form action="{{ url_for('community.addComment', id = id, post_id=post['id']) }}" method="post">
-                <input type="text" name="content" placeholder="Add a comment" required>
-                <button type="submit">Add Comment</button>
-              </form>
+    .profile h1 {
+        color: #062657;
+    }
+
+    .content-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: flex-start; /* Adjust alignment for a better look */
+    }
+    .submitcomment{
+        width:100px;
+        height: 50px;
+        border-radius: 10px;
+        background-color: #0d96ff;
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+    }
+    .content-block {
+        margin: 20px;
+        padding: 20px;
+        width: 40%;
+        border: 1px solid #ccc;
+        border-radius: 20px;
+        box-sizing: border-box;
+        background-color: #fff; /* Set a light background color for each block */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-title {
+        color: #062657;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .attractive-content {
+        margin-top: 20px;
+    }
+
+    .attractive-content p {
+        line-height: 1.5;
+        color: #333;
+    }
+
+    .attractive-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-top: 15px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-all {
+        padding: 10px;
+        font-size: large;
+        color: white;
+        background-color: #0079d3;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Comment input and button styling */
+    .comments input[type="text"] {
+        width: 70%;
+        padding: 10px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .like-button,
+.unlike-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.unlike-button {
+  background-color: #f44336;
+}
+
+.comment {
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+    @media screen and (max-width: 768px) {
+        .sidebar {
+            width: 0;
+            padding: 20px 0;
+        }
+
+        .sidebar a {
+            font-size: 16px;
+        }
+
+        .content {
+            margin-left: 0;
+        }
+
+        .content-block {
+            width: 80%; /* Adjust width for smaller screens */
+        }
+
+        .comments input[type="text"] {
+            width: 100%;
+        }
+
+        .comments button {
+            width: 100%;
+        }
+
+        .like-button, .unlike-button {
+            width: 100%;
+        }
+    }
+
+    .addcolor {
+        color: #2196f3;
+    }
+    
+
+    :root {
+        --primary: #18ffff;
+        --secondary: #00bfa5;
+        --dark: #212121;
+        --light: #F3F3F3;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <button class="hamburger-btn">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
+            <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
+            <a href="{{ url_for('post.createPost') }}">Create Post</a>
+            <div class="dropdown">
+                <a href="#">All Communities</a>
+                <div class="dropdown-content">
+                    {% for communities in communityList %}
+                    <a href="{{ url_for('community.community',id=communities['id']) }}">{{ communities['name'] }}</a>
+                    {% endfor %}
+                </div>
             </div>
-          </div>
+            <a href="{{ url_for('user.profile') }}">User Profile</a>
+            <a href="{{ url_for('community.createEvent') }}">Create Event</a>
+            <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
+            <a href="{{ url_for('community.usersEvents') }}">Users Events</a>
+            <a href="{{ url_for('user.logout') }}">Logout</a>
         </div>
-        {% endfor %}
-      </div>
+
+        <!-- Profile page content -->
+        <div class="content">
+            <div class="profile">
+                <div>
+                    <h1>Welcome to the {{ community['name'] }} Community</h1>
+                    <p>{{ community['description'] }}</p>
+                </div>
+
+                <div class="profile-icon">
+                    <img
+                    src={{community['avatar']}}
+                    alt="Profile Icon"
+                    width="900"
+                    height="300"
+                    />
+                </div>
+                <div class="content-container">
+                    {% for post in posts %}
+                    <div class="content-block">
+                        <h2><a href="{{ url_for('post.show_post',id=post['id']) }}">{{ post['title'] }}</a></h2>
+                        <div class="attractive-content">
+                            <p>{{ post['content'] }}</p>
+                            {% if post['imgURL'] %}
+                            <img
+                                src={{ url_for('uploaded_file', filename=post['imgURL']) }}
+                                width="400"
+                                height="300"
+                            />
+                            {% endif %}
+                            <!-- Display Like and Comment information -->
+                            <p>Likes: {{ post['likeNum'] }}</p>
+                            <!-- Like and Comment buttons with AJAX functionality -->
+                            <div class="comments">
+                                <form action="{{ url_for('community.toggle_like',id=post['id']) }}" method="post">
+                                    <input type="hidden" name="action" value="like">
+                                    {% if post['ifLiked'] %}
+                                    <button type="submit" class="unlike-button">UnLike</button>
+                                    {% else %}
+                                    <button type="submit" class="like-button">Like</button>
+                                    {% endif %}
+                                </form>
+
+                                <h3>Comments:</h3>
+                                {% for comment in post['comments'] %}
+                                <div class="comment-header">
+                                    <span class="comment-author">{{ comment['author'] }}</span> - <span class="comment-date">{{ comment['createTime'] }}</span>
+                                </div>
+                                <p class="comment-body">{{ comment['content'] }} </p>
+                                {% endfor %}
+                                <!-- Comment input form -->
+                                <form action="{{ url_for('community.addComment', id = id, post_id=post['id']) }}" method="post">
+                                    <input type="text" name="content" placeholder="Add a comment" required>
+                                    <button type="submit" class="submitcomment">Add Comment</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
-  </body>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const content = document.querySelector('.content');
+
+            // Get all navbar links
+            const navbarLinks = document.querySelectorAll('.sidebar a');
+
+            if (sidebar.style.width === '250px') {
+                // If sidebar is open, close it
+                sidebar.style.width = '0';
+                content.style.marginLeft = '0';
+
+                // Hide all navbar links when sidebar is closed
+                navbarLinks.forEach(link => {
+                    link.style.display = 'none';
+                });
+            } else {
+                // If sidebar is closed, open it
+                sidebar.style.width = '250px';
+                content.style.marginLeft = '250px';
+
+                // Show all navbar links when sidebar is open
+                navbarLinks.forEach(link => {
+                    link.style.display = 'block';
+                });
+            }
+        }
+    </script>
+</body>
 </html>

@@ -1,15 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Post</title>
     <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://cdn.pixabay.com/photo/2017/06/30/10/14/social-media-2457842_1280.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
 
-        form {
+        .container {
+            display: flex;
+            width: 100%;
+        }
+
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+            transition: margin-left 0.5s;
+            margin-top: 200px;
+        }
+
+        .page-content {
             max-width: 600px;
             margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-size: 2.8vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+
+        .create-post-btn {
+            background-color: #0079d3;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        form {
+            margin-top: 20px;
         }
 
         label {
@@ -17,12 +67,16 @@
             margin-bottom: 8px;
         }
 
-        input, textarea, select {
+        input,
+        textarea,
+        select {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
             display: inline-block;
             box-sizing: border-box;
+            border-radius: 5px;
+            border: 1px solid #ccc;
         }
 
         textarea {
@@ -43,40 +97,249 @@
         input[type="submit"]:hover {
             background-color: #005ea6;
         }
+
+        .file-input-container {
+            position: relative;
+        }
+
+        .upload-btn {
+            background-color: #0079d3;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .file-input {
+            position: absolute;
+            opacity: 0;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .file-name {
+            margin-top: 5px;
+        }
+
+        /* Popup styles and animations */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+            backdrop-filter: blur(10px);
+            animation: popupFadeIn 0.5s ease-out;
+        }
+
+        .popup-content {
+            border-radius: 10px;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .close-btn {
+            background-color: grey;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        /* .close-btn:hover {
+            background-color: #005ea6;
+        } */
+
+        @keyframes popupFadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                padding: 20px 0;
+            }
+
+            .sidebar a {
+                font-size: 16px;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+        }
+/* Thumbs-up animation styles */
+.thumbs-up-container {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .thumbs-up {
+            position: absolute;
+            font-size: 24px; /* You can adjust the size */
+            color: #4caf50; /* You can change the color */
+            animation: thumbsUpAnimation 5s linear infinite;
+        }
+
+        @keyframes thumbsUpAnimation {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateY(-50vh) translateX(calc(80vw));
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-100vh) translateX(100vw);
+                opacity: 1;
+            }
+        }
+
     </style>
 </head>
-<body>
-    <div class="navbar">
-        <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
-        <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
-        <a href="{{ url_for('post.createPost') }}">Create Post</a>
-        <a href="{{ url_for('user.profile') }}">User Profile</a>
-        <a href="{{ url_for('community.createEvent') }}">Create Event</a>
-        <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
-        <a href="{{ url_for('community.usersEvents') }}">Users Events</a>
-        <a href="{{ url_for('user.logout') }}">Logout</a>
-  
-      </div>
-  
-    <div class="page-content">
-        <h2>Welcome to the Community!</h2>
-        <p>Share your thoughts, experiences, and creativity with the community by creating a post. We value your contributions and look forward to hearing from you.</p>
 
-        <h2>Create a Post for {{ communityName }} Community </h2>
-        
+<body>
+    <div class="container">
+        <div class="overlay" id="overlay"></div>
+        <div class="sidebar">
+            <button class="hamburger-btn" onclick="toggleSidebar()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
+            <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
+            <a href="{{ url_for('user.profile') }}">User Profile</a>
+            <a href="{{ url_for('community.createEvent') }}">Create Event</a>
+            <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
+            <a href="{{ url_for('community.usersEvents') }}">Users Events</a>
+            <a href="{{ url_for('user.logout') }}">Logout</a>
+        </div>
+
+        <div class="content">
+            <div class="page-content">
+                <h2>Welcome to the Community!</h2>
+                <p>Share your thoughts, experiences, and creativity with the community by creating a post. We value your contributions and look forward to hearing from you.</p>
+                <a class="create-post-btn" onclick="openPostPopup()">Create Post</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="post-popup">
+        <h2>Create a Post for {{ communityName }} Community</h2>
         <form method="post" action="{{ url_for('post.createPost') }}" enctype="multipart/form-data">
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" required placeholder="Title">
 
             <label for="content">Post Content:</label>
             <textarea id="content" name="content" rows="6" required placeholder="Text (optional)"></textarea>
+
             <div class="file-input-container">
-                <label for="image" class="upload-btn">Upload Image</label>
-                <input type="file" id="file-input" class="file-input" name="image">
-                <span class="file-name">No file chosen</span>
+                <label for="image" class="upload-btn" onclick="handleFileInputClick(event)">Upload Image</label>
+                <input type="file" id="file-input" class="file-input" name="image" onchange="handleFileInputChange(event)">
+                <span class="file-name" id="file-name">No file chosen</span>
             </div>
+
             <input type="submit" value="Post">
         </form>
+        <button class="close-btn" onclick="closePostPopup()">Close</button>
     </div>
+
+    <div class="overlay" id="overlay" onclick="closePostPopup()"></div>
+
+   
+        <div class="thumbs-up" style="left: 20%;"><img src="https://blog.joypixels.com/content/images/2020/09/partying_face.gif"></div>
+        <div class="thumbs-up" style="left: 30%;">👍</div>
+        <div class="thumbs-up" style="left: 40%;">👍</div>
+        <div class="thumbs-up" style="left: 50%;"><img src="https://blog.joypixels.com/content/images/2020/09/partying_face.gif"></div>
+        <div class="thumbs-up" style="left: 60%;">👍</div>
+        <div class="thumbs-up" style="left: 70%;">👍</div>
+        <div class="thumbs-up" style="left: 80%;">👍</div>
+        <div class="thumbs-up" style="left: 90%;"><img src="https://blog.joypixels.com/content/images/2020/09/partying_face.gif"></div>
+    
+        
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const content = document.querySelector('.content');
+            const navbarLinks = document.querySelectorAll('.sidebar a');
+
+            if (sidebar.style.width === '250px') {
+                sidebar.style.width = '0';
+                content.style.marginLeft = '0';
+                navbarLinks.forEach(link => {
+                    link.style.display = 'none';
+                });
+            } else {
+                sidebar.style.width = '250px';
+                content.style.marginLeft = '250px';
+                navbarLinks.forEach(link => {
+                    link.style.display = 'block';
+                });
+            }
+        }
+
+        function openPostPopup() {
+            const popup = document.getElementById('post-popup');
+            const overlay = document.getElementById('overlay');
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+
+        function closePostPopup() {
+            const popup = document.getElementById('post-popup');
+            const overlay = document.getElementById('overlay');
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        function handleFileInputClick(event) {
+            const fileInput = document.getElementById('file-input');
+            fileInput.click();
+        }
+
+        function handleFileInputChange(event) {
+            const fileInput = event.target;
+            const fileName = document.getElementById('file-name');
+
+            if (fileInput.files.length > 0) {
+                fileName.textContent = fileInput.files[0].name;
+            } else {
+                fileName.textContent = 'No file chosen';
+            }
+        }
+    </script>
 </body>
+
 </html>

@@ -34,7 +34,7 @@ def user_login():
         if is_null_login(username, password):
             login_message = "Please input username and password."
             return render_template('login.html', message=login_message)
-
+        print(username)
         user = is_existed(username)
 
         if user and bcrypt.check_password_hash(user['password'], password):

@@ -1,45 +1,164 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Home Page</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
-  </head>
-  <body>
-    <!-- Navigation bar -->
-    <div class="navbar">
-      <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
-      <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
-      <a href="{{ url_for('post.createPost') }}">Create Post</a>
-      <div class="dropdown">
-        <a href="#">All Communities</a>
-        <div class="dropdown-content">
-          {% for communities in communityList %}
-          <a href="{{ url_for('community.community',id=communities['id']) }}">{{ communities['name'] }}</a>
-          {% endfor %}
-        </div>
+<head>
+  <title>Home Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <link rel="stylesheet" type="text/css" href="/static/profilepage.css" />
+</head>
+<style>
+    body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* background-image: linear-gradient(to bottom right, var(--primary), var(--secondary)); */
+    background-color: #212121;
+}
+
+img {
+            width: 300px; /* Adjust the width as needed */
+            height: auto; /* Maintain the aspect ratio */
+            margin: 20px; /* Adjust the margin as needed */
+            border-radius: 8px; /* Optional: Add rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+        }
+
+    .container {
+      display: flex;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 20px;
+      transition: margin-left 0.5s;
+      margin-left: 250px;
+    }
+
+    .profile {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile h1 {
+      color: #062657;
+    }
+
+    .content-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      align-items: flex-start; 
+    }
+
+    .content-block {
+      margin: 20px;
+      padding: 20px;
+      width: 40%;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      box-sizing: border-box;
+      background-color: #fff; /* Set a light background color for each block */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-title {
+      color: #062657;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .attractive-content {
+      margin-top: 20px;
+    }
+
+    .attractive-content p {
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .attractive-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .button-all {
+      padding: 10px;
+      font-size: large;
+      color: white;
+      background-color: #0079d3;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 0;
+        padding: 20px 0;
+      }
+
+      .sidebar a {
+        font-size: 16px;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+
+      .content-block {
+        width: 80%; /* Adjust width for smaller screens */
+      }
+    }
+    .addcolor{
+      color: #2196f3;
+    }
+    :root {
+  --primary: #18ffff;
+  --secondary: #00bfa5;
+  --dark: #212121;
+  --light: #F3F3F3;
+}
+</style>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <button class="hamburger-btn">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    <a href="{{ url_for('community.topPosts') }}">Top Posts</a>
+    <a href="{{ url_for('community.eventExplorer') }}">Event Explorer</a>
+    <a href="{{ url_for('post.createPost') }}">Create Post</a>
+    <div class="dropdown">
+      <a href="#">All Communities</a>
+      <div class="dropdown-content">
+        {% for communities in communityList %}
+        <a href="{{ url_for('community.community',id=communities['id']) }}">{{ communities['name'] }}</a>
+        {% endfor %}
       </div>
-      <a href="{{ url_for('user.profile') }}">User Profile</a>
-      <a href="{{ url_for('community.createEvent') }}">Create Event</a>
-      <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
-      <a href="{{ url_for('community.usersEvents') }}">Users Events</a>
-      <a href="{{ url_for('user.logout') }}">Logout</a>
-
     </div>
+    <a href="{{ url_for('user.profile') }}">User Profile</a>
+    <a href="{{ url_for('community.createEvent') }}">Create Event</a>
+    <a href="{{ url_for('post.usersPosts') }}">Users Posts</a>
+    <a href="{{ url_for('community.usersEvents') }}">Users Events</a>
+    <a href="{{ url_for('user.logout') }}">Logout</a>
+  </div>
 
-    <!-- Profile page content -->
-    <div class="profile">
-      <h1>Welcome to your Virtual Community {{username}}</h1>
-      <br />
-      <div class="posts-container">
-        {% for singlePost in posts %}
-          <div class="posts-block">
-            <p class="post-title"><a href="{{ url_for('post.show_post',id=singlePost['id']) }}">{{ singlePost['title'] }}</a></p>
-            <div class="attractive-content">
-
+  <!-- Profile page content -->
+  <div class="content">
+    <h1 class="addcolor">Welcome to your Virtual Community {{username}}</h1>
+    <br />
+    <div class="posts-container">
+      {% for singlePost in posts %}
+        <div class="posts-block">
+          <p class="post-title"><a href="{{ url_for('post.show_post',id=singlePost['id']) }}">{{ singlePost['title'] }}</a></p>
+          <div class="attractive-content">
             <p class="post-content">
               {% if singlePost['content']|length > 120 %}
                 {{ singlePost['content'][:120] }}...
@@ -47,29 +166,57 @@
                 {{ singlePost['content'] }}
               {% endif %}
             </p>
-
             {% if singlePost['imgURL'] %}
               <img src="{{ singlePost['imgURL'] }}" alt="Post Image" width="400" height="300"/>
             {% endif %}
-
             <p>Likes: {{ singlePost['likeNum'] }}</p>
-
             <p>
               <form action="{{ url_for('community.topPosts') }}" method="POST">
                 {% if likeDict[singlePost['id']] %}
                   <input type="hidden" name="postId" value="{{ singlePost['id'] }}">
-                  <input type="submit" class="unlike-button"  value="Unlike">
+                  <input type="submit" class="unlike-button" value="Unlike">
                 {% else %}
                   <input type="hidden" name="postId" value="{{ singlePost['id'] }}">
-                  <input type="submit" class="like-button"  value="Like">
+                  <input type="submit" class="like-button" value="Like">
                 {% endif %}
               </form>
-              </p>
-            </div>
+            </p>
           </div>
-        <br />
-        {% endfor %}
-      </div>
+        </div>
+      <br />
+      {% endfor %}
     </div>
-  </body>
+  </div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const content = document.querySelector('.content');
+      
+      // Get all navbar links
+      const navbarLinks = document.querySelectorAll('.sidebar a');
+  
+      if (sidebar.style.width === '250px') {
+        // If sidebar is open, close it
+        sidebar.style.width = '0';
+        content.style.marginLeft = '0';
+  
+        // Hide all navbar links when sidebar is closed
+        navbarLinks.forEach(link => {
+          link.style.display = 'none';
+        });
+      } else {
+        // If sidebar is closed, open it
+        sidebar.style.width = '250px';
+        content.style.marginLeft = '250px';
+  
+        // Show all navbar links when sidebar is open
+        navbarLinks.forEach(link => {
+          link.style.display = 'block';
+        });
+      }
+    }
+  </script>
+</body>
 </html>
