@@ -14,7 +14,7 @@ For our project we have used HTML CSS JavaScript Python and Flask tools.
 
 
 For Running our project 
-1) the Database_Script.sql file should be executed in mysql WorkBench tool to load the MySQL Database. 
+1) the team20.sql file should be executed in mysql WorkBench tool to load the MySQL Database. 
 2) We have set the Password to access local instance of database to "rootroot".
 2) We run our project by simply going to the project directory and typing python3 .\app.py command
 3) We need to hit http://127.0.0.1:5000 this URL for accessing the Page
